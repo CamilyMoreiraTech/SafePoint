@@ -1,81 +1,262 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>AquaTech | Página Inicial</title>
+    <title>SafePoint | Página Inicial</title>
 
     <script src="./js/sessao.js"></script>
 
     <link rel="stylesheet" href="./css/estilo.css">
+    <link rel="stylesheet" href="./css/home.css">
     <link rel="icon" href="./assets/icon/favicon2.ico">
     <link rel="preconnect" href="https://fonts.gstatic.com">
 </head>
 
 <body>
-    <div class="header">
-      <div class="container">
-        <h1 class="titulo">AquaTech</h1>
-        <ul class="navbar">
-          <li class="agora">
-            <a href="#">Inicial</a>
-          </li>
-          <li>
-            <a href="simulador.html">Simulador</a>
-          </li>
-          <li>|</li>
-          <li>
-            <a href="login.html">Login</a>
-          </li>
-          <li>
-            <a href="cadastro.html">Cadastro</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  
-    <div class="banner">
-      <div class="container">
-        <p>Preservando <span>hoje</span> para existirem <span>amanhã</span>.</p>
-      </div>
-    </div>
-  
-    <div class="social">
-      <div class="container">
-        <div class="boxes">
-          <div class="box">
-            <img src="assets/imgs/planet-earth_color.png">
-            <h4>Missão</h4>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et, quas cupiditate asperiores provident magnam
-              vitae illum iusto fugiat atque deleniti nulla sed iure suscipit, laborum, aliquid accusantium cum dicta
-              minima.</p>
-          </div>
-          <div class="box">
-            <img src="assets/imgs/lightbulb_color.png">
-            <h4>Visão</h4>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et, quas cupiditate asperiores provident magnam
-              vitae illum iusto fugiat atque deleniti nulla sed iure suscipit, laborum, aliquid accusantium cum dicta
-              minima.</p>
-          </div>
-          <div class="box">
-            <img src="assets/imgs/growth_color.png">
-            <h4>Valores</h4>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et, quas cupiditate asperiores provident magnam
-              vitae illum iusto fugiat atque deleniti nulla sed iure suscipit, laborum, aliquid accusantium cum dicta
-              minima.</p>
-          </div>
+    <!-- MENU -->
+    <header>
+        <div class="conteudo menu">
+            <a href="index.html" class="logo">
+                <img src="assets/imgs/home/estrela.svg" alt="">
+                SafePoint
+            </a>
+
+            <nav class="menu-links">
+                <a href="servidores.html">[ Servidores ]</a>
+                <a href="dashboard/dashboard.html">[ Dashboard ]</a>
+                <a href="sobre.html">[ Sobre ]</a>
+            </nav>
+
+            <div class="menu-botoes">
+                <a href="login.html" class="botao-contorno">[ Entrar ]</a>
+                <a href="cadastro.html" class="botao-destaque">[ Criar conta ]</a>
+            </div>
         </div>
-      </div>
-    </div>
-  
-    <div class="footer">
-      <div class="container">
-        <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023-2026</h4>
-      </div>
-    </div>
-  </body>
+
+        <div class="faixa">
+            <div class="faixa-xadrez"></div>
+            <p class="faixa-texto">Seu save point em comunidades online »</p>
+            <img src="assets/imgs/home/codigo-barras.svg" alt="" class="codigo-barras">
+        </div>
+    </header>
+
+    <main class="conteudo">
+        <!-- BANNER PRINCIPAL -->
+        <section class="janela">
+            <div class="janela-barra">
+                <span>› safepoint.exe</span>
+                <div class="janela-botoes"><span>_</span><span>□</span><span>×</span></div>
+            </div>
+
+            <div class="inicio">
+                <div class="inicio-enfeites">
+                    <span>✦</span>
+                    <span>♥</span>
+                    <span>◇</span>
+                    <span>✧</span>
+                </div>
+
+                <div class="inicio-texto">
+                    <h1 class="inicio-titulo">
+                        <span class="titulo-lilas">Seu save point em</span>
+                        <span class="titulo-rosa">comunidades online</span>
+                    </h1>
+                    <p>Encontre servidores de Discord seguros para jogar, criar e ler em boa companhia, avaliados por outras mulheres.</p>
+
+                    <div class="inicio-botoes">
+                        <a href="cadastro.html" class="botao-destaque">[ Criar conta ] →</a>
+                        <a href="servidores.html" class="botao-contorno">[ Ver servidores ]</a>
+                    </div>
+                </div>
+
+                <div class="inicio-arte">
+                    <div class="lua"></div>
+                    <span class="brilho brilho-1">✦</span>
+                    <span class="brilho brilho-2">✧</span>
+                    <img src="assets/imgs/home/lirio.svg" alt="" class="lirio">
+                </div>
+
+                <ul class="lista-lateral">
+                    <li>Games</li>
+                    <li>Artesanato</li>
+                    <li>Leitura</li>
+                    <li>Comunidade</li>
+                    <li>Respeito</li>
+                    <li>Mulheres</li>
+                </ul>
+            </div>
+
+            <p class="janela-rodape">» safepoint loading...</p>
+        </section>
+
+        <!-- CARDS DOS NICHOS -->
+        <section class="nichos">
+            <div class="janela card-nicho">
+                <div class="janela-barra">
+                    <span>01 › games.exe</span>
+                    <div class="janela-botoes"><span>_</span><span>□</span><span>×</span></div>
+                </div>
+                <div class="card-corpo">
+                    <img src="assets/imgs/home/controle.svg" alt="" class="card-icone">
+                    <h2>Games</h2>
+                    <p>Servidores seguros<br>para todo tipo de jogo.</p>
+                    <a href="servidores.html?tema=games" class="botao-contorno">Ver servidores →</a>
+                </div>
+            </div>
+
+            <div class="janela card-nicho">
+                <div class="janela-barra">
+                    <span>02 › artesanato.exe</span>
+                    <div class="janela-botoes"><span>_</span><span>□</span><span>×</span></div>
+                </div>
+                <div class="card-corpo">
+                    <img src="assets/imgs/home/novelo.svg" alt="" class="card-icone">
+                    <h2>Artesanato</h2>
+                    <p>Servidores seguros<br>para quem ama criar.</p>
+                    <a href="servidores.html?tema=artesanato" class="botao-contorno">Ver servidores →</a>
+                </div>
+            </div>
+
+            <div class="janela card-nicho">
+                <div class="janela-barra">
+                    <span>03 › leitura.exe</span>
+                    <div class="janela-botoes"><span>_</span><span>□</span><span>×</span></div>
+                </div>
+                <div class="card-corpo">
+                    <img src="assets/imgs/home/livro.svg" alt="" class="card-icone">
+                    <h2>Leitura</h2>
+                    <p>Servidores seguros<br>para quem ama ler.</p>
+                    <a href="servidores.html?tema=leitura" class="botao-contorno">Ver servidores →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- COMO FUNCIONA -->
+        <section class="janela">
+            <div class="janela-barra">
+                <span>› processo.exe</span>
+                <div class="janela-botoes"><span>_</span><span>□</span><span>×</span></div>
+            </div>
+            <p class="janela-nota">04 passos<br>para começar</p>
+
+            <h2 class="titulo-secao">
+                <span class="estrela-titulo">✦</span>
+                Como funciona
+                <span class="estrela-titulo">✦</span>
+            </h2>
+
+            <div class="passos">
+                <div class="passo">
+                    <span class="passo-numero">01</span>
+                    <img src="assets/imgs/home/icone-usuaria.svg" alt="" class="passo-icone">
+                    <h3>Cadastre-se</h3>
+                    <p>Crie sua conta de forma simples e rápida.</p>
+                </div>
+
+                <span class="passo-seta">→</span>
+
+                <div class="passo">
+                    <span class="passo-numero">02</span>
+                    <img src="assets/imgs/home/icone-indicar.svg" alt="" class="passo-icone">
+                    <h3>Indique um servidor</h3>
+                    <p>Compartilhe servidores de Discord que você confia.</p>
+                </div>
+
+                <span class="passo-seta">→</span>
+
+                <div class="passo">
+                    <span class="passo-numero">03</span>
+                    <img src="assets/imgs/home/icone-avaliar.svg" alt="" class="passo-icone">
+                    <h3>Avalie</h3>
+                    <p>Dê sua nota e comente sobre sua experiência.</p>
+                </div>
+
+                <span class="passo-seta">→</span>
+
+                <div class="passo">
+                    <span class="passo-numero">04</span>
+                    <img src="assets/imgs/home/icone-dashboard.svg" alt="" class="passo-icone">
+                    <h3>Consulte a dashboard</h3>
+                    <p>Veja rankings e gráficos dos servidores mais seguros.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- A COMUNIDADE EM NÚMEROS (por enquanto fixos em 0, depois virão da API) -->
+        <section class="janela">
+            <div class="janela-barra">
+                <span>› comunidade.exe</span>
+                <span>Mulheres reais · comunidades seguras</span>
+            </div>
+
+            <h2 class="titulo-secao">A comunidade em números</h2>
+
+            <div class="numeros">
+                <div class="numero">
+                    <div id="div_total_usuarias" class="numero-valor">0</div>
+                    <span class="numero-legenda">usuárias</span>
+                </div>
+                <div class="numero numero-centro">
+                    <div id="div_total_servidores" class="numero-valor">0</div>
+                    <span class="numero-legenda">servidores</span>
+                </div>
+                <div class="numero">
+                    <div id="div_total_avaliacoes" class="numero-valor">0</div>
+                    <span class="numero-legenda">avaliações</span>
+                </div>
+            </div>
+
+            <div class="numeros-botao">
+                <a href="dashboard/dashboard.html" class="botao-contorno">Ver a dashboard completa →</a>
+            </div>
+        </section>
+
+        <!-- CHAMADA FINAL -->
+        <section class="janela">
+            <div class="janela-barra">
+                <span>› pronta.exe</span>
+                <div class="janela-botoes"><span>_</span><span>□</span><span>×</span></div>
+            </div>
+
+            <div class="chamada">
+                <p class="texto-pequeno">Mesmos<br>hobbies<br>mais<br>amizades<br>♥</p>
+                <img src="assets/imgs/home/lirio.svg" alt="" class="chamada-flor">
+
+                <div class="chamada-centro">
+                    <h2 class="titulo-secao">
+                        <span class="estrela-titulo">✦</span>
+                        Pronta para encontrar seu lugar?
+                        <span class="estrela-titulo">✦</span>
+                    </h2>
+                    <a href="cadastro.html" class="botao-destaque">[ Criar conta ] →</a>
+                </div>
+
+                <img src="assets/imgs/home/lirio.svg" alt="" class="chamada-flor flor-invertida">
+                <ul class="lista-lateral lista-sem-borda">
+                    <li>› Jogar</li>
+                    <li>› Criar</li>
+                    <li>› Ler</li>
+                    <li>› Explorar</li>
+                    <li>› Pertencer</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <!-- RODAPÉ -->
+    <footer class="conteudo rodape">
+        <a href="index.html" class="logo logo-pequeno">
+            <img src="assets/imgs/home/estrela.svg" alt="">
+            SafePoint
+        </a>
+        <p>feito com carinho e glitter. Projeto acadêmico de ADS.</p>
+        <span class="coracoes">♥ ♥ ♥</span>
+        <img src="assets/imgs/home/codigo-barras.svg" alt="" class="codigo-barras">
+    </footer>
+</body>
 
 </html>

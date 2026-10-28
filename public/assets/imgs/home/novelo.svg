@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 110">
+  <defs>
+    <clipPath id="dentro-novelo">
+      <circle cx="66" cy="58" r="35"/>
+    </clipPath>
+  </defs>
+
+  <!-- agulha de trás -->
+  <line x1="28" y1="18" x2="118" y2="98" stroke="#c4a7ff" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="28" cy="18" r="5" fill="#ff7ae6"/>
+
+  <!-- novelo -->
+  <circle cx="66" cy="58" r="36" fill="#3a1670" stroke="#ff7ae6" stroke-width="2.5"/>
+  <g clip-path="url(#dentro-novelo)" fill="none" stroke="#ff9ae8" stroke-width="2">
+    <path d="M32 44 Q66 30 100 48"/>
+    <path d="M30 58 Q66 44 102 62"/>
+    <path d="M34 72 Q66 60 98 78"/>
+    <path d="M44 28 Q30 60 52 92"/>
+    <path d="M62 22 Q50 58 70 94"/>
+    <path d="M82 26 Q92 60 80 92"/>
+  </g>
+
+  <!-- agulha da frente e fio solto -->
+  <line x1="40" y1="100" x2="126" y2="24" stroke="#c4a7ff" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="126" cy="24" r="5" fill="#ff7ae6"/>
+  <path d="M92 84 Q110 104 134 96" fill="none" stroke="#ff9ae8" stroke-width="2"/>
+
+  <!-- brilhos -->
+  <path d="M14 62 L16 70 L24 72 L16 74 L14 82 L12 74 L4 72 L12 70 Z" fill="#ffc2f2"/>
+  <path d="M110 4 L111 9 L116 10 L111 11 L110 16 L109 11 L104 10 L109 9 Z" fill="#ffc2f2"/>
+</svg>

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 110">
+  <!-- capa -->
+  <path d="M10 30 L10 92 Q42 84 70 98 Q98 84 130 92 L130 30" fill="#24124a" stroke="#8b5cf6" stroke-width="2" stroke-linejoin="round"/>
+
+  <!-- páginas -->
+  <path d="M70 34 Q46 18 16 24 L16 86 Q46 80 70 94 Z" fill="#2e1760" stroke="#c4a7ff" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M70 34 Q94 18 124 24 L124 86 Q94 80 70 94 Z" fill="#2e1760" stroke="#c4a7ff" stroke-width="2" stroke-linejoin="round"/>
+
+  <!-- linhas de texto -->
+  <g fill="none" stroke="#8b5cf6" stroke-width="1.5">
+    <path d="M24 38 Q44 34 62 44"/>
+    <path d="M24 50 Q44 46 62 56"/>
+    <path d="M24 62 Q44 58 62 68"/>
+    <path d="M24 74 Q44 70 62 80"/>
+    <path d="M116 38 Q96 34 78 44"/>
+    <path d="M116 50 Q96 46 78 56"/>
+    <path d="M116 62 Q96 58 78 68"/>
+    <path d="M116 74 Q96 70 78 80"/>
+  </g>
+
+  <!-- marcador -->
+  <path d="M100 86 L100 106 L105 101 L110 106 L110 84" fill="#ff7ae6"/>
+
+  <!-- brilhos -->
+  <path d="M22 0 L24 8 L32 10 L24 12 L22 20 L20 12 L12 10 L20 8 Z" fill="#ffc2f2"/>
+  <path d="M126 2 L127 7 L132 8 L127 9 L126 14 L125 9 L120 8 L125 7 Z" fill="#ff7ae6"/>
+</svg>

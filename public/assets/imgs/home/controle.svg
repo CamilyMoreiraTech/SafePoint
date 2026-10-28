@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 110">
+  <!-- órbita -->
+  <ellipse cx="70" cy="62" rx="66" ry="24" fill="none" stroke="#ff7ae6" stroke-width="1.2" opacity="0.55" transform="rotate(-12 70 62)"/>
+
+  <!-- corpo do controle -->
+  <path d="M38 34 Q70 26 102 34 Q124 40 128 72 Q130 94 114 94 Q102 94 94 76 L46 76 Q38 94 26 94 Q10 94 12 72 Q16 40 38 34 Z" fill="#24124a" stroke="#b794ff" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="M40 40 Q70 33 100 40" fill="none" stroke="#ff9ae8" stroke-width="1.5" opacity="0.6"/>
+
+  <!-- direcional -->
+  <rect x="33" y="52" width="14" height="6" fill="#ff7ae6"/>
+  <rect x="37" y="48" width="6" height="14" fill="#ff7ae6"/>
+
+  <!-- botões -->
+  <circle cx="100" cy="47" r="4.5" fill="#ff7ae6"/>
+  <circle cx="108" cy="55" r="4.5" fill="#c4a7ff"/>
+  <circle cx="100" cy="63" r="4.5" fill="#ff7ae6"/>
+  <circle cx="92" cy="55" r="4.5" fill="#c4a7ff"/>
+  <rect x="62" y="46" width="6" height="3" fill="#8b5cf6"/>
+  <rect x="72" y="46" width="6" height="3" fill="#8b5cf6"/>
+
+  <!-- analógicos -->
+  <circle cx="56" cy="68" r="7" fill="#1a0d36" stroke="#b794ff" stroke-width="2"/>
+  <circle cx="84" cy="68" r="7" fill="#1a0d36" stroke="#b794ff" stroke-width="2"/>
+
+  <!-- brilhos -->
+  <path d="M124 10 L126 18 L134 20 L126 22 L124 30 L122 22 L114 20 L122 18 Z" fill="#ffc2f2"/>
+  <path d="M14 18 L15 23 L20 24 L15 25 L14 30 L13 25 L8 24 L13 23 Z" fill="#ffc2f2"/>
+</svg>
