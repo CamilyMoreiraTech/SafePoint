@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/banner.svg" alt="Banner do SafePoint">
+  <img src="public/assets/imgs/banner-readme.webp" alt="Banner do SafePoint" width="100%">
 </p>
 
 <h1 align="center">💜 SafePoint</h1>
