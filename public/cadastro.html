@@ -2,214 +2,133 @@
 <html lang="pt-br">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>AquaTech | Cadastro</title>
+    <title>SafePoint | Cadastro</title>
 
-  <script src="./js/sessao.js"></script>
+    <script src="./js/sessao.js"></script>
+    <script src="./js/cadastro.js"></script>
 
-  <link rel="stylesheet" href="./css/estilo.css" />
-  <link rel="icon" href="./assets/icon/favicon-safepoint.png" type="image/png" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="stylesheet" href="./css/estilo.css">
+    <link rel="stylesheet" href="./css/home.css">
+    <link rel="stylesheet" href="./css/cadastro.css">
+    <link rel="icon" href="./assets/icon/favicon-safepoint.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
 </head>
 
-<body onload="listar()">
-  <!--header inicio-->
-  <div class="header">
-    <div class="container">
-      <h1 class="titulo">AquaTech</h1>
-      <ul class="navbar">
-        <li>
-          <a href="index.html">Inicial</a>
-        </li>
-        <li>|</li>
-        <li>
-          <a href="login.html">Login</a>
-        </li>
-        <li class="agora">
-          <a href="#">Cadastro</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-  <!--header fim-->
+<body>
+    <!-- MENU -->
+    <header>
+        <div class="conteudo menu">
+            <a href="index.html" class="logo">
+                <img src="assets/imgs/home/estrela.svg" alt="">
+                SafePoint
+            </a>
 
-  <div class="login">
-    <div class="alerta_erro">
-      <div class="card_erro" id="cardErro">
-        <span id="mensagem_erro"></span>
-      </div>
-    </div>
-    <div class="container">
-      <div class="card card-cadastro">
-        <h2>Bem-vindo!</h2>
-        <div class="formulario">
-          <!--
-                         Para inserir mais um campo, copie uma das inputs abaixo.
-                         Assim que inserir vá para o script abaixo.
-                     -->
-          <div class="campo">
-            <span>Código de ativação:</span>
-            <input id="codigo_input" type="text" placeholder="Insira aqui seu código" />
-          </div>
-          <div class="campo">
-            <span>Nome:</span>
-            <input id="nome_input" type="text" placeholder="Seu nome" />
-          </div>
-          <div class="campo">
-            <span>E-mail:</span>
-            <input id="email_input" type="text" placeholder="meuemail@provedor.com" />
-          </div>
-          <div class="campo">
-            <span>Senha:</span>
-            <input id="senha_input" type="password" placeholder="******" />
-          </div>
-          <div class="campo">
-            <span>Confirmação da Senha:</span>
-            <input id="confirmacao_senha_input" type="password" placeholder="******" />
-          </div>
-          <div class="campo">
-            <span>CPF:</span>
-            <input id="cpf_input" type="text" placeholder="Seu CPF" />
-          </div>
-          <button class="botao" onclick="cadastrar()">Cadastrar</button>
-        </div>
-        <div id="div_aguardar" class="loading-div">
-          <img src="./assets/circle-loading.gif" id="loading-gif" />
+            <nav class="menu-links">
+                <a href="servidores.html">[ Servidores ]</a>
+                <a href="dashboard/dashboard.html">[ Dashboard ]</a>
+                <a href="sobre.html">[ Sobre ]</a>
+            </nav>
+
+            <div class="menu-botoes">
+                <a href="login.html" class="botao-contorno">[ Entrar ]</a>
+                <a href="cadastro.html" class="botao-destaque">[ Criar conta ]</a>
+            </div>
         </div>
 
-        <div id="div_erros_login"></div>
-      </div>
-    </div>
-  </div>
+        <div class="faixa">
+            <div class="faixa-xadrez"></div>
+            <p class="faixa-texto">Seu save point em comunidades online »</p>
+            <img src="assets/imgs/home/codigo-barras.svg" alt="" class="codigo-barras">
+        </div>
+    </header>
 
-  <!--footer inicio-->
-  <div class="footer">
-    <div class="container">
-      <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023-2026</h4>
-    </div>
-  </div>
-  <!--footer fim-->
+    <main class="conteudo">
+        <!-- CADASTRO -->
+        <section class="janela">
+            <div class="janela-barra">
+                <span>› cadastro.exe</span>
+                <div class="janela-botoes"><span>_</span><span>□</span><span>×</span></div>
+            </div>
+
+            <div class="cadastro">
+                <div class="cadastro-apresentacao">
+                    <h1 class="inicio-titulo">
+                        <span class="titulo-lilas">Crie sua conta</span><br>
+                        <span class="titulo-rosa">no SafePoint</span>
+                    </h1>
+                    <p>Indique e avalie servidores de Discord e ajude outras mulheres a encontrar comunidades seguras.</p>
+                    <img src="assets/imgs/home/lirio.svg" alt="" class="lirio">
+                </div>
+
+                <div class="cadastro-formulario">
+                    <div class="cadastro-campo">
+                        <label for="ipt_nome">Nome ou apelido</label>
+                        <input id="ipt_nome" type="text" placeholder="Como quer ser chamada">
+                    </div>
+
+                    <div class="cadastro-campo">
+                        <label for="ipt_email">E-mail</label>
+                        <input id="ipt_email" type="email" placeholder="meuemail@provedor.com">
+                    </div>
+
+                    <div class="cadastro-linha">
+                        <div class="cadastro-campo">
+                            <label for="ipt_senha">Senha</label>
+                            <input id="ipt_senha" type="password" placeholder="Mínimo de 6 caracteres">
+                        </div>
+
+                        <div class="cadastro-campo">
+                            <label for="ipt_confirmacao_senha">Confirmar senha</label>
+                            <input id="ipt_confirmacao_senha" type="password" placeholder="Repita a senha">
+                        </div>
+                    </div>
+
+                    <div class="cadastro-campo">
+                        <label for="sel_plataforma">Onde você mais joga</label>
+                        <select id="sel_plataforma">
+                            <option value="">Selecione</option>
+                            <option value="pc">PC</option>
+                            <option value="console">Console</option>
+                            <option value="celular">Celular</option>
+                            <option value="nao_jogo">Não jogo</option>
+                        </select>
+                    </div>
+
+                    <div class="cadastro-campo">
+                        <span class="cadastro-titulo-campo">Seus interesses</span>
+                        <div class="cadastro-opcoes">
+                            <label class="cadastro-opcao"><input id="ipt_games" type="checkbox"> Games</label>
+                            <label class="cadastro-opcao"><input id="ipt_artesanato" type="checkbox"> Artesanato</label>
+                            <label class="cadastro-opcao"><input id="ipt_leitura" type="checkbox"> Leitura</label>
+                        </div>
+                    </div>
+
+                    <div id="div_msg" class="cadastro-mensagem"></div>
+
+                    <button id="btn_cadastrar" class="botao-destaque" onclick="cadastrar()">[ Criar conta ] →</button>
+
+                    <p class="cadastro-login">Já tem uma conta? <a href="login.html">Entrar</a></p>
+                </div>
+            </div>
+
+            <p class="janela-rodape">» safepoint loading...</p>
+        </section>
+    </main>
+
+    <!-- RODAPÉ -->
+    <footer class="conteudo rodape">
+        <a href="index.html" class="logo logo-pequeno">
+            <img src="assets/imgs/home/estrela.svg" alt="">
+            SafePoint
+        </a>
+        <p>feito com carinho e glitter. Projeto acadêmico de ADS.</p>
+        <span class="coracoes">♥ ♥ ♥</span>
+        <img src="assets/imgs/home/codigo-barras.svg" alt="" class="codigo-barras">
+    </footer>
 </body>
 
 </html>
-
-<script>
-
-  // Array para armazenar empresas cadastradas para validação de código de ativação 
-  let listaEmpresasCadastradas = [];
-
-  function cadastrar() {
-    // aguardar();
-
-    //Recupere o valor da nova input pelo nome do id
-    // Agora vá para o método fetch logo abaixo
-    var nomeVar = nome_input.value;
-    var emailVar = email_input.value;
-    var senhaVar = senha_input.value;
-    var confirmacaoSenhaVar = confirmacao_senha_input.value;
-    var codigoVar = codigo_input.value;
-    var idEmpresaVincular
-    var cpfVar = cpf_input.value;
-
-    // Verificando se há algum campo em branco
-    if (
-      nomeVar == "" ||
-      emailVar == "" ||
-      senhaVar == "" ||
-      confirmacaoSenhaVar == "" ||
-      codigoVar == "" ||
-      cpfVar == ""
-    ) {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
-        "(Mensagem de erro para todos os campos em branco)";
-
-      finalizarAguardar();
-      return false;
-    } else {
-      setInterval(sumirMensagem, 5000);
-    }
-
-    // Verificando se o código de ativação é de alguma empresa cadastrada
-    for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
-      if (listaEmpresasCadastradas[i].codigo_ativacao == codigoVar) {
-        idEmpresaVincular = listaEmpresasCadastradas[i].id
-        console.log("Código de ativação válido.");
-        break;
-      } else {
-        cardErro.style.display = "block";
-        mensagem_erro.innerHTML = "(Mensagem de erro para código inválido)";
-        finalizarAguardar();
-      }
-    }
-
-    // Enviando o valor da nova input
-    fetch("/usuarios/cadastrar", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        // crie um atributo que recebe o valor recuperado aqui
-        // Agora vá para o arquivo routes/usuario.js
-        nomeServer: nomeVar,
-        emailServer: emailVar,
-        senhaServer: senhaVar,
-        idEmpresaVincularServer: idEmpresaVincular,
-        cpfServer: cpfVar
-      }),
-    })
-      .then(function (resposta) {
-        console.log("resposta: ", resposta);
-
-        if (resposta.ok) {
-          cardErro.style.display = "block";
-
-          mensagem_erro.innerHTML =
-            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
-
-          setTimeout(() => {
-            window.location = "login.html";
-          }, "2000");
-
-          limparFormulario();
-          finalizarAguardar();
-        } else {
-          throw "Houve um erro ao tentar realizar o cadastro!";
-        }
-      })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-        finalizarAguardar();
-      });
-
-    return false;
-  }
-
-  // Listando empresas cadastradas 
-  function listar() {
-    fetch("/empresas/listar", {
-      method: "GET",
-    })
-      .then(function (resposta) {
-        resposta.json().then((empresas) => {
-          empresas.forEach((empresa) => {
-            listaEmpresasCadastradas.push(empresa);
-
-            console.log("listaEmpresasCadastradas")
-            console.log(listaEmpresasCadastradas[0].codigo_ativacao)
-          });
-        });
-      })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-      });
-  }
-
-  function sumirMensagem() {
-    cardErro.style.display = "none";
-  }
-</script>

@@ -1,17 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
-/* HOME DO SAFEPOINT (este arquivo só é usado no index.html) */
+/* HOME DO SAFEPOINT (o cadastro.html também usa este arquivo para o visual geral) */
 
 :root {
-  --cor-fundo: #08050d;
-  --cor-janela: rgba(15, 10, 25, 0.85);
-  --cor-borda: #5b3fa8;
-  --cor-roxo: #8b5cf6;
-  --cor-lilas: #c4a7ff;
-  --cor-rosa: #ff6ad5;
-  --cor-rosa-botao: #ff7ae6;
-  --cor-texto: #e4dcf5;
-  --cor-texto-suave: #a596c8;
   --fonte-titulo: 'DM Serif Display', Georgia, serif;
   --fonte-texto: 'IBM Plex Mono', 'Courier New', monospace;
 }
@@ -22,8 +13,8 @@
 
 body {
   font-family: var(--fonte-texto);
-  color: var(--cor-texto);
-  background-color: var(--cor-fundo);
+  color: #e4dcf5;
+  background-color: #08050d;
   /* brilho roxo no canto superior direito */
   background-image: radial-gradient(circle 650px at 100% 0%, rgba(139, 92, 246, 0.35), transparent);
   background-repeat: no-repeat;
@@ -50,12 +41,12 @@ a {
   letter-spacing: 1px;
   text-transform: uppercase;
   text-align: center;
-  border: 1px solid var(--cor-lilas);
+  border: 1px solid #c4a7ff;
 }
 
 .botao-destaque {
-  background-color: var(--cor-rosa-botao);
-  border-color: var(--cor-rosa-botao);
+  background-color: #ff7ae6;
+  border-color: #ff7ae6;
   color: #1a0b24;
   font-weight: 500;
   box-shadow: 0 0 16px rgba(255, 122, 230, 0.45);
@@ -66,12 +57,12 @@ a {
 }
 
 .botao-contorno {
-  color: var(--cor-lilas);
+  color: #c4a7ff;
 }
 
 .botao-contorno:hover {
-  color: var(--cor-rosa);
-  border-color: var(--cor-rosa);
+  color: #ff6ad5;
+  border-color: #ff6ad5;
 }
 
 /* MENU */
@@ -91,7 +82,7 @@ a {
   gap: 10px;
   font-family: var(--fonte-titulo);
   font-size: 42px;
-  color: var(--cor-rosa);
+  color: #ff6ad5;
   text-shadow: 0 0 12px rgba(255, 106, 213, 0.6), 0 0 28px rgba(139, 92, 246, 0.5);
 }
 
@@ -108,11 +99,11 @@ a {
   font-size: 13px;
   letter-spacing: 1px;
   text-transform: uppercase;
-  color: var(--cor-lilas);
+  color: #c4a7ff;
 }
 
 .menu-links a:hover {
-  color: var(--cor-rosa);
+  color: #ff6ad5;
 }
 
 .menu-botoes {
@@ -142,7 +133,7 @@ a {
   font-size: 11px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: var(--cor-lilas);
+  color: #c4a7ff;
   white-space: nowrap;
 }
 
@@ -155,8 +146,8 @@ a {
 .janela {
   position: relative;
   margin-top: 24px;
-  background-color: var(--cor-janela);
-  border: 1px solid var(--cor-borda);
+  background-color: rgba(15, 10, 25, 0.85);
+  border: 1px solid #5b3fa8;
   box-shadow: 0 0 18px rgba(139, 92, 246, 0.2);
 }
 
@@ -165,11 +156,11 @@ a {
   justify-content: space-between;
   align-items: center;
   padding: 6px 12px;
-  border-bottom: 1px solid var(--cor-borda);
+  border-bottom: 1px solid #5b3fa8;
   font-size: 11px;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: var(--cor-lilas);
+  color: #c4a7ff;
 }
 
 .janela-botoes {
@@ -180,7 +171,7 @@ a {
 .janela-botoes span {
   width: 14px;
   height: 14px;
-  border: 1px solid var(--cor-lilas);
+  border: 1px solid #c4a7ff;
   font-size: 9px;
   line-height: 12px;
   text-align: center;
@@ -192,7 +183,7 @@ a {
   font-size: 10px;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: var(--cor-texto-suave);
+  color: #a596c8;
 }
 
 .janela-nota {
@@ -204,19 +195,19 @@ a {
   letter-spacing: 1.5px;
   text-transform: uppercase;
   text-align: right;
-  color: var(--cor-texto-suave);
+  color: #a596c8;
 }
 
 .lista-lateral {
   list-style: none;
   margin: 0;
   padding: 12px 14px;
-  border: 1px solid var(--cor-borda);
+  border: 1px solid #5b3fa8;
   font-size: 11px;
   letter-spacing: 1.5px;
   line-height: 2;
   text-transform: uppercase;
-  color: var(--cor-lilas);
+  color: #c4a7ff;
 }
 
 .lista-sem-borda {
@@ -229,7 +220,7 @@ a {
   font-weight: 400;
   font-size: 44px;
   text-align: center;
-  color: var(--cor-lilas);
+  color: #c4a7ff;
   text-shadow: 0 0 16px rgba(139, 92, 246, 0.8);
 }
 
@@ -237,7 +228,7 @@ a {
   margin: 0 12px;
   font-size: 22px;
   vertical-align: middle;
-  color: var(--cor-rosa);
+  color: #ff6ad5;
 }
 
 /* BANNER PRINCIPAL */
@@ -254,9 +245,9 @@ a {
   flex-direction: column;
   gap: 20px;
   padding-right: 12px;
-  border-right: 1px solid var(--cor-borda);
+  border-right: 1px solid #5b3fa8;
   font-size: 18px;
-  color: var(--cor-rosa);
+  color: #ff6ad5;
 }
 
 .inicio-texto {
@@ -273,11 +264,11 @@ a {
 }
 
 .titulo-lilas {
-  color: var(--cor-lilas);
+  color: #c4a7ff;
 }
 
 .titulo-rosa {
-  color: var(--cor-rosa);
+  color: #ff6ad5;
 }
 
 .inicio-texto p {
@@ -319,7 +310,7 @@ a {
 
 .brilho {
   position: absolute;
-  color: var(--cor-rosa);
+  color: #ff6ad5;
 }
 
 .brilho-1 {
@@ -368,7 +359,7 @@ a {
   font-size: 34px;
   letter-spacing: 1px;
   text-transform: uppercase;
-  color: var(--cor-lilas);
+  color: #c4a7ff;
   text-shadow: 0 0 14px rgba(139, 92, 246, 0.8);
 }
 
@@ -396,7 +387,7 @@ a {
   flex: 1;
   min-height: 170px;
   padding: 18px 12px;
-  border: 1px solid var(--cor-borda);
+  border: 1px solid #5b3fa8;
   text-align: center;
 }
 
@@ -406,7 +397,7 @@ a {
   left: 10px;
   font-family: var(--fonte-titulo);
   font-size: 26px;
-  color: var(--cor-rosa);
+  color: #ff6ad5;
 }
 
 .passo-icone {
@@ -427,12 +418,12 @@ a {
   margin: 0;
   font-size: 12px;
   line-height: 1.6;
-  color: var(--cor-texto-suave);
+  color: #a596c8;
 }
 
 .passo-seta {
   font-size: 20px;
-  color: var(--cor-lilas);
+  color: #c4a7ff;
 }
 
 /* A COMUNIDADE EM NÚMEROS */
@@ -448,15 +439,15 @@ a {
 }
 
 .numero-centro {
-  border-left: 1px solid var(--cor-borda);
-  border-right: 1px solid var(--cor-borda);
+  border-left: 1px solid #5b3fa8;
+  border-right: 1px solid #5b3fa8;
 }
 
 .numero-valor {
   font-family: var(--fonte-titulo);
   font-size: 68px;
   line-height: 1;
-  color: var(--cor-rosa);
+  color: #ff6ad5;
   text-shadow: 0 0 18px rgba(255, 106, 213, 0.7);
 }
 
@@ -486,7 +477,7 @@ a {
   letter-spacing: 1.5px;
   line-height: 1.7;
   text-transform: uppercase;
-  color: var(--cor-texto-suave);
+  color: #a596c8;
 }
 
 .chamada-flor {
@@ -531,76 +522,12 @@ a {
   flex: 1;
   margin: 0;
   padding-left: 20px;
-  border-left: 1px solid var(--cor-borda);
+  border-left: 1px solid #5b3fa8;
   font-size: 12px;
-  color: var(--cor-texto-suave);
+  color: #a596c8;
 }
 
 .coracoes {
   letter-spacing: 6px;
-  color: var(--cor-rosa);
-}
-
-/* TELAS MENORES (celular e tablet) */
-
-@media (max-width: 860px) {
-  .conteudo {
-    padding: 0 16px;
-  }
-
-  .menu,
-  .rodape {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .inicio,
-  .nichos,
-  .passos,
-  .numeros,
-  .chamada {
-    flex-direction: column;
-  }
-
-  /* esconde os enfeites para sobrar espaço */
-  .inicio-enfeites,
-  .inicio .lista-lateral,
-  .passo-seta,
-  .texto-pequeno,
-  .chamada-flor,
-  .chamada .lista-lateral,
-  .faixa-texto {
-    display: none;
-  }
-
-  .inicio-titulo {
-    font-size: 42px;
-  }
-
-  .titulo-secao {
-    font-size: 32px;
-  }
-
-  .passo {
-    width: 100%;
-    min-height: auto;
-  }
-
-  .janela-nota {
-    position: static;
-    padding: 10px 16px 0;
-  }
-
-  .numero-centro {
-    margin: 16px 0;
-    padding: 16px 0;
-    border: none;
-    border-top: 1px solid var(--cor-borda);
-    border-bottom: 1px solid var(--cor-borda);
-  }
-
-  .rodape p {
-    padding-left: 0;
-    border-left: none;
-  }
+  color: #ff6ad5;
 }

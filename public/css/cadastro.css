@@ -1,0 +1,133 @@
+/* TELA DE CADASTRO */
+
+.cadastro {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  padding: 32px 40px 16px;
+}
+
+.cadastro-apresentacao {
+  flex: 1;
+  text-align: center;
+}
+
+.cadastro-apresentacao p {
+  max-width: 440px;
+  margin: 0 auto 24px;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.cadastro-formulario {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+  border: 1px solid #5b3fa8;
+}
+
+.cadastro-linha {
+  display: flex;
+  gap: 16px;
+}
+
+.cadastro-linha .cadastro-campo {
+  flex: 1;
+}
+
+.cadastro-campo label,
+.cadastro-titulo-campo {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #c4a7ff;
+}
+
+.cadastro-campo input,
+.cadastro-campo select {
+  width: 100%;
+  margin: 0;
+  padding: 11px 12px;
+  border: 1px solid #5b3fa8;
+  border-radius: 0;
+  background-color: #08050d;
+  color: #e4dcf5;
+  font-family: var(--fonte-texto);
+  font-size: 13px;
+  text-align: left;
+}
+
+.cadastro-campo input::placeholder {
+  color: #a596c8;
+}
+
+.cadastro-campo input:focus,
+.cadastro-campo select:focus {
+  outline: none;
+  border-color: #ff6ad5;
+}
+
+.cadastro-opcoes {
+  display: flex;
+  gap: 12px;
+}
+
+.cadastro-campo .cadastro-opcao {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 10px 12px;
+  border: 1px solid #5b3fa8;
+  background-color: #08050d;
+  cursor: pointer;
+  font-size: 12px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: #e4dcf5;
+}
+
+.cadastro-campo .cadastro-opcao:hover {
+  border-color: #ff6ad5;
+}
+
+.cadastro-campo .cadastro-opcao input {
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  accent-color: #ff6ad5;
+  cursor: pointer;
+}
+
+.cadastro-mensagem {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #ff6ad5;
+}
+
+/* some quando não tem mensagem, para não sobrar espaço */
+.cadastro-mensagem:empty {
+  display: none;
+}
+
+#btn_cadastrar {
+  width: 100%;
+  cursor: pointer;
+  font-family: var(--fonte-texto);
+}
+
+.cadastro-login {
+  margin: 0;
+  font-size: 12px;
+  text-align: center;
+  color: #a596c8;
+}
+
+.cadastro-login a {
+  color: #ff6ad5;
+}
