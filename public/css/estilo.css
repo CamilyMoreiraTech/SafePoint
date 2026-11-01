@@ -10,7 +10,6 @@ body {
 :root {
   --tamanho-header: 80px;
   --tamanho-banner: calc(100vh - var(--tamanho-header) - var(--tamanho-footer) - 2px);
-  --tamanho-simulador: calc(100vh - var(--tamanho-header) - var(--tamanho-footer) - 2px);
   --tamanho-login: calc(100vh - var(--tamanho-header) - var(--tamanho-footer) - 2px);
   --tamanho-footer: 65px;
 }
@@ -300,18 +299,6 @@ input {
 .loading-div img {
   height: 50px;
   width: 50px;
-}
-
-/* SIMULADOR */
-
-.simulador {
-  color: white;
-}
-
-.simulador .container {
-  flex-direction: column;
-  overflow: scroll; 
-  height: var(--tamanho-simulador);
 }
 
 /* ALERTA */
