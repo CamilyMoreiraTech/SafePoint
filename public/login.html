@@ -6,75 +6,108 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>AquaTech | Login</title>
+    <title>SafePoint | Login</title>
 
     <script src="./js/sessao.js"></script>
 
     <link rel="stylesheet" href="./css/estilo.css">
+    <link rel="stylesheet" href="./css/home.css">
+    <link rel="stylesheet" href="./css/cadastro.css">
+    <link rel="stylesheet" href="./css/login.css">
     <link rel="icon" href="./assets/icon/favicon-safepoint.png" type="image/png">
     <link rel="preconnect" href="https://fonts.gstatic.com">
 </head>
 
 <body>
 
-    <!--Header-->
+    <!-- MENU -->
+    <header>
+        <div class="conteudo menu">
+            <a href="index.html" class="logo">
+                <img src="assets/imgs/home/estrela.svg" alt="">
+                SafePoint
+            </a>
 
-    <div class="header">
-        <div class="container">
-            <h1 class="titulo">AquaTech</h1>
-            <ul class="navbar">
-                <li>
-                    <a href="index.html">Inicial</a>
-                </li>
-                <li>|</li>
-                <li class="agora">
-                    <a href="#">Login</a>
-                </li>
-                <li>
-                    <a href="cadastro.html">Cadastro</a>
-                </li>
-            </ul>
-        </div>
-    </div>
+            <nav class="menu-links">
+                <a href="servidores.html">[ Servidores ]</a>
+                <a href="dashboard/dashboard.html">[ Dashboard ]</a>
+                <a href="sobre.html">[ Sobre ]</a>
+            </nav>
 
-
-    <div class="login">
-        <div class="alerta_erro">
-            <div class="card_erro" id="cardErro">
-                <span id="mensagem_erro"></span>
+            <div class="menu-botoes">
+                <a href="login.html" class="botao-contorno">[ Entrar ]</a>
+                <a href="cadastro.html" class="botao-destaque">[ Criar conta ]</a>
             </div>
         </div>
-        <div class="container">
-            <div class="card card-login">
-                <h2>Olá de volta!</h2>
-                <div class="formulario">
-                    <div class="campo">
-                        <span>E-mail:</span>
-                        <input id="email_input" type="text" placeholder="Login">
-                    </div>
-                    <div class="campo">
-                        <span>Senha:</span>
-                        <input id="senha_input" type="password" placeholder="******">
-                    </div>
-                    <button class="botao" onclick="entrar()">Entrar</button>
-                </div>
 
-                <div id="div_aguardar" class="loading-div">
-                    <img src="./assets/circle-loading.gif" id="loading-gif">
-                </div>
+        <div class="faixa">
+            <div class="faixa-xadrez"></div>
+            <p class="faixa-texto">Seu save point em comunidades online »</p>
+            <img src="assets/imgs/home/codigo-barras.svg" alt="" class="codigo-barras">
+        </div>
+    </header>
 
-                <div id="div_erros_login"></div>
+    <main class="conteudo">
+        <!-- LOGIN -->
+        <section class="janela">
+            <div class="janela-barra">
+                <span>› login.exe</span>
+                <div class="janela-botoes"><span>_</span><span>□</span><span>×</span></div>
             </div>
-        </div>
-    </div>
 
-    <!--footer inicio-->
-    <div class="footer">
-        <div class="container">
-            <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023-2026</h4>
-        </div>
-    </div>
-    <!--footer fim-->
+            <div class="cadastro">
+                <div class="cadastro-apresentacao">
+                    <h1 class="inicio-titulo">
+                        <span class="titulo-lilas">Olá de volta</span><br>
+                        <span class="titulo-rosa">ao SafePoint</span>
+                    </h1>
+                    <p>Entre na sua conta para indicar e avaliar os servidores do Discord.</p>
+                    <img src="assets/imgs/home/lirio.svg" alt="" class="lirio">
+                </div>
+
+                <div class="cadastro-formulario">
+                    <div class="cadastro-campo">
+                        <label for="email_input">E-mail</label>
+                        <input id="email_input" type="text" placeholder="meuemail@provedor.com">
+                    </div>
+
+                    <div class="cadastro-campo">
+                        <label for="senha_input">Senha</label>
+                        <input id="senha_input" type="password" placeholder="Sua senha">
+                    </div>
+
+                    <div class="alerta_erro">
+                        <div class="card_erro" id="cardErro">
+                            <span id="mensagem_erro"></span>
+                        </div>
+                    </div>
+
+                    <button id="btn_entrar" class="botao-destaque" onclick="entrar()">[ Entrar ] →</button>
+
+                    <div id="div_aguardar" class="loading-div">
+                        <img src="./assets/circle-loading.gif" id="loading-gif">
+                    </div>
+
+                    <div id="div_erros_login"></div>
+
+                    <p class="cadastro-login">Ainda não tem uma conta? <a href="cadastro.html">Criar conta</a></p>
+                </div>
+            </div>
+
+            <p class="janela-rodape">» safepoint loading...</p>
+        </section>
+    </main>
+
+    <!-- RODAPÉ -->
+    <footer class="conteudo rodape">
+        <a href="index.html" class="logo logo-pequeno">
+            <img src="assets/imgs/home/estrela.svg" alt="">
+            SafePoint
+        </a>
+        <p>feito com carinho e glitter. Projeto acadêmico de ADS.</p>
+        <span class="coracoes">♥ ♥ ♥</span>
+        <img src="assets/imgs/home/codigo-barras.svg" alt="" class="codigo-barras">
+    </footer>
 
 </body>
 
@@ -91,7 +124,7 @@
 
         if (emailVar == "" || senhaVar == "") {
             cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+            mensagem_erro.innerHTML = "Preencha o e-mail e a senha.";
             finalizarAguardar();
             return false;
         }
@@ -100,7 +133,6 @@
         }
 
         console.log("FORM LOGIN: ", emailVar);
-        console.log("FORM SENHA: ", senhaVar);
 
         fetch("/usuarios/autenticar", {
             method: "POST",
@@ -143,6 +175,7 @@
 
         }).catch(function (erro) {
             console.log(erro);
+            finalizarAguardar("Não foi possível entrar.");
         })
 
         return false;

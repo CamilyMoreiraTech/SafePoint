@@ -1,0 +1,28 @@
+/* TELA DE LOGIN (o visual geral vem do home.css e o formulário do cadastro.css) */
+
+#btn_entrar {
+  width: 100%;
+  cursor: pointer;
+  font-family: var(--fonte-texto);
+}
+
+#div_erros_login {
+  font-size: 13px;
+  color: #ff6ad5;
+}
+
+/* a mensagem fica dentro do formulário, no lugar de flutuar sobre a tela */
+.card_erro {
+  position: static;
+  width: 100%;
+  margin-right: 0;
+  padding: 0;
+  background-color: transparent;
+  color: #ff6ad5;
+  border: 0;
+}
+
+.card_erro #mensagem_erro {
+  font-size: 13px;
+  font-weight: 400;
+}
