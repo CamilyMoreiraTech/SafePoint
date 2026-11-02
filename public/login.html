@@ -104,7 +104,7 @@
             <img src="assets/imgs/home/estrela.svg" alt="">
             SafePoint
         </a>
-        <p>feito com carinho e glitter. Projeto acadêmico de ADS.</p>
+        <p>feito com carinho e glitter.</p>
         <span class="coracoes">♥ ♥ ♥</span>
         <img src="assets/imgs/home/codigo-barras.svg" alt="" class="codigo-barras">
     </footer>
@@ -116,24 +116,64 @@
 <script>
 
 
+    // TESTE: usuária fixa enquanto o banco não está conectado (tirar antes da entrega)
+    const usuariasTeste = [
+        { email: "flor@gmail.com", senha: "Flor@2004", nome: "Flor" }
+    ];
+    const limiteErros = 3;
+    let qtdErros = 0;
+
     function entrar() {
         aguardar();
 
         var emailVar = email_input.value;
         var senhaVar = senha_input.value;
 
-        if (emailVar == "" || senhaVar == "") {
-            cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "Preencha o e-mail e a senha.";
-            finalizarAguardar();
+        // qtdErros só volta a 0 quando a página é recarregada
+        if (qtdErros >= limiteErros) {
+            mostrarErro("Login bloqueado: você errou 3 vezes. Recarregue a página para tentar de novo.");
             return false;
         }
-        else {
-            setInterval(sumirMensagem, 5000)
+
+        if (emailVar == "" || senhaVar == "") {
+            mostrarErro("Preencha o e-mail e a senha.");
+            return false;
         }
 
         console.log("FORM LOGIN: ", emailVar);
 
+        let loginCorreto = false;
+
+        for (let i = 0; i < usuariasTeste.length; i++) {
+            if (usuariasTeste[i].email == emailVar && usuariasTeste[i].senha == senhaVar) {
+                loginCorreto = true;
+                sessionStorage.EMAIL_USUARIO = usuariasTeste[i].email;
+                sessionStorage.NOME_USUARIO = usuariasTeste[i].nome;
+                break;
+            }
+        }
+
+        if (loginCorreto) {
+            cardErro.style.display = "none";
+
+            setTimeout(function () {
+                window.location = "./minha-area.html";
+            }, 1000); // apenas para exibir o loading
+        } else {
+            qtdErros++;
+
+            const qtdRestantes = limiteErros - qtdErros;
+
+            if (qtdRestantes == 0) {
+                mostrarErro("Login bloqueado.");
+            } else if (qtdRestantes == 1) {
+                mostrarErro("E-mail ou senha incorretos. Resta 1 tentativa.");
+            } else {
+                mostrarErro(`E-mail ou senha incorretos. Restam ${qtdRestantes} tentativas.`);
+            }
+        }
+
+        /* Código da API
         fetch("/usuarios/autenticar", {
             method: "POST",
             headers: {
@@ -177,8 +217,15 @@
             console.log(erro);
             finalizarAguardar("Não foi possível entrar.");
         })
+        */
 
         return false;
+    }
+
+    function mostrarErro(mensagem) {
+        cardErro.style.display = "block";
+        mensagem_erro.innerHTML = mensagem;
+        finalizarAguardar();
     }
 
     function sumirMensagem() {
