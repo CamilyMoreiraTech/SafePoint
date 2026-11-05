@@ -37,6 +37,14 @@
   flex: 1;
 }
 
+/* explicação das regras da senha, logo abaixo dos campos de senha */
+.cadastro-dica {
+  margin: -8px 0 0;
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--cor-texto-suave);
+}
+
 .cadastro-campo label,
 .cadastro-titulo-campo {
   display: block;

@@ -1,6 +1,48 @@
+// confere cada caractere da senha e devolve o que está faltando ("" quando está tudo certo)
+function verificarSenha(senha) {
+    const maiusculas = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const minusculas = "abcdefghijklmnopqrstuvwxyz";
+    const numeros = "0123456789";
+
+    let temMaiuscula = false;
+    let temMinuscula = false;
+    let temNumero = false;
+    let temEspecial = false;
+
+    for (let i = 0; i < senha.length; i++) {
+        const caractere = senha[i];
+
+        if (maiusculas.includes(caractere)) {
+            temMaiuscula = true;
+        } else if (minusculas.includes(caractere)) {
+            temMinuscula = true;
+        } else if (numeros.includes(caractere)) {
+            temNumero = true;
+        } else {
+            // tudo que não é letra sem acento nem número conta como especial
+            temEspecial = true;
+        }
+    }
+
+    if (senha.length < 6) {
+        return "A senha precisa ter pelo menos 6 caracteres.";
+    } else if (!temMaiuscula) {
+        return "A senha precisa ter pelo menos uma letra maiúscula.";
+    } else if (!temMinuscula) {
+        return "A senha precisa ter pelo menos uma letra minúscula.";
+    } else if (!temNumero) {
+        return "A senha precisa ter pelo menos um número.";
+    } else if (!temEspecial) {
+        return "A senha precisa ter pelo menos um caractere especial (ex.: @, #, !).";
+    }
+
+    return "";
+}
+
 function validar(nome, email, senha, confirmacaoSenha, faixaEtaria, plataforma, interesses) {
     let valida = true;
     let mensagem = "";
+    const erroSenha = verificarSenha(senha);
 
     if (nome == "" || email == "" || senha == "" || confirmacaoSenha == "" || faixaEtaria == "" || plataforma == "") {
         valida = false;
@@ -14,9 +56,9 @@ function validar(nome, email, senha, confirmacaoSenha, faixaEtaria, plataforma, 
     } else if (!email.includes("@") || !email.includes(".")) {
         valida = false;
         mensagem = "Digite um e-mail válido.";
-    } else if (senha.length < 6) {
+    } else if (erroSenha != "") {
         valida = false;
-        mensagem = "A senha precisa ter pelo menos 6 caracteres.";
+        mensagem = erroSenha;
     } else if (senha != confirmacaoSenha) {
         valida = false;
         mensagem = "As senhas não são iguais.";
