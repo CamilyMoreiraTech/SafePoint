@@ -11,4 +11,8 @@ router.post("/indicar", function (req, res) {
     servidorController.indicar(req, res);
 });
 
+router.get("/indicados/:idUsuaria", function (req, res) {
+    servidorController.listarIndicados(req, res);
+});
+
 module.exports = router;

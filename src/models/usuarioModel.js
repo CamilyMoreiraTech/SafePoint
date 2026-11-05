@@ -32,9 +32,31 @@ function listarFaixasEtarias() {
     return database.executar(instrucaoSql);
 }
 
+// os interesses vêm juntos em um texto ("games,leitura"), como os temas dos servidores
+function buscarPerfil(idUsuaria) {
+    var instrucaoSql = `
+        SELECT
+            u.nome,
+            u.email,
+            u.faixa_etaria,
+            u.plataforma,
+            DATE_FORMAT(u.dt_cadastro, '%d/%m/%Y') AS dt_cadastro,
+            (SELECT GROUP_CONCAT(t.nome)
+                FROM interesse_usuaria iu
+                    INNER JOIN tema t
+                        ON iu.fk_tema = t.id
+                WHERE iu.fk_usuaria = u.id) AS interesses
+        FROM usuaria u
+        WHERE u.id = ${idUsuaria};
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     autenticar,
     cadastrar,
     cadastrarInteresse,
-    listarFaixasEtarias
+    listarFaixasEtarias,
+    buscarPerfil
 };

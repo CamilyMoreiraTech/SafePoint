@@ -102,8 +102,26 @@ function listarFaixasEtarias(req, res) {
     });
 }
 
+// dados do cadastro da própria usuária (só usado na minha área, que exige login)
+function buscarPerfil(req, res) {
+    var idUsuaria = req.params.idUsuaria;
+
+    usuarioModel.buscarPerfil(idUsuaria).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar o perfil: ", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
 module.exports = {
     autenticar,
     cadastrar,
-    listarFaixasEtarias
+    listarFaixasEtarias,
+    buscarPerfil
 }

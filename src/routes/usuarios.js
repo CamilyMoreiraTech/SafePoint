@@ -16,4 +16,8 @@ router.get("/faixas-etarias", function (req, res) {
     usuarioController.listarFaixasEtarias(req, res);
 });
 
+router.get("/perfil/:idUsuaria", function (req, res) {
+    usuarioController.buscarPerfil(req, res);
+});
+
 module.exports = router;

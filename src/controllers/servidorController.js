@@ -53,7 +53,25 @@ function indicar(req, res) {
     }
 }
 
+// servidores que a usuária indicou, com qualquer status (para a minha área)
+function listarIndicados(req, res) {
+    var idUsuaria = req.params.idUsuaria;
+
+    servidorModel.listarIndicados(idUsuaria).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as indicações: ", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
 module.exports = {
     listar,
-    indicar
+    indicar,
+    listarIndicados
 }

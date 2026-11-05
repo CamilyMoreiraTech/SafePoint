@@ -10,14 +10,16 @@
 
     <script src="./js/sessao.js"></script>
     <script src="./js/verificar-login.js"></script>
+    <script src="./js/minha-area.js"></script>
 
     <link rel="stylesheet" href="./css/estilo.css">
     <link rel="stylesheet" href="./css/home.css">
+    <link rel="stylesheet" href="./css/minha-area.css">
     <link rel="icon" href="./assets/icon/favicon-safepoint.png" type="image/png">
     <link rel="preconnect" href="https://fonts.gstatic.com">
 </head>
 
-<body onload="verificarLogin('minha-area.html'); atualizarMenu()">
+<body onload="verificarLogin('minha-area.html'); atualizarMenu(); iniciarMinhaArea()">
     <!-- MENU -->
     <header>
         <div class="conteudo menu">
@@ -46,17 +48,109 @@
     </header>
 
     <main class="conteudo">
-        <!-- MINHA ÁREA (conteúdo ainda será criado) -->
+        <!-- BOAS-VINDAS, PERFIL E NÚMEROS -->
         <section class="janela">
             <div class="janela-barra">
                 <span>› minha-area.exe</span>
                 <div class="janela-botoes"><span>_</span><span>□</span><span>×</span></div>
             </div>
 
-            <h1 class="titulo-secao">Minha área</h1>
+            <div class="area-topo">
+                <div class="area-boas-vindas">
+                    <h1 class="inicio-titulo">
+                        <span class="titulo-lilas">Olá,</span>
+                        <span id="div_nome_usuaria" class="titulo-rosa"></span>
+                    </h1>
+                    <p>Aqui você acompanha os servidores que indicou e as avaliações que fez. Obrigada por ajudar a comunidade a ficar mais segura ♥</p>
 
-            <p class="janela-rodape">» em construção</p>
+                    <div class="inicio-botoes">
+                        <a href="indicar-servidor.html" class="botao-destaque">[ Indicar um servidor ] →</a>
+                        <a href="servidores.html" class="botao-contorno">[ Ver servidores ]</a>
+                    </div>
+                </div>
+
+                <!-- os dados do perfil são preenchidos pelo minha-area.js com os dados da API -->
+                <div class="area-perfil">
+                    <h2>Meu perfil</h2>
+                    <div class="perfil-linha">
+                        <span class="perfil-rotulo">E-mail</span>
+                        <span id="div_email"></span>
+                    </div>
+                    <div class="perfil-linha">
+                        <span class="perfil-rotulo">Faixa etária</span>
+                        <span id="div_faixa_etaria"></span>
+                    </div>
+                    <div class="perfil-linha">
+                        <span class="perfil-rotulo">Onde mais joga</span>
+                        <span id="div_plataforma"></span>
+                    </div>
+                    <div class="perfil-linha">
+                        <span class="perfil-rotulo">Interesses</span>
+                        <span id="div_interesses"></span>
+                    </div>
+                    <div class="perfil-linha">
+                        <span class="perfil-rotulo">Membro desde</span>
+                        <span id="div_dt_cadastro"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="div_msg" class="area-mensagem"></div>
+
+            <div class="area-numeros">
+                <div class="area-numero">
+                    <div id="div_qtd_indicados" class="area-numero-valor">0</div>
+                    <div class="area-numero-legenda">servidores indicados</div>
+                </div>
+                <div class="area-numero">
+                    <div id="div_qtd_aprovados" class="area-numero-valor">0</div>
+                    <div class="area-numero-legenda">indicações aprovadas</div>
+                </div>
+                <div class="area-numero">
+                    <div id="div_qtd_avaliacoes" class="area-numero-valor">0</div>
+                    <div class="area-numero-legenda">avaliações feitas</div>
+                </div>
+            </div>
         </section>
+
+        <!-- MINHAS INDICAÇÕES E MINHAS AVALIAÇÕES -->
+        <div class="area-linha">
+            <section class="janela">
+                <div class="janela-barra">
+                    <span>› indicacoes.exe</span>
+                    <div class="janela-botoes"><span>_</span><span>□</span><span>×</span></div>
+                </div>
+                <div class="area-bloco">
+                    <h2>Minhas indicações</h2>
+
+                    <div id="div_indicacoes">
+                        <div class="area-vazio">Carregando...</div>
+                    </div>
+
+                    <div class="area-bloco-botao">
+                        <a href="indicar-servidor.html" class="botao-contorno">[ Indicar outro servidor ] →</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="janela">
+                <div class="janela-barra">
+                    <span>› avaliacoes.exe</span>
+                    <div class="janela-botoes"><span>_</span><span>□</span><span>×</span></div>
+                </div>
+                <div class="area-bloco">
+                    <h2>Minhas avaliações</h2>
+
+                    <div id="div_avaliacoes">
+                        <div class="area-vazio">Carregando...</div>
+                    </div>
+
+                    <div class="area-bloco-botao">
+                        <a href="servidores.html" class="botao-contorno">[ Avaliar um servidor ] →</a>
+                    </div>
+                </div>
+            </section>
+        </div>
     </main>
 
     <!-- RODAPÉ -->

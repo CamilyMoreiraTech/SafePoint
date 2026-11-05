@@ -47,8 +47,30 @@ function cadastrarTema(idServidor, tema) {
     return database.executar(instrucaoSql);
 }
 
+// aqui aparecem também os pendentes e recusados, porque é a própria usuária vendo as indicações dela
+function listarIndicados(idUsuaria) {
+    var instrucaoSql = `
+        SELECT
+            s.id,
+            s.nome,
+            s.status,
+            DATE_FORMAT(s.dt_indicacao, '%d/%m/%Y') AS dt_indicacao,
+            (SELECT GROUP_CONCAT(t.nome)
+                FROM tema_servidor ts
+                    INNER JOIN tema t
+                        ON ts.fk_tema = t.id
+                WHERE ts.fk_servidor = s.id) AS temas
+        FROM servidor s
+        WHERE s.fk_usuaria = ${idUsuaria}
+        ORDER BY s.id DESC;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     listar,
     indicar,
-    cadastrarTema
+    cadastrarTema,
+    listarIndicados
 };

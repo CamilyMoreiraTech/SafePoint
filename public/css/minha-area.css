@@ -1,0 +1,180 @@
+/* MINHA ÁREA */
+
+/* BOAS-VINDAS + PERFIL */
+
+.area-topo {
+  display: flex;
+  gap: 24px;
+  padding: 28px 24px 24px;
+}
+
+.area-boas-vindas {
+  flex: 2;
+}
+
+.area-boas-vindas p {
+  max-width: 520px;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.area-perfil {
+  flex: 1;
+  padding: 16px 18px;
+  border: 1px solid var(--cor-borda);
+}
+
+.area-perfil h2,
+.area-bloco h2 {
+  margin: 0 0 14px;
+  font-family: var(--fonte-titulo);
+  font-weight: 400;
+  font-size: 24px;
+  color: var(--cor-lilas);
+}
+
+.perfil-linha {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(91, 63, 168, 0.4);
+  font-size: 13px;
+}
+
+.perfil-rotulo {
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--cor-texto-suave);
+}
+
+.etiqueta {
+  display: inline-block;
+  margin-left: 4px;
+  padding: 2px 8px;
+  border: 1px solid var(--cor-rosa);
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--cor-rosa);
+}
+
+/* NÚMEROS DA USUÁRIA */
+
+.area-numeros {
+  display: flex;
+  gap: 16px;
+  padding: 0 24px 24px;
+}
+
+.area-numero {
+  flex: 1;
+  padding: 16px;
+  border: 1px solid var(--cor-borda);
+  text-align: center;
+}
+
+.area-numero-valor {
+  font-family: var(--fonte-titulo);
+  font-size: 48px;
+  line-height: 1;
+  color: var(--cor-rosa);
+  text-shadow: 0 0 18px rgba(255, 106, 213, 0.7);
+}
+
+.area-numero-legenda {
+  margin-top: 8px;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* INDICAÇÕES E AVALIAÇÕES */
+
+.area-linha {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.area-linha .janela {
+  flex: 1;
+  margin-top: 0;
+}
+
+.area-bloco {
+  padding: 16px 20px 20px;
+}
+
+.item {
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(91, 63, 168, 0.4);
+}
+
+.item-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.item-nome {
+  font-size: 15px;
+  color: #ffffff;
+}
+
+.item-detalhe {
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--cor-texto-suave);
+}
+
+.item-comentario {
+  margin: 8px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.status {
+  padding: 3px 8px;
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: 1px solid;
+}
+
+.status-pendente {
+  color: var(--cor-lilas);
+}
+
+.status-aprovado {
+  color: #1a0b24;
+  background-color: var(--cor-rosa);
+  border-color: var(--cor-rosa);
+}
+
+.status-recusado {
+  color: var(--cor-texto-suave);
+}
+
+.estrelas {
+  letter-spacing: 2px;
+  color: var(--cor-rosa);
+}
+
+.area-vazio {
+  padding: 12px 0;
+  font-size: 13px;
+  color: var(--cor-texto-suave);
+}
+
+.area-bloco-botao {
+  margin-top: 16px;
+}
+
+.area-mensagem {
+  padding: 0 24px;
+  font-size: 13px;
+  color: var(--cor-rosa);
+}
