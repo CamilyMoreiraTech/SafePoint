@@ -14,6 +14,46 @@ function listar(req, res) {
     });
 }
 
+function indicar(req, res) {
+    var nome = req.body.nomeServer;
+    var link = req.body.linkConviteServer;
+    var descricao = req.body.descricaoServer;
+    var temas = req.body.temasServer;
+    var idUsuaria = req.body.idUsuariaServer;
+
+    if (nome == undefined || link == undefined || descricao == undefined) {
+        res.status(400).send("Nome, link ou descrição estão undefined!");
+    } else if (idUsuaria == undefined) {
+        res.status(400).send("A usuária que indicou está undefined!");
+    } else if (temas == undefined || temas.length == 0) {
+        res.status(400).send("Marque pelo menos um tema!");
+    } else {
+
+        servidorModel.indicar(nome, link, descricao, idUsuaria)
+            .then(
+                function (resultado) {
+                    // insertId é o id do servidor que acabou de ser criado - para gravar os temas dele
+                    var idServidor = resultado.insertId;
+
+                    for (var i = 0; i < temas.length; i++) {
+                        servidorModel.cadastrarTema(idServidor, temas[i])
+                            .catch(function (erro) {
+                                console.log(erro);
+                            });
+                    }
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("\nHouve um erro ao indicar o servidor! Erro: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
 module.exports = {
-    listar
+    listar,
+    indicar
 }

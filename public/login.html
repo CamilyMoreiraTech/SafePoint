@@ -161,8 +161,16 @@
                     sessionStorage.ID_USUARIO = json.id;
                     cardErro.style.display = "none";
 
+                    // volta para a página que pediu o login (ex.: indicar servidor)
+                    // trocar "servidores.html" por "minha-area.html" quando essa página existir
+                    let proximaPagina = "servidores.html";
+                    if (sessionStorage.PAGINA_APOS_LOGIN != undefined) {
+                        proximaPagina = sessionStorage.PAGINA_APOS_LOGIN;
+                        sessionStorage.removeItem("PAGINA_APOS_LOGIN");
+                    }
+
                     setTimeout(function () {
-                        window.location = "./minha-area.html";
+                        window.location = proximaPagina;
                     }, 1000); // apenas para exibir o loading
 
                 });

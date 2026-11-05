@@ -30,6 +30,25 @@ function listar() {
     return database.executar(instrucaoSql);
 }
 
+// o status fica 'pendente' sozinho, pelo DEFAULT da tabela
+function indicar(nome, link, descricao, idUsuaria) {
+    var instrucaoSql = `
+        INSERT INTO servidor (nome, link_convite, descricao, fk_usuaria) VALUES ('${nome}', '${link}', '${descricao}', ${idUsuaria});
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function cadastrarTema(idServidor, tema) {
+    var instrucaoSql = `
+        INSERT INTO tema_servidor (fk_servidor, fk_tema) SELECT ${idServidor}, id FROM tema WHERE nome = '${tema}';
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
-    listar
+    listar,
+    indicar,
+    cadastrarTema
 };
