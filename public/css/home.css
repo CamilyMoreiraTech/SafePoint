@@ -3,6 +3,13 @@
 /* HOME DO SAFEPOINT (o cadastro.html também usa este arquivo para o visual geral) */
 
 :root {
+  --cor-fundo: #08050d;
+  --cor-borda: #5b3fa8;
+  --cor-lilas: #c4a7ff;
+  --cor-rosa: #ff6ad5;
+  --cor-rosa-botao: #ff7ae6;
+  --cor-texto: #e4dcf5;
+  --cor-texto-suave: #a596c8;
   --fonte-titulo: 'DM Serif Display', Georgia, serif;
   --fonte-texto: 'IBM Plex Mono', 'Courier New', monospace;
 }
@@ -13,8 +20,8 @@
 
 body {
   font-family: var(--fonte-texto);
-  color: #e4dcf5;
-  background-color: #08050d;
+  color: var(--cor-texto);
+  background-color: var(--cor-fundo);
   /* brilho roxo no canto superior direito */
   background-image: radial-gradient(circle 650px at 100% 0%, rgba(139, 92, 246, 0.35), transparent);
   background-repeat: no-repeat;
@@ -41,12 +48,12 @@ a {
   letter-spacing: 1px;
   text-transform: uppercase;
   text-align: center;
-  border: 1px solid #c4a7ff;
+  border: 1px solid var(--cor-lilas);
 }
 
 .botao-destaque {
-  background-color: #ff7ae6;
-  border-color: #ff7ae6;
+  background-color: var(--cor-rosa-botao);
+  border-color: var(--cor-rosa-botao);
   color: #1a0b24;
   font-weight: 500;
   box-shadow: 0 0 16px rgba(255, 122, 230, 0.45);
@@ -57,12 +64,12 @@ a {
 }
 
 .botao-contorno {
-  color: #c4a7ff;
+  color: var(--cor-lilas);
 }
 
 .botao-contorno:hover {
-  color: #ff6ad5;
-  border-color: #ff6ad5;
+  color: var(--cor-rosa);
+  border-color: var(--cor-rosa);
 }
 
 /* MENU */
@@ -82,7 +89,7 @@ a {
   gap: 10px;
   font-family: var(--fonte-titulo);
   font-size: 42px;
-  color: #ff6ad5;
+  color: var(--cor-rosa);
   text-shadow: 0 0 12px rgba(255, 106, 213, 0.6), 0 0 28px rgba(139, 92, 246, 0.5);
 }
 
@@ -99,11 +106,11 @@ a {
   font-size: 13px;
   letter-spacing: 1px;
   text-transform: uppercase;
-  color: #c4a7ff;
+  color: var(--cor-lilas);
 }
 
 .menu-links a:hover {
-  color: #ff6ad5;
+  color: var(--cor-rosa);
 }
 
 .menu-botoes {
@@ -133,7 +140,7 @@ a {
   font-size: 11px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: #c4a7ff;
+  color: var(--cor-lilas);
   white-space: nowrap;
 }
 
@@ -147,7 +154,7 @@ a {
   position: relative;
   margin-top: 24px;
   background-color: rgba(15, 10, 25, 0.85);
-  border: 1px solid #5b3fa8;
+  border: 1px solid var(--cor-borda);
   box-shadow: 0 0 18px rgba(139, 92, 246, 0.2);
 }
 
@@ -156,11 +163,11 @@ a {
   justify-content: space-between;
   align-items: center;
   padding: 6px 12px;
-  border-bottom: 1px solid #5b3fa8;
+  border-bottom: 1px solid var(--cor-borda);
   font-size: 11px;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: #c4a7ff;
+  color: var(--cor-lilas);
 }
 
 .janela-botoes {
@@ -171,7 +178,7 @@ a {
 .janela-botoes span {
   width: 14px;
   height: 14px;
-  border: 1px solid #c4a7ff;
+  border: 1px solid var(--cor-lilas);
   font-size: 9px;
   line-height: 12px;
   text-align: center;
@@ -183,7 +190,7 @@ a {
   font-size: 10px;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: #a596c8;
+  color: var(--cor-texto-suave);
 }
 
 .janela-nota {
@@ -195,19 +202,19 @@ a {
   letter-spacing: 1.5px;
   text-transform: uppercase;
   text-align: right;
-  color: #a596c8;
+  color: var(--cor-texto-suave);
 }
 
 .lista-lateral {
   list-style: none;
   margin: 0;
   padding: 12px 14px;
-  border: 1px solid #5b3fa8;
+  border: 1px solid var(--cor-borda);
   font-size: 11px;
   letter-spacing: 1.5px;
   line-height: 2;
   text-transform: uppercase;
-  color: #c4a7ff;
+  color: var(--cor-lilas);
 }
 
 .lista-sem-borda {
@@ -220,7 +227,7 @@ a {
   font-weight: 400;
   font-size: 44px;
   text-align: center;
-  color: #c4a7ff;
+  color: var(--cor-lilas);
   text-shadow: 0 0 16px rgba(139, 92, 246, 0.8);
 }
 
@@ -228,7 +235,7 @@ a {
   margin: 0 12px;
   font-size: 22px;
   vertical-align: middle;
-  color: #ff6ad5;
+  color: var(--cor-rosa);
 }
 
 /* BANNER PRINCIPAL */
@@ -245,9 +252,9 @@ a {
   flex-direction: column;
   gap: 20px;
   padding-right: 12px;
-  border-right: 1px solid #5b3fa8;
+  border-right: 1px solid var(--cor-borda);
   font-size: 18px;
-  color: #ff6ad5;
+  color: var(--cor-rosa);
 }
 
 .inicio-texto {
@@ -264,11 +271,11 @@ a {
 }
 
 .titulo-lilas {
-  color: #c4a7ff;
+  color: var(--cor-lilas);
 }
 
 .titulo-rosa {
-  color: #ff6ad5;
+  color: var(--cor-rosa);
 }
 
 .inicio-texto p {
@@ -310,7 +317,7 @@ a {
 
 .brilho {
   position: absolute;
-  color: #ff6ad5;
+  color: var(--cor-rosa);
 }
 
 .brilho-1 {
@@ -359,17 +366,23 @@ a {
   font-size: 34px;
   letter-spacing: 1px;
   text-transform: uppercase;
-  color: #c4a7ff;
+  color: var(--cor-lilas);
   text-shadow: 0 0 14px rgba(139, 92, 246, 0.8);
 }
 
 .card-corpo p {
-  margin: 0 0 18px;
+  margin: 0;
   font-size: 13px;
   line-height: 1.5;
 }
 
-.card-corpo .botao-contorno {
+.nichos-botao {
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* o botão ocupa a mesma largura da linha dos 3 cards */
+.nichos-botao .botao-destaque {
   width: 100%;
 }
 
@@ -387,7 +400,7 @@ a {
   flex: 1;
   min-height: 170px;
   padding: 18px 12px;
-  border: 1px solid #5b3fa8;
+  border: 1px solid var(--cor-borda);
   text-align: center;
 }
 
@@ -397,7 +410,7 @@ a {
   left: 10px;
   font-family: var(--fonte-titulo);
   font-size: 26px;
-  color: #ff6ad5;
+  color: var(--cor-rosa);
 }
 
 .passo-icone {
@@ -418,12 +431,12 @@ a {
   margin: 0;
   font-size: 12px;
   line-height: 1.6;
-  color: #a596c8;
+  color: var(--cor-texto-suave);
 }
 
 .passo-seta {
   font-size: 20px;
-  color: #c4a7ff;
+  color: var(--cor-lilas);
 }
 
 /* A COMUNIDADE EM NÚMEROS */
@@ -439,15 +452,15 @@ a {
 }
 
 .numero-centro {
-  border-left: 1px solid #5b3fa8;
-  border-right: 1px solid #5b3fa8;
+  border-left: 1px solid var(--cor-borda);
+  border-right: 1px solid var(--cor-borda);
 }
 
 .numero-valor {
   font-family: var(--fonte-titulo);
   font-size: 68px;
   line-height: 1;
-  color: #ff6ad5;
+  color: var(--cor-rosa);
   text-shadow: 0 0 18px rgba(255, 106, 213, 0.7);
 }
 
@@ -477,7 +490,7 @@ a {
   letter-spacing: 1.5px;
   line-height: 1.7;
   text-transform: uppercase;
-  color: #a596c8;
+  color: var(--cor-texto-suave);
 }
 
 .chamada-flor {
@@ -522,12 +535,12 @@ a {
   flex: 1;
   margin: 0;
   padding-left: 20px;
-  border-left: 1px solid #5b3fa8;
+  border-left: 1px solid var(--cor-borda);
   font-size: 12px;
-  color: #a596c8;
+  color: var(--cor-texto-suave);
 }
 
 .coracoes {
   letter-spacing: 6px;
-  color: #ff6ad5;
+  color: var(--cor-rosa);
 }

@@ -25,7 +25,7 @@
   flex-direction: column;
   gap: 16px;
   padding: 24px;
-  border: 1px solid #5b3fa8;
+  border: 1px solid var(--cor-borda);
 }
 
 .cadastro-linha {
@@ -44,7 +44,7 @@
   font-size: 11px;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: #c4a7ff;
+  color: var(--cor-lilas);
 }
 
 .cadastro-campo input,
@@ -52,23 +52,23 @@
   width: 100%;
   margin: 0;
   padding: 11px 12px;
-  border: 1px solid #5b3fa8;
+  border: 1px solid var(--cor-borda);
   border-radius: 0;
-  background-color: #08050d;
-  color: #e4dcf5;
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
   font-family: var(--fonte-texto);
   font-size: 13px;
   text-align: left;
 }
 
 .cadastro-campo input::placeholder {
-  color: #a596c8;
+  color: var(--cor-texto-suave);
 }
 
 .cadastro-campo input:focus,
 .cadastro-campo select:focus {
   outline: none;
-  border-color: #ff6ad5;
+  border-color: var(--cor-rosa);
 }
 
 .cadastro-opcoes {
@@ -83,31 +83,31 @@
   gap: 8px;
   margin: 0;
   padding: 10px 12px;
-  border: 1px solid #5b3fa8;
-  background-color: #08050d;
+  border: 1px solid var(--cor-borda);
+  background-color: var(--cor-fundo);
   cursor: pointer;
   font-size: 12px;
   letter-spacing: 0;
   text-transform: none;
-  color: #e4dcf5;
+  color: var(--cor-texto);
 }
 
 .cadastro-campo .cadastro-opcao:hover {
-  border-color: #ff6ad5;
+  border-color: var(--cor-rosa);
 }
 
 .cadastro-campo .cadastro-opcao input {
   width: 16px;
   height: 16px;
   padding: 0;
-  accent-color: #ff6ad5;
+  accent-color: var(--cor-rosa);
   cursor: pointer;
 }
 
 .cadastro-mensagem {
   font-size: 13px;
   line-height: 1.5;
-  color: #ff6ad5;
+  color: var(--cor-rosa);
 }
 
 /* some quando não tem mensagem, para não sobrar espaço */
@@ -125,9 +125,9 @@
   margin: 0;
   font-size: 12px;
   text-align: center;
-  color: #a596c8;
+  color: var(--cor-texto-suave);
 }
 
 .cadastro-login a {
-  color: #ff6ad5;
+  color: var(--cor-rosa);
 }

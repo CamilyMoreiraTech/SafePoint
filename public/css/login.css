@@ -8,7 +8,7 @@
 
 #div_erros_login {
   font-size: 13px;
-  color: #ff6ad5;
+  color: var(--cor-rosa);
 }
 
 /* a mensagem fica dentro do formulário, no lugar de flutuar sobre a tela */
@@ -18,7 +18,7 @@
   margin-right: 0;
   padding: 0;
   background-color: transparent;
-  color: #ff6ad5;
+  color: var(--cor-rosa);
   border: 0;
 }
 
