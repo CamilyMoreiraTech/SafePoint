@@ -87,7 +87,23 @@ function cadastrar(req, res) {
     }
 }
 
+// só quantidades por faixa (para a dashboard), sem nome nem e-mail das usuárias
+function listarFaixasEtarias(req, res) {
+    usuarioModel.listarFaixasEtarias().then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as faixas etárias: ", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
 module.exports = {
     autenticar,
-    cadastrar
+    cadastrar,
+    listarFaixasEtarias
 }

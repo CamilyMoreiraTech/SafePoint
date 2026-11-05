@@ -24,8 +24,17 @@ function cadastrarInteresse(idUsuaria, interesse) {
     return database.executar(instrucaoSql);
 }
 
+function listarFaixasEtarias() {
+    var instrucaoSql = `
+        SELECT faixa_etaria, COUNT(id) AS total_usuarias FROM usuaria GROUP BY faixa_etaria;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     autenticar,
     cadastrar,
-    cadastrarInteresse
+    cadastrarInteresse,
+    listarFaixasEtarias
 };

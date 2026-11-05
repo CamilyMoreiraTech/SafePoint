@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SafePoint | Dashboard</title>
+
+    <script src="./js/sessao.js"></script>
+    <script src="./js/verificar-login.js"></script>
+    <!-- mesmo Chart.js que a dashboard da base usa -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./js/dashboard.js"></script>
+
+    <link rel="stylesheet" href="./css/estilo.css">
+    <link rel="stylesheet" href="./css/home.css">
+    <link rel="stylesheet" href="./css/dashboard.css">
+    <link rel="icon" href="./assets/icon/favicon-safepoint.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+</head>
+
+<body onload="atualizarMenu(); iniciarDashboard()">
+    <!-- MENU -->
+    <header>
+        <div class="conteudo menu">
+            <a href="index.html" class="logo">
+                <img src="assets/imgs/home/estrela.svg" alt="">
+                SafePoint
+            </a>
+
+            <nav class="menu-links">
+                <a href="servidores.html">[ Servidores ]</a>
+                <a href="dashboard.html">[ Dashboard ]</a>
+                <a href="sobre.html">[ Sobre ]</a>
+            </nav>
+
+            <div id="div_menu_botoes" class="menu-botoes">
+                <a href="login.html" class="botao-contorno">[ Entrar ]</a>
+                <a href="cadastro.html" class="botao-destaque">[ Criar conta ]</a>
+            </div>
+        </div>
+
+        <div class="faixa">
+            <div class="faixa-xadrez"></div>
+            <p class="faixa-texto">Seu save point em comunidades online »</p>
+            <img src="assets/imgs/home/codigo-barras.svg" alt="" class="codigo-barras">
+        </div>
+    </header>
+
+    <main class="conteudo">
+        <!-- TÍTULO, FILTRO E INDICADORES -->
+        <section class="janela">
+            <div class="janela-barra">
+                <span>› dashboard.exe</span>
+                <div class="janela-botoes"><span>_</span><span>□</span><span>×</span></div>
+            </div>
+
+            <div class="dashboard-topo">
+                <div>
+                    <h1 class="titulo-secao">Dashboard da comunidade</h1>
+                    <p>Como estão os servidores avaliados pelas usuárias do SafePoint.</p>
+                </div>
+
+                <div class="dashboard-filtro">
+                    <label for="sel_tema">Tema</label>
+                    <select id="sel_tema" onchange="atualizarDashboard()">
+                        <option value="">Todos os temas</option>
+                        <option value="games">Games</option>
+                        <option value="artesanato">Artesanato</option>
+                        <option value="leitura">Leitura</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="div_msg" class="dashboard-mensagem"></div>
+
+            <div class="indicadores">
+                <div class="indicador">
+                    <div id="div_qtd_servidores" class="indicador-valor">0</div>
+                    <div class="indicador-legenda">servidores aprovados</div>
+                </div>
+                <div class="indicador">
+                    <div id="div_total_avaliacoes" class="indicador-valor">0</div>
+                    <div class="indicador-legenda">avaliações</div>
+                </div>
+                <div class="indicador">
+                    <div id="div_media_seguranca" class="indicador-valor">-</div>
+                    <div class="indicador-legenda">média de segurança</div>
+                </div>
+                <div class="indicador">
+                    <div id="div_perc_toxicidade" class="indicador-valor">-</div>
+                    <div class="indicador-legenda">presenciaram toxicidade</div>
+                    <div class="indicador-detalhe">das avaliações</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RANKING E TOXICIDADE -->
+        <div class="dashboard-linha">
+            <section class="janela janela-larga">
+                <div class="janela-barra">
+                    <span>› ranking.exe</span>
+                    <div class="janela-botoes"><span>_</span><span>□</span><span>×</span></div>
+                </div>
+                <div class="janela-corpo">
+                    <h2>Top 5 servidores mais seguros</h2>
+                    <table class="ranking">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Servidor</th>
+                                <th>Temas</th>
+                                <th>Segurança</th>
+                                <th>Avaliações</th>
+                            </tr>
+                        </thead>
+                        <!-- as linhas são montadas pelo dashboard.js com os dados da API -->
+                        <tbody id="div_ranking"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="janela janela-estreita">
+                <div class="janela-barra">
+                    <span>› toxicidade.exe</span>
+                    <div class="janela-botoes"><span>_</span><span>□</span><span>×</span></div>
+                </div>
+                <div class="janela-corpo">
+                    <h2>Presenciou toxicidade?</h2>
+                    <div class="grafico">
+                        <canvas id="grafico_toxicidade"></canvas>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- SERVIDORES POR TEMA E FAIXA ETÁRIA -->
+        <div class="dashboard-linha">
+            <section class="janela janela-estreita">
+                <div class="janela-barra">
+                    <span>› temas.exe</span>
+                    <div class="janela-botoes"><span>_</span><span>□</span><span>×</span></div>
+                </div>
+                <div class="janela-corpo">
+                    <h2>Servidores por tema</h2>
+                    <div class="grafico">
+                        <canvas id="grafico_temas"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <section class="janela janela-estreita">
+                <div class="janela-barra">
+                    <span>› faixa-etaria.exe</span>
+                    <div class="janela-botoes"><span>_</span><span>□</span><span>×</span></div>
+                </div>
+                <div class="janela-corpo">
+                    <h2>Usuárias por faixa etária</h2>
+                    <div class="grafico">
+                        <canvas id="grafico_faixa_etaria"></canvas>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- RODAPÉ -->
+    <footer class="conteudo rodape">
+        <a href="index.html" class="logo logo-pequeno">
+            <img src="assets/imgs/home/estrela.svg" alt="">
+            SafePoint
+        </a>
+        <p>feito com carinho e glitter.<br>O Discord é classificado como não recomendado para menores de 18 anos.</p>
+        <span class="coracoes">♥ ♥ ♥</span>
+        <img src="assets/imgs/home/codigo-barras.svg" alt="" class="codigo-barras">
+    </footer>
+</body>
+
+</html>

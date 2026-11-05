@@ -12,4 +12,8 @@ router.post("/autenticar", function (req, res) {
     usuarioController.autenticar(req, res);
 });
 
+router.get("/faixas-etarias", function (req, res) {
+    usuarioController.listarFaixasEtarias(req, res);
+});
+
 module.exports = router;
