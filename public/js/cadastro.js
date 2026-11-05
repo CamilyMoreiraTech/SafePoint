@@ -1,10 +1,13 @@
-function validar(nome, email, senha, confirmacaoSenha, plataforma, interesses) {
+function validar(nome, email, senha, confirmacaoSenha, faixaEtaria, plataforma, interesses) {
     let valida = true;
     let mensagem = "";
 
-    if (nome == "" || email == "" || senha == "" || confirmacaoSenha == "" || plataforma == "") {
+    if (nome == "" || email == "" || senha == "" || confirmacaoSenha == "" || faixaEtaria == "" || plataforma == "") {
         valida = false;
         mensagem = "Preencha todos os campos.";
+    } else if (faixaEtaria == "menor") {
+        valida = false;
+        mensagem = "O SafePoint é apenas para maiores de 18 anos.";
     } else if (interesses.length == 0) {
         valida = false;
         mensagem = "Marque pelo menos um interesse.";
@@ -28,6 +31,7 @@ function cadastrar() {
     const email = ipt_email.value;
     const senha = ipt_senha.value;
     const confirmacaoSenha = ipt_confirmacao_senha.value;
+    const faixaEtaria = sel_faixa_etaria.value;
     const plataforma = sel_plataforma.value;
     const interesses = [];
 
@@ -41,7 +45,7 @@ function cadastrar() {
         interesses.push("leitura");
     }
 
-    if (validar(nome, email, senha, confirmacaoSenha, plataforma, interesses)) {
+    if (validar(nome, email, senha, confirmacaoSenha, faixaEtaria, plataforma, interesses)) {
         div_msg.textContent = `Tudo certo, ${nome}!`;
     }
 }
