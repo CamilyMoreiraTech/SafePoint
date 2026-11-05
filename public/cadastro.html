@@ -120,9 +120,19 @@
                         </div>
                     </div>
 
-                    <div id="div_msg" class="cadastro-mensagem"></div>
+                    <div class="alerta_erro">
+                        <div class="card_erro" id="cardErro">
+                            <span id="mensagem_erro"></span>
+                        </div>
+                    </div>
 
                     <button id="btn_cadastrar" class="botao-destaque" onclick="cadastrar()">[ Criar conta ] →</button>
+
+                    <div id="div_aguardar" class="loading-div">
+                        <img src="./assets/circle-loading.gif" id="loading-gif">
+                    </div>
+
+                    <div id="div_erros_login"></div>
 
                     <p class="cadastro-login">Já tem uma conta? <a href="login.html">Entrar</a></p>
                 </div>

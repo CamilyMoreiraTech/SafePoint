@@ -1,62 +1,82 @@
--- Arquivo de apoio, caso você queira criar tabelas como as aqui criadas para a API funcionar.
--- Você precisa executar os comandos no banco de dados para criar as tabelas,
--- ter este arquivo aqui não significa que a tabela em seu BD estará como abaixo!
+CREATE DATABASE safepoint;
 
-/*
-comandos para mysql server
-*/
+USE safepoint;
 
-CREATE DATABASE aquatech;
-
-USE aquatech;
-
-CREATE TABLE empresa (
+CREATE TABLE tema (
 	id INT PRIMARY KEY AUTO_INCREMENT,
-	razao_social VARCHAR(50),
-	cnpj CHAR(14),
-	codigo_ativacao VARCHAR(50)
+	nome VARCHAR(20) UNIQUE
 );
 
-CREATE TABLE usuario (
+/* dados do formulário de cadastro */
+CREATE TABLE usuaria (
 	id INT PRIMARY KEY AUTO_INCREMENT,
-	nome VARCHAR(50),
-	email VARCHAR(50),
-	senha VARCHAR(50),
-	fk_empresa INT,
-	FOREIGN KEY (fk_empresa) REFERENCES empresa(id)
+	nome VARCHAR(50) NOT NULL,
+	email VARCHAR(100) NOT NULL UNIQUE,
+	senha VARCHAR(255) NOT NULL,
+	faixa_etaria VARCHAR(10) NOT NULL,
+	plataforma VARCHAR(10) NOT NULL,
+	dt_cadastro DATETIME DEFAULT CURRENT_TIMESTAMP,
+	CONSTRAINT chk_faixa_etaria CHECK (faixa_etaria IN ('18-24', '25-34', '35+')),
+	CONSTRAINT chk_plataforma CHECK (plataforma IN ('pc', 'console', 'celular', 'nao_jogo'))
 );
 
-SELECT * FROM usuario;
-
-ALTER TABLE usuario ADD COLUMN cpf CHAR(11);
-
-CREATE TABLE aviso (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	titulo VARCHAR(100),
-	descricao VARCHAR(150),
-	fk_usuario INT,
-	FOREIGN KEY (fk_usuario) REFERENCES usuario(id)
+/* interesses marcados no cadastro (uma usuária pode ter de 1 a 3) */
+CREATE TABLE interesse_usuaria (
+	fk_usuaria INT,
+	fk_tema INT,
+	PRIMARY KEY (fk_usuaria, fk_tema),
+	FOREIGN KEY (fk_usuaria) REFERENCES usuaria(id),
+	FOREIGN KEY (fk_tema) REFERENCES tema(id)
 );
 
-create table aquario (
-/* em nossa regra de negócio, um aquario tem apenas um sensor */
+/* dados do formulário de indicação: todo servidor começa como pendente */
+CREATE TABLE servidor (
 	id INT PRIMARY KEY AUTO_INCREMENT,
+	nome VARCHAR(100) NOT NULL,
+	link_convite VARCHAR(200) NOT NULL UNIQUE,
 	descricao VARCHAR(300),
-	fk_empresa INT,
-	FOREIGN KEY (fk_empresa) REFERENCES empresa(id)
+	status VARCHAR(10) NOT NULL DEFAULT 'pendente',
+	dt_indicacao DATETIME DEFAULT CURRENT_TIMESTAMP,
+	fk_usuaria INT,
+	FOREIGN KEY (fk_usuaria) REFERENCES usuaria(id),
+	CONSTRAINT chk_status CHECK (status IN ('pendente', 'aprovado', 'recusado'))
 );
 
-/* esta tabela deve estar de acordo com o que está em INSERT de sua API do arduino - dat-acqu-ino */
+/* temas do servidor (um servidor pode ter de 1 a 3) */
+CREATE TABLE tema_servidor (
+	fk_servidor INT,
+	fk_tema INT,
+	PRIMARY KEY (fk_servidor, fk_tema),
+	FOREIGN KEY (fk_servidor) REFERENCES servidor(id),
+	FOREIGN KEY (fk_tema) REFERENCES tema(id)
+);
 
-create table medida (
+/* dados do formulário de avaliação: cada usuária avalia cada servidor uma vez */
+CREATE TABLE avaliacao (
 	id INT PRIMARY KEY AUTO_INCREMENT,
-	temperatura DECIMAL,
-	momento DATETIME,
-	fk_aquario INT,
-	FOREIGN KEY (fk_aquario) REFERENCES aquario(id)
+	nota_seguranca INT NOT NULL,
+	nota_moderacao INT NOT NULL,
+	nota_acolhimento INT NOT NULL,
+	nota_atividade INT NOT NULL,
+	nota_respeito INT NOT NULL,
+	comentario VARCHAR(500),
+	presenciou_toxicidade TINYINT NOT NULL, -- 1 = sim, 0 = não
+	dt_avaliacao DATETIME DEFAULT CURRENT_TIMESTAMP,
+	fk_usuaria INT,
+	fk_servidor INT,
+	FOREIGN KEY (fk_usuaria) REFERENCES usuaria(id),
+	FOREIGN KEY (fk_servidor) REFERENCES servidor(id),
+	CONSTRAINT uq_avaliacao UNIQUE (fk_usuaria, fk_servidor),
+	CONSTRAINT chk_nota_seguranca CHECK (nota_seguranca BETWEEN 1 AND 5),
+	CONSTRAINT chk_nota_moderacao CHECK (nota_moderacao BETWEEN 1 AND 5),
+	CONSTRAINT chk_nota_acolhimento CHECK (nota_acolhimento BETWEEN 1 AND 5),
+	CONSTRAINT chk_nota_atividade CHECK (nota_atividade BETWEEN 1 AND 5),
+	CONSTRAINT chk_nota_respeito CHECK (nota_respeito BETWEEN 1 AND 5),
+	CONSTRAINT chk_toxicidade CHECK (presenciou_toxicidade IN (0, 1))
 );
 
-insert into empresa (razao_social, codigo_ativacao) values ('Empresa 1', 'ED145B');
-insert into empresa (razao_social, codigo_ativacao) values ('Empresa 2', 'A1B2C3');
-insert into aquario (descricao, fk_empresa) values ('Aquário de Estrela-do-mar', 1);
-insert into aquario (descricao, fk_empresa) values ('Aquário de Peixe-dourado', 2);
+insert into tema (nome) values ('games');
+insert into tema (nome) values ('artesanato');
+insert into tema (nome) values ('leitura');
+
+select * from usuaria;

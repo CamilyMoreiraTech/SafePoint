@@ -11,18 +11,4 @@
   color: var(--cor-rosa);
 }
 
-/* a mensagem fica dentro do formulário, no lugar de flutuar sobre a tela */
-.card_erro {
-  position: static;
-  width: 100%;
-  margin-right: 0;
-  padding: 0;
-  background-color: transparent;
-  color: var(--cor-rosa);
-  border: 0;
-}
-
-.card_erro #mensagem_erro {
-  font-size: 13px;
-  font-weight: 400;
-}
+/* o estilo do cardErro está no cadastro.css, que o login também importa */

@@ -104,15 +104,20 @@
   cursor: pointer;
 }
 
-.cadastro-mensagem {
-  font-size: 13px;
-  line-height: 1.5;
+/* mensagens da base (cardErro): ficam dentro do formulário, no lugar de flutuar sobre a tela */
+.card_erro {
+  position: static;
+  width: 100%;
+  margin-right: 0;
+  padding: 0;
+  background-color: transparent;
   color: var(--cor-rosa);
+  border: 0;
 }
 
-/* some quando não tem mensagem, para não sobrar espaço */
-.cadastro-mensagem:empty {
-  display: none;
+.card_erro #mensagem_erro {
+  font-size: 13px;
+  font-weight: 400;
 }
 
 #btn_cadastrar {

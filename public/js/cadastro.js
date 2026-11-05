@@ -22,8 +22,18 @@ function validar(nome, email, senha, confirmacaoSenha, faixaEtaria, plataforma, 
         mensagem = "As senhas não são iguais.";
     }
 
-    div_msg.textContent = mensagem;
+    if (valida) {
+        cardErro.style.display = "none";
+    } else {
+        mostrarMensagem(mensagem);
+    }
+
     return valida;
+}
+
+function mostrarMensagem(mensagem) {
+    cardErro.style.display = "block";
+    mensagem_erro.innerHTML = mensagem;
 }
 
 function cadastrar() {
@@ -46,6 +56,32 @@ function cadastrar() {
     }
 
     if (validar(nome, email, senha, confirmacaoSenha, faixaEtaria, plataforma, interesses)) {
-        div_msg.textContent = `Tudo certo, ${nome}!`;
+        fetch("/usuarios/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                nomeServer: nome,
+                emailServer: email,
+                senhaServer: senha,
+                faixaEtariaServer: faixaEtaria,
+                plataformaServer: plataforma,
+                interessesServer: interesses
+            })
+        }).then(function (resposta) {
+            if (resposta.ok) {
+                mostrarMensagem("Cadastro realizado com sucesso! Redirecionando para tela de Login...");
+
+                setTimeout(function () {
+                    window.location = "login.html";
+                }, 2000);
+            } else {
+                throw "Houve um erro ao tentar realizar o cadastro!";
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            finalizarAguardar();
+        });
     }
 }

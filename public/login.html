@@ -116,10 +116,6 @@
 <script>
 
 
-    // TESTE: usuária fixa enquanto o banco não está conectado (tirar antes da entrega)
-    const usuariasTeste = [
-        { email: "flor@gmail.com", senha: "Flor@2004", nome: "Flor" }
-    ];
     const limiteErros = 3;
     let qtdErros = 0;
 
@@ -142,38 +138,6 @@
 
         console.log("FORM LOGIN: ", emailVar);
 
-        let loginCorreto = false;
-
-        for (let i = 0; i < usuariasTeste.length; i++) {
-            if (usuariasTeste[i].email == emailVar && usuariasTeste[i].senha == senhaVar) {
-                loginCorreto = true;
-                sessionStorage.EMAIL_USUARIO = usuariasTeste[i].email;
-                sessionStorage.NOME_USUARIO = usuariasTeste[i].nome;
-                break;
-            }
-        }
-
-        if (loginCorreto) {
-            cardErro.style.display = "none";
-
-            setTimeout(function () {
-                window.location = "./minha-area.html";
-            }, 1000); // apenas para exibir o loading
-        } else {
-            qtdErros++;
-
-            const qtdRestantes = limiteErros - qtdErros;
-
-            if (qtdRestantes == 0) {
-                mostrarErro("Login bloqueado.");
-            } else if (qtdRestantes == 1) {
-                mostrarErro("E-mail ou senha incorretos. Resta 1 tentativa.");
-            } else {
-                mostrarErro(`E-mail ou senha incorretos. Restam ${qtdRestantes} tentativas.`);
-            }
-        }
-
-        /* Código da API
         fetch("/usuarios/autenticar", {
             method: "POST",
             headers: {
@@ -195,13 +159,27 @@
                     sessionStorage.EMAIL_USUARIO = json.email;
                     sessionStorage.NOME_USUARIO = json.nome;
                     sessionStorage.ID_USUARIO = json.id;
-                    sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
+                    cardErro.style.display = "none";
 
                     setTimeout(function () {
-                        window.location = "./dashboard/cards.html";
+                        window.location = "./minha-area.html";
                     }, 1000); // apenas para exibir o loading
 
                 });
+
+            } else if (resposta.status == 403) {
+                // 403 = e-mail ou senha errados: só esse caso gasta tentativa
+                qtdErros++;
+
+                const qtdRestantes = limiteErros - qtdErros;
+
+                if (qtdRestantes == 0) {
+                    mostrarErro("Login bloqueado.");
+                } else if (qtdRestantes == 1) {
+                    mostrarErro("E-mail ou senha incorretos. Resta 1 tentativa.");
+                } else {
+                    mostrarErro(`E-mail ou senha incorretos. Restam ${qtdRestantes} tentativas.`);
+                }
 
             } else {
 
@@ -217,7 +195,6 @@
             console.log(erro);
             finalizarAguardar("Não foi possível entrar.");
         })
-        */
 
         return false;
     }
