@@ -9,6 +9,7 @@
     <title>SafePoint | Servidores</title>
 
     <script src="./js/sessao.js"></script>
+    <script src="./js/verificar-login.js"></script>
     <script src="./js/servidores.js"></script>
 
     <link rel="stylesheet" href="./css/estilo.css">
@@ -18,7 +19,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
 </head>
 
-<body onload="listarServidores()">
+<body onload="verificarLogin('servidores.html'); atualizarMenu(); listarServidores()">
     <!-- MENU -->
     <header>
         <div class="conteudo menu">
@@ -33,7 +34,7 @@
                 <a href="sobre.html">[ Sobre ]</a>
             </nav>
 
-            <div class="menu-botoes">
+            <div id="div_menu_botoes" class="menu-botoes">
                 <a href="login.html" class="botao-contorno">[ Entrar ]</a>
                 <a href="cadastro.html" class="botao-destaque">[ Criar conta ]</a>
             </div>

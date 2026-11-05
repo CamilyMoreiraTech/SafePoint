@@ -72,6 +72,11 @@ a {
   border-color: var(--cor-rosa);
 }
 
+/* o Sair não tem href, então o cursor de mãozinha precisa ser colocado */
+.botao-sair {
+  cursor: pointer;
+}
+
 /* MENU */
 
 .menu {

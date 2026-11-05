@@ -1,11 +1,4 @@
-// só quem está logada pode indicar: o login guarda o ID_USUARIO no sessionStorage
-function verificarLogin() {
-    if (sessionStorage.ID_USUARIO == undefined) {
-        // avisa o login para voltar para cá depois de entrar
-        sessionStorage.PAGINA_APOS_LOGIN = "indicar-servidor.html";
-        window.location = "login.html";
-    }
-}
+// a verificação de login fica no verificar-login.js
 
 function validar(nome, link, descricao, temas) {
     let valida = true;

@@ -9,6 +9,7 @@
     <title>SafePoint | Login</title>
 
     <script src="./js/sessao.js"></script>
+    <script src="./js/verificar-login.js"></script>
 
     <link rel="stylesheet" href="./css/estilo.css">
     <link rel="stylesheet" href="./css/home.css">
@@ -18,7 +19,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
 </head>
 
-<body>
+<body onload="atualizarMenu()">
 
     <!-- MENU -->
     <header>
@@ -34,7 +35,7 @@
                 <a href="sobre.html">[ Sobre ]</a>
             </nav>
 
-            <div class="menu-botoes">
+            <div id="div_menu_botoes" class="menu-botoes">
                 <a href="login.html" class="botao-contorno">[ Entrar ]</a>
                 <a href="cadastro.html" class="botao-destaque">[ Criar conta ]</a>
             </div>
@@ -161,9 +162,8 @@
                     sessionStorage.ID_USUARIO = json.id;
                     cardErro.style.display = "none";
 
-                    // volta para a página que pediu o login (ex.: indicar servidor)
-                    // trocar "servidores.html" por "minha-area.html" quando essa página existir
-                    let proximaPagina = "servidores.html";
+                    // volta para a página que pediu o login (ex.: indicar servidor); se nenhuma pediu, vai para a minha área
+                    let proximaPagina = "minha-area.html";
                     if (sessionStorage.PAGINA_APOS_LOGIN != undefined) {
                         proximaPagina = sessionStorage.PAGINA_APOS_LOGIN;
                         sessionStorage.removeItem("PAGINA_APOS_LOGIN");
