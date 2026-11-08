@@ -7,4 +7,8 @@ router.get("/usuaria/:idUsuaria", function (req, res) {
     avaliacaoController.listarPorUsuaria(req, res);
 });
 
+router.post("/avaliar", function (req, res) {
+    avaliacaoController.avaliar(req, res);
+});
+
 module.exports = router;

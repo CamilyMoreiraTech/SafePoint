@@ -1,0 +1,13 @@
+/* TELA DE AVALIAR SERVIDOR (o formulário vem do cadastro.css e o quadro e o comentário do indicar-servidor.css) */
+
+#btn_avaliar {
+  width: 100%;
+  cursor: pointer;
+  font-family: var(--fonte-texto);
+}
+
+/* nome do servidor que está sendo avaliado */
+.avaliar-nome {
+  color: var(--cor-rosa);
+  font-weight: 400;
+}

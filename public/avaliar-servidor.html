@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SafePoint | Avaliar servidor</title>
+
+    <script src="./js/sessao.js"></script>
+    <script src="./js/verificar-login.js"></script>
+    <script src="./js/avaliar-servidor.js"></script>
+
+    <link rel="stylesheet" href="./css/estilo.css">
+    <link rel="stylesheet" href="./css/home.css">
+    <link rel="stylesheet" href="./css/cadastro.css">
+    <link rel="stylesheet" href="./css/indicar-servidor.css">
+    <link rel="stylesheet" href="./css/avaliar-servidor.css">
+    <link rel="icon" href="./assets/icon/favicon-safepoint.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+</head>
+
+<body onload="verificarLogin('avaliar-servidor.html'); atualizarMenu(); iniciarAvaliacao()">
+    <!-- MENU -->
+    <header>
+        <div class="conteudo menu">
+            <a href="index.html" class="logo">
+                <img src="assets/imgs/home/estrela.svg" alt="">
+                SafePoint
+            </a>
+
+            <nav class="menu-links">
+                <a href="servidores.html">[ Servidores ]</a>
+                <a href="dashboard.html">[ Dashboard ]</a>
+                <a href="sobre.html">[ Sobre ]</a>
+            </nav>
+
+            <div id="div_menu_botoes" class="menu-botoes">
+                <a href="login.html" class="botao-contorno">[ Entrar ]</a>
+                <a href="cadastro.html" class="botao-destaque">[ Criar conta ]</a>
+            </div>
+        </div>
+
+        <div class="faixa">
+            <div class="faixa-xadrez"></div>
+            <p class="faixa-texto">Seu save point em comunidades online »</p>
+            <img src="assets/imgs/home/codigo-barras.svg" alt="" class="codigo-barras">
+        </div>
+    </header>
+
+    <main class="conteudo">
+        <!-- AVALIAR SERVIDOR -->
+        <section class="janela">
+            <div class="janela-barra">
+                <span>› avaliar-servidor.exe</span>
+                <div class="janela-botoes"><span>_</span><span>□</span><span>×</span></div>
+            </div>
+
+            <div class="cadastro">
+                <div class="cadastro-apresentacao">
+                    <h1 class="inicio-titulo">
+                        <span class="titulo-lilas">Avalie o</span><br>
+                        <span class="titulo-rosa">servidor</span>
+                    </h1>
+                    <!-- o nome do servidor foi digitado por uma usuária: entra com textContent -->
+                    <p>Você está avaliando <strong id="div_nome_servidor" class="avaliar-nome"></strong></p>
+
+                    <div class="indicar-passos">
+                        <p>O que cada nota quer dizer</p>
+                        <ol>
+                            <li><strong>Segurança:</strong> você se sentiu segura lá?</li>
+                            <li><strong>Moderação:</strong> a moderação age quando precisa?</li>
+                            <li><strong>Acolhimento:</strong> foi bem recebida ao entrar?</li>
+                            <li><strong>Atividade:</strong> o servidor é movimentado?</li>
+                            <li><strong>Respeito:</strong> as pessoas se tratam com respeito?</li>
+                        </ol>
+                    </div>
+
+                    <img src="assets/imgs/home/lirio.svg" alt="" class="lirio">
+                </div>
+
+                <div class="cadastro-formulario">
+                    <div class="cadastro-linha">
+                        <div class="cadastro-campo">
+                            <label for="sel_seguranca">Segurança</label>
+                            <select id="sel_seguranca">
+                                <option value="">Escolha</option>
+                                <option value="1">1 ★</option>
+                                <option value="2">2 ★★</option>
+                                <option value="3">3 ★★★</option>
+                                <option value="4">4 ★★★★</option>
+                                <option value="5">5 ★★★★★</option>
+                            </select>
+                        </div>
+                        <div class="cadastro-campo">
+                            <label for="sel_moderacao">Moderação</label>
+                            <select id="sel_moderacao">
+                                <option value="">Escolha</option>
+                                <option value="1">1 ★</option>
+                                <option value="2">2 ★★</option>
+                                <option value="3">3 ★★★</option>
+                                <option value="4">4 ★★★★</option>
+                                <option value="5">5 ★★★★★</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="cadastro-linha">
+                        <div class="cadastro-campo">
+                            <label for="sel_acolhimento">Acolhimento</label>
+                            <select id="sel_acolhimento">
+                                <option value="">Escolha</option>
+                                <option value="1">1 ★</option>
+                                <option value="2">2 ★★</option>
+                                <option value="3">3 ★★★</option>
+                                <option value="4">4 ★★★★</option>
+                                <option value="5">5 ★★★★★</option>
+                            </select>
+                        </div>
+                        <div class="cadastro-campo">
+                            <label for="sel_atividade">Atividade</label>
+                            <select id="sel_atividade">
+                                <option value="">Escolha</option>
+                                <option value="1">1 ★</option>
+                                <option value="2">2 ★★</option>
+                                <option value="3">3 ★★★</option>
+                                <option value="4">4 ★★★★</option>
+                                <option value="5">5 ★★★★★</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="cadastro-linha">
+                        <div class="cadastro-campo">
+                            <label for="sel_respeito">Respeito</label>
+                            <select id="sel_respeito">
+                                <option value="">Escolha</option>
+                                <option value="1">1 ★</option>
+                                <option value="2">2 ★★</option>
+                                <option value="3">3 ★★★</option>
+                                <option value="4">4 ★★★★</option>
+                                <option value="5">5 ★★★★★</option>
+                            </select>
+                        </div>
+                        <div class="cadastro-campo">
+                            <label for="sel_toxicidade">Presenciou toxicidade?</label>
+                            <select id="sel_toxicidade">
+                                <option value="">Escolha</option>
+                                <option value="0">Não</option>
+                                <option value="1">Sim</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="cadastro-campo">
+                        <label for="ipt_comentario">Comentário (opcional)</label>
+                        <textarea id="ipt_comentario" maxlength="500" placeholder="Conte como foi a sua experiência no servidor"></textarea>
+                    </div>
+
+                    <p class="cadastro-dica">Dê uma nota de 1 a 5 em cada critério. O comentário pode ter até 500 caracteres. Cada usuária avalia um servidor uma vez só.</p>
+
+                    <div class="alerta_erro">
+                        <div class="card_erro" id="cardErro">
+                            <span id="mensagem_erro"></span>
+                        </div>
+                    </div>
+
+                    <button id="btn_avaliar" class="botao-destaque" onclick="avaliar()">[ Enviar avaliação ] →</button>
+
+                    <p class="cadastro-login">Mudou de ideia? <a href="servidores.html">Voltar para os servidores</a></p>
+                </div>
+            </div>
+
+            <p class="janela-rodape">» safepoint loading...</p>
+        </section>
+    </main>
+
+    <!-- RODAPÉ -->
+    <footer class="conteudo rodape">
+        <a href="index.html" class="logo logo-pequeno">
+            <img src="assets/imgs/home/estrela.svg" alt="">
+            SafePoint
+        </a>
+        <p>feito com carinho e glitter.<br>O Discord é classificado como não recomendado para menores de 18 anos.</p>
+        <span class="coracoes">♥ ♥ ♥</span>
+        <img src="assets/imgs/home/codigo-barras.svg" alt="" class="codigo-barras">
+    </footer>
+</body>
+
+</html>

@@ -19,6 +19,16 @@ function listarPorUsuaria(idUsuaria) {
     return database.executar(instrucaoSql);
 }
 
+function avaliar(notaSeguranca, notaModeracao, notaAcolhimento, notaAtividade, notaRespeito, toxicidade, comentario, idUsuaria, idServidor) {
+    var instrucaoSql = `
+        INSERT INTO avaliacao (nota_seguranca, nota_moderacao, nota_acolhimento, nota_atividade, nota_respeito, presenciou_toxicidade, comentario, fk_usuaria, fk_servidor)
+        VALUES (${notaSeguranca}, ${notaModeracao}, ${notaAcolhimento}, ${notaAtividade}, ${notaRespeito}, ${toxicidade}, '${comentario}', ${idUsuaria}, ${idServidor});
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
-    listarPorUsuaria
+    listarPorUsuaria,
+    avaliar
 };
