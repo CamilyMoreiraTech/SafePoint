@@ -7,6 +7,10 @@ function validar(nome, link, descricao, temas) {
     if (nome == "" || link == "" || descricao == "") {
         valida = false;
         mensagem = "Preencha todos os campos.";
+    } else if (!link.startsWith("https://discord.gg/") && !link.startsWith("https://discord.com/invite/")) {
+        // o link vira o botão "Entrar no Discord" da lista, então só aceita convite do Discord
+        valida = false;
+        mensagem = "O link precisa começar com https://discord.gg/ ou https://discord.com/invite/";
     } else if (temas.length == 0) {
         valida = false;
         mensagem = "Marque pelo menos um tema.";
@@ -62,12 +66,15 @@ function indicar() {
             if (resposta.ok) {
                 mostrarMensagem("Indicação enviada! O servidor vai aparecer na lista depois de aprovado.");
                 limparFormulario();
+            } else if (resposta.status == 403) {
+                // 403 = esse link de convite já foi indicado antes
+                mostrarMensagem("Esse servidor já foi indicado. Obrigada por ajudar!");
             } else {
-                throw "Houve um erro ao tentar enviar a indicação!";
+                mostrarMensagem("Não foi possível enviar a indicação. Tente novamente.");
             }
         }).catch(function (resposta) {
             console.log(`#ERRO: ${resposta}`);
-            finalizarAguardar();
+            mostrarMensagem("Não foi possível enviar a indicação. Verifique se a API está iniciada.");
         });
     }
 }

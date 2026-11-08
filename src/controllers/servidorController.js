@@ -46,8 +46,13 @@ function indicar(req, res) {
             ).catch(
                 function (erro) {
                     console.log(erro);
-                    console.log("\nHouve um erro ao indicar o servidor! Erro: ", erro.sqlMessage);
-                    res.status(500).json(erro.sqlMessage);
+                    // o link_convite é UNIQUE: o banco não deixa indicar o mesmo link duas vezes
+                    if (erro.code == "ER_DUP_ENTRY") {
+                        res.status(403).send("Esse servidor já foi indicado!");
+                    } else {
+                        console.log("\nHouve um erro ao indicar o servidor! Erro: ", erro.sqlMessage);
+                        res.status(500).json(erro.sqlMessage);
+                    }
                 }
             );
     }
