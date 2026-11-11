@@ -52,8 +52,9 @@ CREATE TABLE tema_servidor (
 );
 
 /* dados do formulário de avaliação: cada usuária avalia cada servidor uma vez */
+/* as FKs fazem parte da chave primária: não existe avaliação sem usuária e sem servidor */
 CREATE TABLE avaliacao (
-	id INT PRIMARY KEY AUTO_INCREMENT,
+	id INT AUTO_INCREMENT,
 	nota_seguranca INT NOT NULL,
 	nota_moderacao INT NOT NULL,
 	nota_acolhimento INT NOT NULL,
@@ -64,6 +65,7 @@ CREATE TABLE avaliacao (
 	dt_avaliacao DATETIME DEFAULT CURRENT_TIMESTAMP,
 	fk_usuaria INT,
 	fk_servidor INT,
+	PRIMARY KEY (id, fk_usuaria, fk_servidor),
 	FOREIGN KEY (fk_usuaria) REFERENCES usuaria(id),
 	FOREIGN KEY (fk_servidor) REFERENCES servidor(id),
 	CONSTRAINT uq_avaliacao UNIQUE (fk_usuaria, fk_servidor),
