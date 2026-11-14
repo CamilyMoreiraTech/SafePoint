@@ -1,0 +1,48 @@
+/* TELA DE MODERAÇÃO (os cards vêm do servidores.css) */
+
+/* checklist no lugar do filtro */
+.moderacao-regras p {
+  margin: 0 0 8px;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--cor-lilas);
+}
+
+.moderacao-regras ol {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--cor-texto-suave);
+}
+
+/* link e quem indicou, dentro do card */
+.moderacao-info {
+  margin: 4px 0 16px;
+  padding: 4px 12px;
+  border: 1px solid var(--cor-borda);
+  font-size: 12px;
+}
+
+.moderacao-linha {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 6px 0;
+}
+
+.moderacao-rotulo {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--cor-texto-suave);
+}
+
+.moderacao-link {
+  color: var(--cor-rosa);
+}
+
+.card-servidor-botoes a {
+  cursor: pointer;
+}

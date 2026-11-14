@@ -68,9 +68,56 @@ function listarIndicados(idUsuaria) {
     return database.executar(instrucaoSql);
 }
 
+// usado antes de listar ou moderar: só moderadoras podem
+function verificarModeradora(idUsuaria) {
+    var instrucaoSql = `
+        SELECT tipo FROM usuaria WHERE id = ${idUsuaria};
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+// servidores que ainda esperam revisão, com o nome de quem indicou (os mais antigos primeiro)
+function listarPendentes() {
+    var instrucaoSql = `
+        SELECT
+            s.id,
+            s.nome,
+            s.link_convite,
+            s.descricao,
+            DATE_FORMAT(s.dt_indicacao, '%d/%m/%Y') AS dt_indicacao,
+            u.nome AS nome_indicadora,
+            (SELECT GROUP_CONCAT(t.nome)
+                FROM tema_servidor ts
+                    INNER JOIN tema t
+                        ON ts.fk_tema = t.id
+                WHERE ts.fk_servidor = s.id) AS temas
+        FROM servidor s
+            LEFT JOIN usuaria u
+                ON s.fk_usuaria = u.id
+        WHERE s.status = 'pendente'
+        ORDER BY s.id;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+// o AND status = 'pendente' impede moderar de novo um servidor que já foi revisado
+function moderar(idServidor, status, idModeradora) {
+    var instrucaoSql = `
+        UPDATE servidor SET status = '${status}', fk_moderadora = ${idModeradora}
+        WHERE id = ${idServidor} AND status = 'pendente';
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     listar,
     indicar,
     cadastrarTema,
-    listarIndicados
+    listarIndicados,
+    verificarModeradora,
+    listarPendentes,
+    moderar
 };

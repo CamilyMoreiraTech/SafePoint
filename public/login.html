@@ -160,6 +160,8 @@
                     sessionStorage.EMAIL_USUARIO = json.email;
                     sessionStorage.NOME_USUARIO = json.nome;
                     sessionStorage.ID_USUARIO = json.id;
+                    // 'usuaria' ou 'moderadora': decide se o menu mostra a Moderação
+                    sessionStorage.TIPO_USUARIO = json.tipo;
                     cardErro.style.display = "none";
 
                     // volta para a página que pediu o login (ex.: indicar servidor); se nenhuma pediu, vai para a minha área

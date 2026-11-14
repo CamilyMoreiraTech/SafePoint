@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SafePoint | Moderação</title>
+
+    <script src="./js/sessao.js"></script>
+    <script src="./js/verificar-login.js"></script>
+    <script src="./js/moderacao.js"></script>
+
+    <link rel="stylesheet" href="./css/estilo.css">
+    <link rel="stylesheet" href="./css/home.css">
+    <link rel="stylesheet" href="./css/servidores.css">
+    <link rel="stylesheet" href="./css/moderacao.css">
+    <link rel="icon" href="./assets/icon/favicon-safepoint.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+</head>
+
+<body onload="verificarLogin('moderacao.html'); atualizarMenu(); iniciarModeracao()">
+    <!-- MENU -->
+    <header>
+        <div class="conteudo menu">
+            <a href="index.html" class="logo">
+                <img src="assets/imgs/home/estrela.svg" alt="">
+                SafePoint
+            </a>
+
+            <nav class="menu-links">
+                <a href="servidores.html">[ Servidores ]</a>
+                <a href="dashboard.html">[ Dashboard ]</a>
+                <a href="sobre.html">[ Sobre ]</a>
+            </nav>
+
+            <div id="div_menu_botoes" class="menu-botoes">
+                <a href="login.html" class="botao-contorno">[ Entrar ]</a>
+                <a href="cadastro.html" class="botao-destaque">[ Criar conta ]</a>
+            </div>
+        </div>
+
+        <div class="faixa">
+            <div class="faixa-xadrez"></div>
+            <p class="faixa-texto">Seu save point em comunidades online »</p>
+            <img src="assets/imgs/home/codigo-barras.svg" alt="" class="codigo-barras">
+        </div>
+    </header>
+
+    <main class="conteudo">
+        <!-- MODERAÇÃO -->
+        <section class="janela">
+            <div class="janela-barra">
+                <span>› moderacao.exe</span>
+                <div class="janela-botoes"><span>_</span><span>□</span><span>×</span></div>
+            </div>
+
+            <div class="servidores-topo">
+                <div>
+                    <h1 class="inicio-titulo">
+                        <span class="titulo-lilas">Servidores</span>
+                        <span class="titulo-rosa">pendentes</span>
+                    </h1>
+                </div>
+            </div>
+
+            <div class="filtros">
+                <div class="moderacao-regras">
+                    <p>Antes de aprovar, confira</p>
+                    <ol>
+                        <li>O link é um convite do Discord que funciona.</li>
+                        <li>O servidor tem regras contra assédio e discurso de ódio.</li>
+                        <li>Os temas marcados combinam com o servidor.</li>
+                    </ol>
+                </div>
+
+                <span id="div_total" class="filtros-total"></span>
+            </div>
+
+            <div id="div_msg" class="servidores-mensagem"></div>
+
+            <!-- os cards são montados pelo moderacao.js com os dados da API -->
+            <div id="div_lista_pendentes" class="lista-servidores"></div>
+
+            <p class="janela-rodape">» só moderadoras veem esta página</p>
+        </section>
+    </main>
+
+    <!-- RODAPÉ -->
+    <footer class="conteudo rodape">
+        <a href="index.html" class="logo logo-pequeno">
+            <img src="assets/imgs/home/estrela.svg" alt="">
+            SafePoint
+        </a>
+        <p>feito com carinho e glitter.<br>O Discord é classificado como não recomendado para menores de 18 anos.</p>
+        <span class="coracoes">♥ ♥ ♥</span>
+        <img src="assets/imgs/home/codigo-barras.svg" alt="" class="codigo-barras">
+    </footer>
+</body>
+
+</html>

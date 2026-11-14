@@ -21,6 +21,14 @@ function atualizarMenu() {
         <a class="botao-contorno botao-sair" onclick="sair()">[ Sair ]</a>
     `;
 
+    // só moderadoras veem o botão da moderação
+    if (sessionStorage.TIPO_USUARIO == "moderadora") {
+        div_menu_botoes.innerHTML = `
+            <a href="moderacao.html" class="botao-contorno">[ Moderação ]</a>
+            ${div_menu_botoes.innerHTML}
+        `;
+    }
+
     // esses dois blocos só existem na home
     if (document.getElementById("div_inicio_botoes") != null) {
         div_inicio_botoes.innerHTML = `
