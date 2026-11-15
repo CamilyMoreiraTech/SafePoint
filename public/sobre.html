@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SafePoint | Sobre</title>
+
+    <script src="./js/sessao.js"></script>
+    <script src="./js/verificar-login.js"></script>
+
+    <link rel="stylesheet" href="./css/estilo.css">
+    <link rel="stylesheet" href="./css/home.css">
+    <link rel="stylesheet" href="./css/minha-area.css">
+    <link rel="stylesheet" href="./css/sobre.css">
+    <link rel="icon" href="./assets/icon/favicon-safepoint.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+</head>
+
+<!-- página só com texto: não busca nada na API e não exige login -->
+<body onload="atualizarMenu()">
+    <!-- MENU -->
+    <header>
+        <div class="conteudo menu">
+            <a href="index.html" class="logo">
+                <img src="assets/imgs/home/estrela.svg" alt="">
+                SafePoint
+            </a>
+
+            <nav class="menu-links">
+                <a href="servidores.html">[ Servidores ]</a>
+                <a href="dashboard.html">[ Dashboard ]</a>
+                <a href="sobre.html">[ Sobre ]</a>
+            </nav>
+
+            <div id="div_menu_botoes" class="menu-botoes">
+                <a href="login.html" class="botao-contorno">[ Entrar ]</a>
+                <a href="cadastro.html" class="botao-destaque">[ Criar conta ]</a>
+            </div>
+        </div>
+
+        <div class="faixa">
+            <div class="faixa-xadrez"></div>
+            <p class="faixa-texto">Seu save point em comunidades online »</p>
+            <img src="assets/imgs/home/codigo-barras.svg" alt="" class="codigo-barras">
+        </div>
+    </header>
+
+    <main class="conteudo">
+        <!-- APRESENTAÇÃO -->
+        <section class="janela">
+            <div class="janela-barra">
+                <span>› sobre-mim.exe</span>
+                <div class="janela-botoes"><span>_</span><span>□</span><span>×</span></div>
+            </div>
+
+            <div class="sobre-topo">
+                <!-- coluna da esquerda: foto e ficha, uma embaixo da outra -->
+                <div class="sobre-lateral">
+                    <!-- foto salva dentro do projeto (sem link externo) -->
+                    <div class="sobre-foto">
+                        <img src="assets/imgs/foto-camily.jpg" alt="Foto da Camily segurando um controle" class="sobre-foto-imagem">
+                        <img src="assets/imgs/home/lirio.svg" alt="" class="sobre-foto-flor">
+                    </div>
+
+                    <div class="area-perfil">
+                        <h2>Ficha</h2>
+                        <div class="perfil-linha">
+                            <span class="perfil-rotulo">Nome</span>
+                            <span>Camily</span>
+                        </div>
+                        <div class="perfil-linha">
+                            <span class="perfil-rotulo">Curso</span>
+                            <span>ADS</span>
+                        </div>
+                        <div class="perfil-linha">
+                            <span class="perfil-rotulo">Projeto</span>
+                            <span>SafePoint</span>
+                        </div>
+                        <div class="perfil-linha">
+                            <span class="perfil-rotulo">Interesses</span>
+                            <span>
+                                <span class="etiqueta">Games</span>
+                                <span class="etiqueta">Artesanato</span>
+                                <span class="etiqueta">Leitura</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sobre-texto">
+                    <h1 class="inicio-titulo">
+                        <span class="titulo-lilas">Oi, eu sou a</span>
+                        <span class="titulo-rosa">Camily</span>
+                    </h1>
+                    <p>
+                        Aquela menina que cresceu rodeada de primos e de um irmão. Desde pequena eu amo jogar, mas
+                        sempre ficava de canto por ser menina, e quando jogava era sempre single player. Os amigos
+                        que eu tinha não jogavam, não liam e muito menos faziam algum artesanato. Então recorri ao
+                        Discord, mas, resumindo, não foi uma aventura feliz, que me deixou algumas marcas até hoje.
+                    </p>
+                    <p>
+                        Hoje sou estudante de Análise e Desenvolvimento de Sistemas, e o SafePoint é o meu projeto
+                        individual. A ideia nasceu dessas situações que vivi por grande parte da vida e que sei que
+                        muitas mulheres também vivem: entrar em um servidor de Discord para jogar ou conversar e
+                        encontrar um ambiente tóxico.
+                    </p>
+                    <p>
+                        Adoro jogar de tudo, fazer qualquer tipo de artesanato e ler, principalmente fantasia e poesia.
+                        Sou apaixonada por animais, cinéfila que maratona de tudo e, acima de tudo, amo compartilhar
+                        esses momentos com outras mulheres.
+                    </p>
+                    <p>
+                        Como toda mulher, eu também sou forte e, por mais que eu tenha sofrido, continuei na procura de
+                        algum lugarzinho seguro e encontrei alguns.
+                    </p>
+
+                    <!-- frase em destaque, com fundo rosa -->
+                    <p class="sobre-frase">
+                        <span class="estrela-titulo">✦</span>
+                        Eu queria que nenhuma outra menina precisasse descobrir esses lugares sozinha
+                        <span class="estrela-titulo">♥</span>
+                    </p>
+                </div>
+            </div>
+
+            <p class="janela-rodape">» player 1 · pronta para jogar</p>
+        </section>
+
+        <!-- TRÊS BLOCOS -->
+        <div class="area-linha">
+            <section class="janela">
+                <div class="janela-barra">
+                    <span>01 › motivo.exe</span>
+                    <div class="janela-botoes"><span>_</span><span>□</span><span>×</span></div>
+                </div>
+                <div class="area-bloco">
+                    <h2>Por que o SafePoint</h2>
+                    <p class="sobre-paragrafo">
+                        Não existe um lugar central onde mulheres possam consultar a experiência de outras antes de entrar
+                        em uma comunidade. O SafePoint junta essas opiniões em notas, rankings e gráficos.
+                    </p>
+                </div>
+            </section>
+
+            <section class="janela">
+                <div class="janela-barra">
+                    <span>02 › tecnologias.exe</span>
+                    <div class="janela-botoes"><span>_</span><span>□</span><span>×</span></div>
+                </div>
+                <div class="area-bloco">
+                    <h2>Como foi feito</h2>
+                    <ul class="sobre-lista">
+                        <li>HTML, CSS e JavaScript nas telas</li>
+                        <li>API em Node.js com Express</li>
+                        <li>Banco de dados MySQL</li>
+                        <li>Chart.js nos gráficos da dashboard</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="janela">
+                <div class="janela-barra">
+                    <span>03 › regras.exe</span>
+                    <div class="janela-botoes"><span>_</span><span>□</span><span>×</span></div>
+                </div>
+                <div class="area-bloco">
+                    <h2>O que eu prometo</h2>
+                    <ul class="sobre-lista">
+                        <li>Todo servidor indicado passa por moderação</li>
+                        <li>Seu e-mail nunca aparece nas páginas públicas</li>
+                        <li>Só mulheres maiores de 18 anos</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- CHAMADA FINAL -->
+        <section class="janela">
+            <div class="chamada">
+                <img src="assets/imgs/home/lirio.svg" alt="" class="chamada-flor">
+
+                <div id="div_chamada" class="chamada-centro">
+                    <h2 class="titulo-secao">
+                        <span class="estrela-titulo">✦</span>
+                        Pronta para encontrar seu lugar?
+                        <span class="estrela-titulo">✦</span>
+                    </h2>
+                    <a href="cadastro.html" class="botao-destaque">[ Criar conta ] →</a>
+                </div>
+
+                <img src="assets/imgs/home/lirio.svg" alt="" class="chamada-flor flor-invertida">
+            </div>
+        </section>
+    </main>
+
+    <!-- RODAPÉ -->
+    <footer class="conteudo rodape">
+        <a href="index.html" class="logo logo-pequeno">
+            <img src="assets/imgs/home/estrela.svg" alt="">
+            SafePoint
+        </a>
+        <p>feito com carinho e glitter.<br>O Discord é classificado como não recomendado para menores de 18 anos.</p>
+        <span class="coracoes">♥ ♥ ♥</span>
+        <img src="assets/imgs/home/codigo-barras.svg" alt="" class="codigo-barras">
+    </footer>
+</body>
+
+</html>

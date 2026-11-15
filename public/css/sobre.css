@@ -1,0 +1,77 @@
+/* SOBRE (usa também a ficha e os blocos do minha-area.css) */
+
+/* align-items: center deixa o texto no meio da altura da foto + ficha */
+.sobre-topo {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  padding: 32px 24px 24px;
+}
+
+/* coluna da esquerda: foto em cima e ficha embaixo */
+.sobre-lateral {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  width: 300px;
+}
+
+/* moldura da foto */
+.sobre-foto {
+  position: relative;
+  padding: 6px;
+  border: 1px solid var(--cor-rosa);
+  box-shadow: 0 0 18px rgba(255, 106, 213, 0.45);
+}
+
+/* a foto já foi cortada quadrada: ocupa toda a largura da moldura */
+.sobre-foto-imagem {
+  display: block;
+  width: 100%;
+}
+
+.sobre-foto-flor {
+  position: absolute;
+  bottom: -18px;
+  right: -22px;
+  width: 70px;
+}
+
+/* o texto ocupa todo o espaço que sobra ao lado da coluna */
+.sobre-texto {
+  flex: 1;
+}
+
+.sobre-texto p {
+  margin: 0 0 18px;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+/* frase de efeito em destaque, com fundo rosa */
+.sobre-texto .sobre-frase {
+  margin: 32px 0 0;
+  padding: 18px 12px;
+  background-color: rgba(255, 106, 213, 0.12);
+  border: 1px solid var(--cor-rosa);
+  box-shadow: 0 0 18px rgba(255, 106, 213, 0.35);
+  font-family: var(--fonte-titulo);
+  font-size: 22px;
+  line-height: 1.3;
+  text-align: center;
+  color: var(--cor-rosa);
+  text-shadow: 0 0 12px rgba(255, 106, 213, 0.6);
+}
+
+.sobre-paragrafo {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.sobre-lista {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 13px;
+  line-height: 2;
+}
