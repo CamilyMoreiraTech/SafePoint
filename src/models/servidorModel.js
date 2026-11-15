@@ -1,4 +1,5 @@
 var database = require("../database/config");
+var escapar = require("../database/escapar-texto");
 
 function listar() {
     console.log("ACESSEI O SERVIDOR MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
@@ -33,7 +34,7 @@ function listar() {
 // o status fica 'pendente' sozinho, pelo DEFAULT da tabela
 function indicar(nome, link, descricao, idUsuaria) {
     var instrucaoSql = `
-        INSERT INTO servidor (nome, link_convite, descricao, fk_usuaria) VALUES ('${nome}', '${link}', '${descricao}', ${idUsuaria});
+        INSERT INTO servidor (nome, link_convite, descricao, fk_usuaria) VALUES ('${escapar.escaparTexto(nome)}', '${escapar.escaparTexto(link)}', '${escapar.escaparTexto(descricao)}', ${idUsuaria});
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -41,7 +42,7 @@ function indicar(nome, link, descricao, idUsuaria) {
 
 function cadastrarTema(idServidor, tema) {
     var instrucaoSql = `
-        INSERT INTO tema_servidor (fk_servidor, fk_tema) SELECT ${idServidor}, id FROM tema WHERE nome = '${tema}';
+        INSERT INTO tema_servidor (fk_servidor, fk_tema) SELECT ${idServidor}, id FROM tema WHERE nome = '${escapar.escaparTexto(tema)}';
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -105,7 +106,7 @@ function listarPendentes() {
 // o AND status = 'pendente' impede moderar de novo um servidor que já foi revisado
 function moderar(idServidor, status, idModeradora) {
     var instrucaoSql = `
-        UPDATE servidor SET status = '${status}', fk_moderadora = ${idModeradora}
+        UPDATE servidor SET status = '${escapar.escaparTexto(status)}', fk_moderadora = ${idModeradora}
         WHERE id = ${idServidor} AND status = 'pendente';
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);

@@ -1,4 +1,5 @@
 var database = require("../database/config");
+var escapar = require("../database/escapar-texto");
 
 // junta com a tabela servidor para mostrar o nome do servidor avaliado
 function listarPorUsuaria(idUsuaria) {
@@ -22,7 +23,7 @@ function listarPorUsuaria(idUsuaria) {
 function avaliar(notaSeguranca, notaModeracao, notaAcolhimento, notaAtividade, notaRespeito, toxicidade, comentario, idUsuaria, idServidor) {
     var instrucaoSql = `
         INSERT INTO avaliacao (nota_seguranca, nota_moderacao, nota_acolhimento, nota_atividade, nota_respeito, presenciou_toxicidade, comentario, fk_usuaria, fk_servidor)
-        VALUES (${notaSeguranca}, ${notaModeracao}, ${notaAcolhimento}, ${notaAtividade}, ${notaRespeito}, ${toxicidade}, '${comentario}', ${idUsuaria}, ${idServidor});
+        VALUES (${notaSeguranca}, ${notaModeracao}, ${notaAcolhimento}, ${notaAtividade}, ${notaRespeito}, ${toxicidade}, '${escapar.escaparTexto(comentario)}', ${idUsuaria}, ${idServidor});
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

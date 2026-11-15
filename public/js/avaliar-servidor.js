@@ -19,13 +19,24 @@ function buscarNomeServidor() {
     fetch("/servidores/listar", {
         method: "GET"
     }).then(function (resposta) {
-        if (resposta.ok && resposta.status != 204) {
+        if (resposta.status == 204) {
+            // 204 = nenhum servidor aprovado, então o escolhido também não está na lista
+            mostrarMensagem("Este servidor não está disponível para avaliação. Escolha um servidor na lista de servidores.");
+        } else if (resposta.ok) {
             resposta.json().then(function (servidores) {
+                let encontrou = false;
+
                 for (let i = 0; i < servidores.length; i++) {
                     if (servidores[i].id == sessionStorage.ID_SERVIDOR_AVALIAR) {
                         // o nome foi digitado por uma usuária: entra com textContent
                         div_nome_servidor.textContent = servidores[i].nome;
+                        encontrou = true;
                     }
+                }
+
+                // a lista só tem aprovados: se não achou, o servidor não pode ser avaliado
+                if (!encontrou) {
+                    mostrarMensagem("Este servidor não está disponível para avaliação. Escolha um servidor na lista de servidores.");
                 }
             });
         } else {

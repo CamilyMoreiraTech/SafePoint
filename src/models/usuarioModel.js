@@ -1,8 +1,9 @@
 var database = require("../database/config")
+var escapar = require("../database/escapar-texto");
 
 function autenticar(email, senha) {
     var instrucaoSql = `
-        SELECT id, nome, email, tipo FROM usuaria WHERE email = '${email}' AND senha = '${senha}';
+        SELECT id, nome, email, tipo FROM usuaria WHERE email = '${escapar.escaparTexto(email)}' AND senha = '${escapar.escaparTexto(senha)}';
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -10,7 +11,7 @@ function autenticar(email, senha) {
 
 function cadastrar(nome, email, senha, faixaEtaria, plataforma) {
     var instrucaoSql = `
-        INSERT INTO usuaria (nome, email, senha, faixa_etaria, plataforma) VALUES ('${nome}', '${email}', '${senha}', '${faixaEtaria}', '${plataforma}');
+        INSERT INTO usuaria (nome, email, senha, faixa_etaria, plataforma) VALUES ('${escapar.escaparTexto(nome)}', '${escapar.escaparTexto(email)}', '${escapar.escaparTexto(senha)}', '${escapar.escaparTexto(faixaEtaria)}', '${escapar.escaparTexto(plataforma)}');
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -18,7 +19,7 @@ function cadastrar(nome, email, senha, faixaEtaria, plataforma) {
 
 function cadastrarInteresse(idUsuaria, interesse) {
     var instrucaoSql = `
-        INSERT INTO interesse_usuaria (fk_usuaria, fk_tema) SELECT ${idUsuaria}, id FROM tema WHERE nome = '${interesse}';
+        INSERT INTO interesse_usuaria (fk_usuaria, fk_tema) SELECT ${idUsuaria}, id FROM tema WHERE nome = '${escapar.escaparTexto(interesse)}';
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
