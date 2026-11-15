@@ -118,12 +118,15 @@ function cadastrar() {
                 setTimeout(function () {
                     window.location = "login.html";
                 }, 2000);
+            } else if (resposta.status == 403) {
+                // 403 = esse e-mail já tem uma conta
+                mostrarMensagem("Este e-mail já está cadastrado.");
             } else {
-                throw "Houve um erro ao tentar realizar o cadastro!";
+                mostrarMensagem("Não foi possível realizar o cadastro. Tente novamente.");
             }
         }).catch(function (resposta) {
             console.log(`#ERRO: ${resposta}`);
-            finalizarAguardar();
+            mostrarMensagem("Não foi possível realizar o cadastro. Verifique se a API está iniciada.");
         });
     }
 }

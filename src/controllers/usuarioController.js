@@ -78,11 +78,16 @@ function cadastrar(req, res) {
             ).catch(
                 function (erro) {
                     console.log(erro);
-                    console.log(
-                        "\nHouve um erro ao realizar o cadastro! Erro: ",
-                        erro.sqlMessage
-                    );
-                    res.status(500).json(erro.sqlMessage);
+                    // o email é UNIQUE: o banco não deixa cadastrar o mesmo e-mail duas vezes
+                    if (erro.code == "ER_DUP_ENTRY") {
+                        res.status(403).send("Este e-mail já está cadastrado!");
+                    } else {
+                        console.log(
+                            "\nHouve um erro ao realizar o cadastro! Erro: ",
+                            erro.sqlMessage
+                        );
+                        res.status(500).json(erro.sqlMessage);
+                    }
                 }
             );
     }
