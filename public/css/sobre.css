@@ -37,6 +37,21 @@
   width: 70px;
 }
 
+/* na ficha, a linha dos interesses fica em coluna: rótulo em cima, etiquetas embaixo */
+.sobre-linha-interesses {
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sobre-etiquetas {
+  display: flex;
+  gap: 6px;
+}
+
+.sobre-etiquetas .etiqueta {
+  margin-left: 0;
+}
+
 /* o texto ocupa todo o espaço que sobra ao lado da coluna */
 .sobre-texto {
   flex: 1;
