@@ -10,6 +10,7 @@
 
     <script src="./js/sessao.js"></script>
     <script src="./js/verificar-login.js"></script>
+    <script src="./js/index.js"></script>
 
     <link rel="stylesheet" href="./css/estilo.css">
     <link rel="stylesheet" href="./css/home.css">
@@ -17,7 +18,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
 </head>
 
-<body onload="atualizarMenu()">
+<body onload="atualizarMenu(); carregarNumeros()">
     <!-- MENU -->
     <header>
         <div class="conteudo menu">
@@ -187,7 +188,7 @@
             </div>
         </section>
 
-        <!-- A COMUNIDADE EM NÚMEROS (por enquanto fixos em 0, depois virão da API) -->
+        <!-- A COMUNIDADE EM NÚMEROS (preenchidos pelo index.js com os dados da API) -->
         <section class="janela">
             <div class="janela-barra">
                 <span>› comunidade.exe</span>
@@ -210,6 +211,8 @@
                     <span class="numero-legenda">avaliações</span>
                 </div>
             </div>
+
+            <div id="div_msg" class="numeros-mensagem"></div>
 
             <div class="numeros-botao">
                 <a href="dashboard.html" class="botao-contorno">Ver a dashboard completa →</a>

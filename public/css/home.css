@@ -474,6 +474,14 @@ a {
   letter-spacing: 1px;
 }
 
+/* aviso quando a API não responde */
+.numeros-mensagem {
+  padding: 0 24px;
+  font-size: 13px;
+  text-align: center;
+  color: var(--cor-rosa);
+}
+
 .numeros-botao {
   padding: 26px 0 30px;
   text-align: center;
