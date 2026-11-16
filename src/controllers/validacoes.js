@@ -39,8 +39,49 @@ function verificarTemas(lista) {
     return true;
 }
 
+// mesma regra do cadastro.js: devolve o que está faltando na senha ("" quando está tudo certo)
+function verificarSenha(senha) {
+    const maiusculas = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const minusculas = "abcdefghijklmnopqrstuvwxyz";
+    const numeros = "0123456789";
+
+    let temMaiuscula = false;
+    let temMinuscula = false;
+    let temNumero = false;
+    let temEspecial = false;
+
+    for (let i = 0; i < senha.length; i++) {
+        const caractere = senha[i];
+
+        if (maiusculas.includes(caractere)) {
+            temMaiuscula = true;
+        } else if (minusculas.includes(caractere)) {
+            temMinuscula = true;
+        } else if (numeros.includes(caractere)) {
+            temNumero = true;
+        } else {
+            temEspecial = true;
+        }
+    }
+
+    if (senha.length < 6) {
+        return "A senha precisa ter pelo menos 6 caracteres!";
+    } else if (!temMaiuscula) {
+        return "A senha precisa ter pelo menos uma letra maiúscula!";
+    } else if (!temMinuscula) {
+        return "A senha precisa ter pelo menos uma letra minúscula!";
+    } else if (!temNumero) {
+        return "A senha precisa ter pelo menos um número!";
+    } else if (!temEspecial) {
+        return "A senha precisa ter pelo menos um caractere especial!";
+    }
+
+    return "";
+}
+
 module.exports = {
     verificarId,
     verificarNota,
-    verificarTemas
+    verificarTemas,
+    verificarSenha
 };

@@ -59,8 +59,11 @@ function cadastrar(req, res) {
         res.status(400).send("Preencha todos os campos!");
     } else if (!email.includes("@") || !email.includes(".")) {
         res.status(400).send("Digite um e-mail válido!");
-    } else if (senha.length < 6) {
-        res.status(400).send("A senha precisa ter pelo menos 6 caracteres!");
+    } else if (nome.length > 50 || email.length > 100) {
+        // mesmos limites das colunas da tabela usuaria
+        res.status(400).send("O nome pode ter até 50 caracteres e o e-mail até 100!");
+    } else if (validacoes.verificarSenha(senha) != "") {
+        res.status(400).send(validacoes.verificarSenha(senha));
     } else if (faixaEtaria != "18-24" && faixaEtaria != "25-34" && faixaEtaria != "35+") {
         // "menor" também cai aqui: o SafePoint é só para maiores de 18 anos
         res.status(400).send("Faixa etária inválida! O SafePoint é apenas para maiores de 18 anos.");

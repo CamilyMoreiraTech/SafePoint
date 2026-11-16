@@ -1,5 +1,8 @@
 // a verificação de login fica no verificar-login.js
 
+// true enquanto espera a resposta da API: impede que um segundo clique envie a indicação de novo
+let aguardandoResposta = false;
+
 function validar(nome, link, descricao, temas) {
     let valida = true;
     let mensagem = "";
@@ -34,6 +37,10 @@ function mostrarMensagem(mensagem) {
 }
 
 function indicar() {
+    if (aguardandoResposta) {
+        return;
+    }
+
     const nome = ipt_nome_servidor.value;
     const link = ipt_link_convite.value;
     const descricao = ipt_descricao.value;
@@ -50,6 +57,9 @@ function indicar() {
     }
 
     if (validar(nome, link, descricao, temas)) {
+        aguardandoResposta = true;
+        aguardar(); // mostra o gif de carregamento (função do sessao.js)
+
         fetch("/servidores/indicar", {
             method: "POST",
             headers: {
@@ -63,6 +73,10 @@ function indicar() {
                 idUsuariaServer: sessionStorage.ID_USUARIO
             })
         }).then(function (resposta) {
+            // a resposta chegou (com sucesso ou erro): libera o botão e esconde o gif
+            aguardandoResposta = false;
+            finalizarAguardar();
+
             if (resposta.ok) {
                 mostrarMensagem("Indicação enviada! O servidor vai aparecer na lista depois de aprovado.");
                 limparFormulario();
@@ -74,6 +88,8 @@ function indicar() {
             }
         }).catch(function (resposta) {
             console.log(`#ERRO: ${resposta}`);
+            aguardandoResposta = false;
+            finalizarAguardar();
             mostrarMensagem("Não foi possível enviar a indicação. Verifique se a API está iniciada.");
         });
     }

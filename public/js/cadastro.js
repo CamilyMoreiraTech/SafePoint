@@ -1,3 +1,6 @@
+// true enquanto espera a resposta da API: impede que um segundo clique envie o cadastro de novo
+let aguardandoResposta = false;
+
 // confere cada caractere da senha e devolve o que está faltando ("" quando está tudo certo)
 function verificarSenha(senha) {
     const maiusculas = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -79,6 +82,10 @@ function mostrarMensagem(mensagem) {
 }
 
 function cadastrar() {
+    if (aguardandoResposta) {
+        return;
+    }
+
     const nome = ipt_nome.value;
     const email = ipt_email.value;
     const senha = ipt_senha.value;
@@ -98,6 +105,9 @@ function cadastrar() {
     }
 
     if (validar(nome, email, senha, confirmacaoSenha, faixaEtaria, plataforma, interesses)) {
+        aguardandoResposta = true;
+        aguardar(); // mostra o gif de carregamento (função do sessao.js)
+
         fetch("/usuarios/cadastrar", {
             method: "POST",
             headers: {
@@ -112,7 +122,10 @@ function cadastrar() {
                 interessesServer: interesses
             })
         }).then(function (resposta) {
+            finalizarAguardar();
+
             if (resposta.ok) {
+                // aguardandoResposta continua true: a página já vai trocar para o login
                 mostrarMensagem("Cadastro realizado com sucesso! Redirecionando para tela de Login...");
 
                 setTimeout(function () {
@@ -120,12 +133,16 @@ function cadastrar() {
                 }, 2000);
             } else if (resposta.status == 403) {
                 // 403 = esse e-mail já tem uma conta
+                aguardandoResposta = false;
                 mostrarMensagem("Este e-mail já está cadastrado.");
             } else {
+                aguardandoResposta = false;
                 mostrarMensagem("Não foi possível realizar o cadastro. Tente novamente.");
             }
         }).catch(function (resposta) {
             console.log(`#ERRO: ${resposta}`);
+            finalizarAguardar();
+            aguardandoResposta = false;
             mostrarMensagem("Não foi possível realizar o cadastro. Verifique se a API está iniciada.");
         });
     }

@@ -7,6 +7,7 @@ function listar() {
     // só servidores aprovados, com os temas juntos em um texto ("games,leitura")
     // e as contas das avaliações; LEFT JOIN mantém os servidores que ainda não têm avaliação
     // as médias de cada critério alimentam o mini gráfico dos cards da tela de servidores
+    // ordem: maior média de segurança primeiro; empate = quem tem mais avaliações fica na frente
     var instrucaoSql = `
         SELECT
             s.id,
@@ -30,7 +31,7 @@ function listar() {
                 ON a.fk_servidor = s.id
         WHERE s.status = 'aprovado'
         GROUP BY s.id, s.nome, s.descricao, s.link_convite
-        ORDER BY media_seguranca DESC;
+        ORDER BY media_seguranca DESC, total_avaliacoes DESC;
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
