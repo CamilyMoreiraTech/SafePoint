@@ -1,4 +1,5 @@
 var servidorModel = require("../models/servidorModel");
+var validacoes = require("./validacoes");
 
 function listar(req, res) {
     servidorModel.listar().then(function (resultado) {
@@ -23,13 +24,22 @@ function indicar(req, res) {
 
     if (nome == undefined || link == undefined || descricao == undefined) {
         res.status(400).send("Nome, link ou descrição estão undefined!");
-    } else if (idUsuaria == undefined) {
-        res.status(400).send("A usuária que indicou está undefined!");
-    } else if (temas == undefined || temas.length == 0) {
-        res.status(400).send("Marque pelo menos um tema!");
+    } else if (nome == "" || link == "" || descricao == "") {
+        res.status(400).send("Preencha todos os campos!");
+    } else if (!link.startsWith("https://discord.gg/") && !link.startsWith("https://discord.com/invite/")) {
+        // o link vira o botão "Entrar no Discord": sem essa conferência daria para indicar um link perigoso
+        res.status(400).send("O link precisa ser um convite do Discord!");
+    } else if (nome.length > 100) {
+        res.status(400).send("O nome pode ter até 100 caracteres!");
+    } else if (descricao.length > 300) {
+        res.status(400).send("A descrição pode ter até 300 caracteres!");
+    } else if (!validacoes.verificarId(idUsuaria)) {
+        res.status(400).send("A usuária que indicou é inválida!");
+    } else if (!validacoes.verificarTemas(temas)) {
+        res.status(400).send("Marque pelo menos um tema válido!");
     } else {
 
-        servidorModel.indicar(nome, link, descricao, idUsuaria)
+        servidorModel.indicar(nome, link, descricao, Number(idUsuaria))
             .then(
                 function (resultado) {
                     // insertId é o id do servidor que acabou de ser criado - para gravar os temas dele
@@ -62,7 +72,12 @@ function indicar(req, res) {
 function listarIndicados(req, res) {
     var idUsuaria = req.params.idUsuaria;
 
-    servidorModel.listarIndicados(idUsuaria).then(function (resultado) {
+    if (!validacoes.verificarId(idUsuaria)) {
+        res.status(400).send("Id da usuária inválido!");
+        return;
+    }
+
+    servidorModel.listarIndicados(Number(idUsuaria)).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -79,7 +94,12 @@ function listarIndicados(req, res) {
 function listarPendentes(req, res) {
     var idUsuaria = req.params.idUsuaria;
 
-    servidorModel.verificarModeradora(idUsuaria).then(function (resultadoTipo) {
+    if (!validacoes.verificarId(idUsuaria)) {
+        res.status(400).send("Id da usuária inválido!");
+        return;
+    }
+
+    servidorModel.verificarModeradora(Number(idUsuaria)).then(function (resultadoTipo) {
         if (resultadoTipo.length == 0 || resultadoTipo[0].tipo != "moderadora") {
             res.status(403).send("Apenas moderadoras podem ver os servidores pendentes!");
         } else {
@@ -109,15 +129,17 @@ function moderar(req, res) {
 
     if (status != "aprovado" && status != "recusado") {
         res.status(400).send("O status precisa ser aprovado ou recusado!");
-    } else if (idModeradora == undefined) {
-        res.status(400).send("A moderadora está undefined!");
+    } else if (!validacoes.verificarId(idModeradora)) {
+        res.status(400).send("A moderadora é inválida!");
+    } else if (!validacoes.verificarId(idServidor)) {
+        res.status(400).send("O servidor é inválido!");
     } else {
 
-        servidorModel.verificarModeradora(idModeradora).then(function (resultadoTipo) {
+        servidorModel.verificarModeradora(Number(idModeradora)).then(function (resultadoTipo) {
             if (resultadoTipo.length == 0 || resultadoTipo[0].tipo != "moderadora") {
                 res.status(403).send("Apenas moderadoras podem aprovar ou recusar servidores!");
             } else {
-                servidorModel.moderar(idServidor, status, idModeradora).then(function (resultado) {
+                servidorModel.moderar(Number(idServidor), status, Number(idModeradora)).then(function (resultado) {
                     // affectedRows = 0: o servidor não existe ou já tinha sido revisado
                     if (resultado.affectedRows == 0) {
                         res.status(400).send("Esse servidor não está mais pendente!");

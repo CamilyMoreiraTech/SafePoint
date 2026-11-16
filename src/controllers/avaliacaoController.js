@@ -1,10 +1,16 @@
 var avaliacaoModel = require("../models/avaliacaoModel");
+var validacoes = require("./validacoes");
 
 // avaliações que a usuária fez (para a minha área)
 function listarPorUsuaria(req, res) {
     var idUsuaria = req.params.idUsuaria;
 
-    avaliacaoModel.listarPorUsuaria(idUsuaria).then(function (resultado) {
+    if (!validacoes.verificarId(idUsuaria)) {
+        res.status(400).send("Id da usuária inválido!");
+        return;
+    }
+
+    avaliacaoModel.listarPorUsuaria(Number(idUsuaria)).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -28,15 +34,24 @@ function avaliar(req, res) {
     var idUsuaria = req.body.idUsuariaServer;
     var idServidor = req.body.idServidorServer;
 
-    if (notaSeguranca == undefined || notaModeracao == undefined || notaAcolhimento == undefined || notaAtividade == undefined || notaRespeito == undefined) {
-        res.status(400).send("Alguma nota está undefined!");
-    } else if (toxicidade == undefined) {
-        res.status(400).send("A resposta sobre toxicidade está undefined!");
-    } else if (idUsuaria == undefined || idServidor == undefined) {
-        res.status(400).send("A usuária ou o servidor está undefined!");
+    // o comentário é opcional
+    if (comentario == undefined) {
+        comentario = "";
+    }
+
+    if (!validacoes.verificarNota(notaSeguranca) || !validacoes.verificarNota(notaModeracao) || !validacoes.verificarNota(notaAcolhimento) || !validacoes.verificarNota(notaAtividade) || !validacoes.verificarNota(notaRespeito)) {
+        res.status(400).send("Todas as notas precisam ser de 1 a 5!");
+    } else if (String(toxicidade) != "0" && String(toxicidade) != "1") {
+        // comparado como texto porque "" == 0 seria verdadeiro
+        res.status(400).send("A resposta sobre toxicidade precisa ser 0 ou 1!");
+    } else if (comentario.length > 500) {
+        res.status(400).send("O comentário pode ter até 500 caracteres!");
+    } else if (!validacoes.verificarId(idUsuaria) || !validacoes.verificarId(idServidor)) {
+        res.status(400).send("Usuária ou servidor inválido!");
     } else {
 
-        avaliacaoModel.avaliar(notaSeguranca, notaModeracao, notaAcolhimento, notaAtividade, notaRespeito, toxicidade, comentario, idUsuaria, idServidor)
+        // a partir daqui os números já foram conferidos: vão para o SQL como Number
+        avaliacaoModel.avaliar(Number(notaSeguranca), Number(notaModeracao), Number(notaAcolhimento), Number(notaAtividade), Number(notaRespeito), Number(toxicidade), comentario, Number(idUsuaria), Number(idServidor))
             .then(
                 function (resultado) {
                     res.json(resultado);

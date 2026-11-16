@@ -1,4 +1,5 @@
 var usuarioModel = require("../models/usuarioModel");
+var validacoes = require("./validacoes");
 
 function autenticar(req, res) {
     var email = req.body.emailServer;
@@ -13,12 +14,10 @@ function autenticar(req, res) {
         usuarioModel.autenticar(email, senha)
             .then(
                 function (resultadoAutenticar) {
+                    // só a quantidade: e-mail e dados da usuária não vão para o terminal
                     console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
-                    console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`); // transforma JSON em String
 
                     if (resultadoAutenticar.length == 1) {
-                        console.log(resultadoAutenticar);
-
                         res.json({
                             id: resultadoAutenticar[0].id,
                             email: resultadoAutenticar[0].email,
@@ -56,8 +55,19 @@ function cadastrar(req, res) {
         res.status(400).send("Nome, e-mail ou senha estão undefined!");
     } else if (faixaEtaria == undefined || plataforma == undefined) {
         res.status(400).send("Faixa etária ou plataforma estão undefined!");
-    } else if (interesses == undefined || interesses.length == 0) {
-        res.status(400).send("Marque pelo menos um interesse!");
+    } else if (nome == "" || email == "" || senha == "") {
+        res.status(400).send("Preencha todos os campos!");
+    } else if (!email.includes("@") || !email.includes(".")) {
+        res.status(400).send("Digite um e-mail válido!");
+    } else if (senha.length < 6) {
+        res.status(400).send("A senha precisa ter pelo menos 6 caracteres!");
+    } else if (faixaEtaria != "18-24" && faixaEtaria != "25-34" && faixaEtaria != "35+") {
+        // "menor" também cai aqui: o SafePoint é só para maiores de 18 anos
+        res.status(400).send("Faixa etária inválida! O SafePoint é apenas para maiores de 18 anos.");
+    } else if (plataforma != "pc" && plataforma != "console" && plataforma != "celular" && plataforma != "nao_jogo") {
+        res.status(400).send("Plataforma inválida!");
+    } else if (!validacoes.verificarTemas(interesses)) {
+        res.status(400).send("Marque pelo menos um interesse válido!");
     } else {
 
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
@@ -112,7 +122,12 @@ function listarFaixasEtarias(req, res) {
 function buscarPerfil(req, res) {
     var idUsuaria = req.params.idUsuaria;
 
-    usuarioModel.buscarPerfil(idUsuaria).then(function (resultado) {
+    if (!validacoes.verificarId(idUsuaria)) {
+        res.status(400).send("Id da usuária inválido!");
+        return;
+    }
+
+    usuarioModel.buscarPerfil(Number(idUsuaria)).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {

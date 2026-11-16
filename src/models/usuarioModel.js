@@ -5,7 +5,8 @@ function autenticar(email, senha) {
     var instrucaoSql = `
         SELECT id, nome, email, tipo FROM usuaria WHERE email = '${escapar.escaparTexto(email)}' AND senha = '${escapar.escaparTexto(senha)}';
     `;
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    // o SQL tem a senha, então não vai inteiro para o terminal
+    console.log("Executando a instrução SQL de login");
     return database.executar(instrucaoSql);
 }
 
@@ -13,7 +14,8 @@ function cadastrar(nome, email, senha, faixaEtaria, plataforma) {
     var instrucaoSql = `
         INSERT INTO usuaria (nome, email, senha, faixa_etaria, plataforma) VALUES ('${escapar.escaparTexto(nome)}', '${escapar.escaparTexto(email)}', '${escapar.escaparTexto(senha)}', '${escapar.escaparTexto(faixaEtaria)}', '${escapar.escaparTexto(plataforma)}');
     `;
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    // o SQL tem a senha, então não vai inteiro para o terminal
+    console.log("Executando a instrução SQL de cadastro");
     return database.executar(instrucaoSql);
 }
 
