@@ -6,6 +6,7 @@ function listar() {
 
     // só servidores aprovados, com os temas juntos em um texto ("games,leitura")
     // e as contas das avaliações; LEFT JOIN mantém os servidores que ainda não têm avaliação
+    // as médias de cada critério alimentam o mini gráfico dos cards da tela de servidores
     var instrucaoSql = `
         SELECT
             s.id,
@@ -19,6 +20,10 @@ function listar() {
                 WHERE ts.fk_servidor = s.id) AS temas,
             COUNT(a.id) AS total_avaliacoes,
             AVG(a.nota_seguranca) AS media_seguranca,
+            AVG(a.nota_moderacao) AS media_moderacao,
+            AVG(a.nota_acolhimento) AS media_acolhimento,
+            AVG(a.nota_atividade) AS media_atividade,
+            AVG(a.nota_respeito) AS media_respeito,
             SUM(a.presenciou_toxicidade) AS total_toxicidade
         FROM servidor s
             LEFT JOIN avaliacao a

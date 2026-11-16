@@ -74,6 +74,7 @@ function montarCard(servidor, numero) {
                 <div class="temas">${montarTemas(servidor.temas)}</div>
                 <p id="descricao_servidor_${servidor.id}"></p>
                 ${montarNotas(servidor)}
+                ${montarGraficoCriterios(servidor)}
                 <div class="card-servidor-botoes">
                     <a id="link_servidor_${servidor.id}" class="botao-contorno">Entrar no Discord</a>
                     <a class="botao-destaque" onclick="avaliarServidor(${servidor.id})">Avaliar</a>
@@ -144,6 +145,41 @@ function montarEstrelas(media) {
     }
 
     return estrelas;
+}
+
+// mini gráfico do card: uma barra para cada critério da avaliação
+function montarGraficoCriterios(servidor) {
+    // sem avaliações não tem média para desenhar (o aviso já aparece em montarNotas)
+    if (Number(servidor.total_avaliacoes) == 0) {
+        return "";
+    }
+
+    return `
+        <div class="criterios">
+            <div class="criterios-titulo">Notas por critério</div>
+            ${montarBarra("Segurança", servidor.media_seguranca)}
+            ${montarBarra("Moderação", servidor.media_moderacao)}
+            ${montarBarra("Acolhimento", servidor.media_acolhimento)}
+            ${montarBarra("Atividade", servidor.media_atividade)}
+            ${montarBarra("Respeito", servidor.media_respeito)}
+        </div>
+    `;
+}
+
+// a largura da barra é a média em porcentagem da nota máxima (5 = 100%)
+function montarBarra(criterio, media) {
+    const nota = Number(media);
+    const percBarra = nota / 5 * 100;
+
+    return `
+        <div class="criterio">
+            <span class="criterio-nome">${criterio}</span>
+            <div class="criterio-trilha">
+                <div class="criterio-barra" style="width: ${percBarra}%"></div>
+            </div>
+            <span class="criterio-valor">${nota.toFixed(1).replace(".", ",")}</span>
+        </div>
+    `;
 }
 
 function preencherTextos(servidor) {

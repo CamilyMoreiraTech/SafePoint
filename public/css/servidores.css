@@ -152,6 +152,56 @@
   color: var(--cor-texto-suave);
 }
 
+/* MINI GRÁFICO DOS CRITÉRIOS (uma barra por critério) */
+
+.criterios {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid var(--cor-borda);
+}
+
+.criterios-titulo {
+  margin-bottom: 2px;
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--cor-lilas);
+}
+
+.criterio {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+}
+
+.criterio-nome {
+  width: 90px;
+  color: var(--cor-texto-suave);
+}
+
+/* trilha = fundo da barra; a barra rosa ocupa a parte da nota */
+.criterio-trilha {
+  flex: 1;
+  height: 8px;
+  border: 1px solid var(--cor-borda);
+  background-color: var(--cor-fundo);
+}
+
+.criterio-barra {
+  height: 100%;
+  background-color: var(--cor-rosa);
+  box-shadow: 0 0 8px rgba(255, 106, 213, 0.6);
+}
+
+.criterio-valor {
+  width: 26px;
+  text-align: right;
+  color: var(--cor-rosa);
+}
+
 /* BOTÕES DO CARD */
 
 .card-servidor-botoes {
