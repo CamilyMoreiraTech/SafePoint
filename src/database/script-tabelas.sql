@@ -83,6 +83,33 @@ CREATE TABLE avaliacao (
 	CONSTRAINT chk_toxicidade CHECK (presenciou_toxicidade IN (0, 1))
 );
 
+/* servidores aprovados com os temas e as médias das avaliações
+   usada pela tela de servidores e pela dashboard (servidorModel.listar)
+   LEFT JOIN mantém os servidores que ainda não têm avaliação */
+CREATE VIEW vw_servidores_aprovados AS
+SELECT
+	s.id,
+	s.nome,
+	s.descricao,
+	s.link_convite,
+	(SELECT GROUP_CONCAT(t.nome)
+		FROM tema_servidor ts
+			INNER JOIN tema t
+				ON ts.fk_tema = t.id
+		WHERE ts.fk_servidor = s.id) AS temas,
+	COUNT(a.id) AS total_avaliacoes,
+	AVG(a.nota_seguranca) AS media_seguranca,
+	AVG(a.nota_moderacao) AS media_moderacao,
+	AVG(a.nota_acolhimento) AS media_acolhimento,
+	AVG(a.nota_atividade) AS media_atividade,
+	AVG(a.nota_respeito) AS media_respeito,
+	SUM(a.presenciou_toxicidade) AS total_toxicidade
+FROM servidor s
+	LEFT JOIN avaliacao a
+		ON a.fk_servidor = s.id
+WHERE s.status = 'aprovado'
+GROUP BY s.id, s.nome, s.descricao, s.link_convite;
+
 insert into tema (nome) values ('games');
 insert into tema (nome) values ('artesanato');
 insert into tema (nome) values ('leitura');

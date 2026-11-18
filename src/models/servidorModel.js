@@ -4,33 +4,11 @@ var escapar = require("../database/escapar-texto");
 function listar() {
     console.log("ACESSEI O SERVIDOR MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
 
-    // só servidores aprovados, com os temas juntos em um texto ("games,leitura")
-    // e as contas das avaliações; LEFT JOIN mantém os servidores que ainda não têm avaliação
-    // as médias de cada critério alimentam o mini gráfico dos cards da tela de servidores
+    // a view já traz só os aprovados, com os temas ("games,leitura") e as médias das avaliações
+    // (ver vw_servidores_aprovados no script-tabelas.sql)
     // ordem: maior média de segurança primeiro; empate = quem tem mais avaliações fica na frente
     var instrucaoSql = `
-        SELECT
-            s.id,
-            s.nome,
-            s.descricao,
-            s.link_convite,
-            (SELECT GROUP_CONCAT(t.nome)
-                FROM tema_servidor ts
-                    INNER JOIN tema t
-                        ON ts.fk_tema = t.id
-                WHERE ts.fk_servidor = s.id) AS temas,
-            COUNT(a.id) AS total_avaliacoes,
-            AVG(a.nota_seguranca) AS media_seguranca,
-            AVG(a.nota_moderacao) AS media_moderacao,
-            AVG(a.nota_acolhimento) AS media_acolhimento,
-            AVG(a.nota_atividade) AS media_atividade,
-            AVG(a.nota_respeito) AS media_respeito,
-            SUM(a.presenciou_toxicidade) AS total_toxicidade
-        FROM servidor s
-            LEFT JOIN avaliacao a
-                ON a.fk_servidor = s.id
-        WHERE s.status = 'aprovado'
-        GROUP BY s.id, s.nome, s.descricao, s.link_convite
+        SELECT * FROM vw_servidores_aprovados
         ORDER BY media_seguranca DESC, total_avaliacoes DESC;
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
