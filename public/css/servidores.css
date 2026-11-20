@@ -217,6 +217,20 @@
   gap: 10px;
 }
 
+/* link para a tela de comentários, embaixo dos botões */
+.card-servidor-comentarios {
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--cor-lilas);
+  cursor: pointer;
+}
+
+.card-servidor-comentarios:hover {
+  color: var(--cor-rosa);
+}
+
 .card-servidor-botoes a {
   flex: 1;
   padding: 10px 8px;

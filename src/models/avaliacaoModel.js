@@ -26,6 +26,29 @@ function listarPorUsuaria(idUsuaria) {
     return database.executar(instrucaoSql);
 }
 
+// comentários de um servidor aprovado, para a tela de comentários
+// não traz nome nem e-mail: a tela é pública e os comentários aparecem anônimos
+function listarPorServidor(idServidor) {
+    var instrucaoSql = `
+        SELECT
+            a.id,
+            a.nota_seguranca,
+            a.presenciou_toxicidade,
+            a.comentario,
+            DATE_FORMAT(a.dt_avaliacao, '%d/%m/%Y') AS dt_avaliacao
+        FROM avaliacao a
+            INNER JOIN servidor s
+                ON a.fk_servidor = s.id
+        WHERE a.fk_servidor = ${idServidor}
+            AND s.status = 'aprovado'
+            AND a.comentario IS NOT NULL
+            AND a.comentario <> ''
+        ORDER BY a.dt_avaliacao DESC;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 function avaliar(notaSeguranca, notaModeracao, notaAcolhimento, notaAtividade, toxicidade, comentario, idUsuaria, idServidor) {
     var instrucaoSql = `
         INSERT INTO avaliacao (nota_seguranca, nota_moderacao, nota_acolhimento, nota_atividade, presenciou_toxicidade, comentario, fk_usuaria, fk_servidor)
@@ -62,6 +85,7 @@ function excluir(idAvaliacao, idUsuaria) {
 
 module.exports = {
     listarPorUsuaria,
+    listarPorServidor,
     avaliar,
     editar,
     excluir

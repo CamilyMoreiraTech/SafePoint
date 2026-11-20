@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SafePoint | Comentários</title>
+
+    <script src="./js/sessao.js"></script>
+    <script src="./js/verificar-login.js"></script>
+    <script src="./js/comentarios.js"></script>
+
+    <link rel="stylesheet" href="./css/estilo.css">
+    <link rel="stylesheet" href="./css/home.css">
+    <link rel="stylesheet" href="./css/comentarios.css">
+    <link rel="icon" href="./assets/icon/favicon-safepoint.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+</head>
+
+<body onload="verificarLogin('comentarios.html'); atualizarMenu(); iniciarComentarios()">
+    <!-- MENU -->
+    <header>
+        <div class="conteudo menu">
+            <a href="index.html" class="logo">
+                <img src="assets/imgs/home/estrela.svg" alt="">
+                SafePoint
+            </a>
+
+            <nav class="menu-links">
+                <a href="servidores.html">[ Servidores ]</a>
+                <a href="dashboard.html">[ Dashboard ]</a>
+                <a href="sobre.html">[ Sobre ]</a>
+            </nav>
+
+            <div id="div_menu_botoes" class="menu-botoes">
+                <a href="login.html" class="botao-contorno">[ Entrar ]</a>
+                <a href="cadastro.html" class="botao-destaque">[ Criar conta ]</a>
+            </div>
+        </div>
+
+        <div class="faixa">
+            <div class="faixa-xadrez"></div>
+            <p class="faixa-texto">Seu save point em comunidades online »</p>
+            <img src="assets/imgs/home/codigo-barras.svg" alt="" class="codigo-barras">
+        </div>
+    </header>
+
+    <main class="conteudo">
+        <!-- COMENTÁRIOS DO SERVIDOR -->
+        <section class="janela">
+            <div class="janela-barra">
+                <span>› comentarios.exe</span>
+                <div class="janela-botoes"><span>_</span><span>□</span><span>×</span></div>
+            </div>
+
+            <div class="comentarios-topo">
+                <div>
+                    <h1 class="inicio-titulo">
+                        <span class="titulo-lilas">Comentários</span>
+                        <span class="titulo-rosa">das usuárias</span>
+                    </h1>
+                    <!-- o nome do servidor foi digitado por uma usuária: entra com textContent -->
+                    <div id="div_nome_servidor" class="comentarios-servidor"></div>
+                    <div id="div_resumo" class="comentarios-resumo"></div>
+                </div>
+                <a href="servidores.html" class="botao-contorno">← [ Voltar aos servidores ]</a>
+            </div>
+
+            <div id="div_msg" class="comentarios-mensagem">Carregando comentários...</div>
+
+            <!-- os comentários são montados pelo comentarios.js com os dados da API -->
+            <div id="div_lista_comentarios" class="lista-comentarios"></div>
+
+            <p class="janela-rodape">» os comentários aparecem sem o nome de quem escreveu</p>
+        </section>
+    </main>
+
+    <!-- RODAPÉ -->
+    <footer class="conteudo rodape">
+        <a href="index.html" class="logo logo-pequeno">
+            <img src="assets/imgs/home/estrela.svg" alt="">
+            SafePoint
+        </a>
+        <p>feito com carinho e glitter.<br>O Discord é classificado como não recomendado para menores de 18 anos.</p>
+        <span class="coracoes">♥ ♥ ♥</span>
+        <img src="assets/imgs/home/codigo-barras.svg" alt="" class="codigo-barras">
+    </footer>
+</body>
+
+</html>

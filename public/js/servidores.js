@@ -105,6 +105,7 @@ function montarCard(servidor, numero) {
                     <a id="link_servidor_${servidor.id}" class="botao-contorno">Entrar no Discord</a>
                     ${montarBotaoAvaliar(servidor.id, idAvaliacao)}
                 </div>
+                <a class="card-servidor-comentarios" onclick="verComentarios(${servidor.id})">» Comentários das usuárias</a>
             </div>
         </div>
     `;
@@ -250,6 +251,12 @@ function avaliarServidor(idServidor) {
     // avaliação nova: apaga uma edição que tenha ficado pela metade
     sessionStorage.removeItem("ID_AVALIACAO_EDITAR");
     window.location = "avaliar-servidor.html";
+}
+
+// guarda qual servidor foi escolhido para a tela de comentários saber
+function verComentarios(idServidor) {
+    sessionStorage.ID_SERVIDOR_COMENTARIOS = idServidor;
+    window.location = "comentarios.html";
 }
 
 // mesmo caminho do botão "Editar" da minha área: a tela de avaliar abre já preenchida

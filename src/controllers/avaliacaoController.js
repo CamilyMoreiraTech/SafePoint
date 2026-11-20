@@ -23,6 +23,28 @@ function listarPorUsuaria(req, res) {
     });
 }
 
+// comentários de um servidor (para a tela de comentários)
+function listarPorServidor(req, res) {
+    var idServidor = req.params.idServidor;
+
+    if (!validacoes.verificarId(idServidor)) {
+        res.status(400).send("Id do servidor inválido!");
+        return;
+    }
+
+    avaliacaoModel.listarPorServidor(Number(idServidor)).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum comentário encontrado!");
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar os comentários: ", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
 // regras usadas ao avaliar e ao editar: devolve o que está errado ("" quando está tudo certo)
 function verificarAvaliacao(notaSeguranca, notaModeracao, notaAcolhimento, notaAtividade, toxicidade, comentario) {
     if (!validacoes.verificarNota(notaSeguranca) || !validacoes.verificarNota(notaModeracao) || !validacoes.verificarNota(notaAcolhimento) || !validacoes.verificarNota(notaAtividade)) {
@@ -144,6 +166,7 @@ function excluir(req, res) {
 
 module.exports = {
     listarPorUsuaria,
+    listarPorServidor,
     avaliar,
     editar,
     excluir
