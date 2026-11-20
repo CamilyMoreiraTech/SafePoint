@@ -201,7 +201,7 @@ function montarEstrelas(media) {
     return estrelas;
 }
 
-// mini gráfico do card: uma barra para cada critério da avaliação
+// mini gráfico do card: uma barra por critério (segurança fica de fora porque já aparece em destaque nas notas)
 function montarGraficoCriterios(servidor) {
     // sem avaliações não tem média para desenhar (o aviso já aparece em montarNotas)
     if (Number(servidor.total_avaliacoes) == 0) {
@@ -210,8 +210,7 @@ function montarGraficoCriterios(servidor) {
 
     return `
         <div class="criterios">
-            <div class="criterios-titulo">Notas por critério</div>
-            ${montarBarra("Segurança", servidor.media_seguranca)}
+            <div class="criterios-titulo">Notas de outros critério</div>
             ${montarBarra("Moderação", servidor.media_moderacao)}
             ${montarBarra("Acolhimento", servidor.media_acolhimento)}
             ${montarBarra("Atividade", servidor.media_atividade)}
