@@ -215,7 +215,6 @@ function montarGraficoCriterios(servidor) {
             ${montarBarra("Moderação", servidor.media_moderacao)}
             ${montarBarra("Acolhimento", servidor.media_acolhimento)}
             ${montarBarra("Atividade", servidor.media_atividade)}
-            ${montarBarra("Respeito", servidor.media_respeito)}
         </div>
     `;
 }

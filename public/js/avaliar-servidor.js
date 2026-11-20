@@ -54,7 +54,6 @@ function preencherFormulario(avaliacao) {
     sel_moderacao.value = avaliacao.nota_moderacao;
     sel_acolhimento.value = avaliacao.nota_acolhimento;
     sel_atividade.value = avaliacao.nota_atividade;
-    sel_respeito.value = avaliacao.nota_respeito;
     sel_toxicidade.value = avaliacao.presenciou_toxicidade;
 
     // value de textarea não interpreta HTML, então o comentário entra com segurança
@@ -138,11 +137,10 @@ function avaliar() {
     const notaModeracao = Number(sel_moderacao.value);
     const notaAcolhimento = Number(sel_acolhimento.value);
     const notaAtividade = Number(sel_atividade.value);
-    const notaRespeito = Number(sel_respeito.value);
     const toxicidade = sel_toxicidade.value;
     const comentario = ipt_comentario.value;
 
-    const notas = [notaSeguranca, notaModeracao, notaAcolhimento, notaAtividade, notaRespeito];
+    const notas = [notaSeguranca, notaModeracao, notaAcolhimento, notaAtividade];
 
     if (sessionStorage.ID_SERVIDOR_AVALIAR == undefined) {
         mostrarMensagem("Escolha um servidor na lista de servidores para avaliar.");
@@ -152,7 +150,6 @@ function avaliar() {
             notaModeracaoServer: notaModeracao,
             notaAcolhimentoServer: notaAcolhimento,
             notaAtividadeServer: notaAtividade,
-            notaRespeitoServer: notaRespeito,
             toxicidadeServer: Number(toxicidade),
             comentarioServer: comentario,
             idUsuariaServer: sessionStorage.ID_USUARIO,
@@ -223,7 +220,6 @@ function limparFormulario() {
     sel_moderacao.value = "";
     sel_acolhimento.value = "";
     sel_atividade.value = "";
-    sel_respeito.value = "";
     sel_toxicidade.value = "";
     ipt_comentario.value = "";
 }

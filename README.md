@@ -25,7 +25,7 @@
 
 Muitos servidores de jogos, artesanato e leitura acabam se tornando ambientes tóxicos para mulheres, o que dificulta encontrar pessoas para jogar, conversar, ler e compartilhar interesses com segurança. Hoje não existe um lugar centralizado para consultar a experiência de outras usuárias antes de entrar em um servidor.
 
-O **SafePoint** resolve isso: as usuárias se cadastram, indicam servidores e os avaliam com notas e comentários em critérios como segurança, moderação, acolhimento e respeito. Esses dados alimentam uma dashboard com rankings, gráficos e indicadores, mostrando quais servidores são os mais seguros e como está o cenário geral desses espaços.
+O **SafePoint** resolve isso: as usuárias se cadastram, indicam servidores e os avaliam com notas e comentários em critérios como segurança, moderação, acolhimento e atividade. Esses dados alimentam uma dashboard com rankings, gráficos e indicadores, mostrando quais servidores são os mais seguros e como está o cenário geral desses espaços.
 
 ## 🎮 Para quem é
 

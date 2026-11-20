@@ -13,7 +13,6 @@ function listarPorUsuaria(idUsuaria) {
             a.nota_moderacao,
             a.nota_acolhimento,
             a.nota_atividade,
-            a.nota_respeito,
             a.presenciou_toxicidade,
             a.comentario,
             DATE_FORMAT(a.dt_avaliacao, '%d/%m/%Y') AS dt_avaliacao
@@ -27,24 +26,23 @@ function listarPorUsuaria(idUsuaria) {
     return database.executar(instrucaoSql);
 }
 
-function avaliar(notaSeguranca, notaModeracao, notaAcolhimento, notaAtividade, notaRespeito, toxicidade, comentario, idUsuaria, idServidor) {
+function avaliar(notaSeguranca, notaModeracao, notaAcolhimento, notaAtividade, toxicidade, comentario, idUsuaria, idServidor) {
     var instrucaoSql = `
-        INSERT INTO avaliacao (nota_seguranca, nota_moderacao, nota_acolhimento, nota_atividade, nota_respeito, presenciou_toxicidade, comentario, fk_usuaria, fk_servidor)
-        VALUES (${notaSeguranca}, ${notaModeracao}, ${notaAcolhimento}, ${notaAtividade}, ${notaRespeito}, ${toxicidade}, '${escapar.escaparTexto(comentario)}', ${idUsuaria}, ${idServidor});
+        INSERT INTO avaliacao (nota_seguranca, nota_moderacao, nota_acolhimento, nota_atividade, presenciou_toxicidade, comentario, fk_usuaria, fk_servidor)
+        VALUES (${notaSeguranca}, ${notaModeracao}, ${notaAcolhimento}, ${notaAtividade}, ${toxicidade}, '${escapar.escaparTexto(comentario)}', ${idUsuaria}, ${idServidor});
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
 // o AND fk_usuaria impede que uma usuária altere a avaliação de outra
-function editar(idAvaliacao, notaSeguranca, notaModeracao, notaAcolhimento, notaAtividade, notaRespeito, toxicidade, comentario, idUsuaria) {
+function editar(idAvaliacao, notaSeguranca, notaModeracao, notaAcolhimento, notaAtividade, toxicidade, comentario, idUsuaria) {
     var instrucaoSql = `
         UPDATE avaliacao SET
             nota_seguranca = ${notaSeguranca},
             nota_moderacao = ${notaModeracao},
             nota_acolhimento = ${notaAcolhimento},
             nota_atividade = ${notaAtividade},
-            nota_respeito = ${notaRespeito},
             presenciou_toxicidade = ${toxicidade},
             comentario = '${escapar.escaparTexto(comentario)}'
         WHERE id = ${idAvaliacao} AND fk_usuaria = ${idUsuaria};

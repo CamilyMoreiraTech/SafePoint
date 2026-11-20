@@ -65,7 +65,6 @@ CREATE TABLE avaliacao (
 	nota_moderacao INT NOT NULL,
 	nota_acolhimento INT NOT NULL,
 	nota_atividade INT NOT NULL,
-	nota_respeito INT NOT NULL,
 	comentario VARCHAR(500),
 	presenciou_toxicidade TINYINT NOT NULL, -- 1 = sim, 0 = não
 	dt_avaliacao DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -79,7 +78,6 @@ CREATE TABLE avaliacao (
 	CONSTRAINT chk_nota_moderacao CHECK (nota_moderacao BETWEEN 1 AND 5),
 	CONSTRAINT chk_nota_acolhimento CHECK (nota_acolhimento BETWEEN 1 AND 5),
 	CONSTRAINT chk_nota_atividade CHECK (nota_atividade BETWEEN 1 AND 5),
-	CONSTRAINT chk_nota_respeito CHECK (nota_respeito BETWEEN 1 AND 5),
 	CONSTRAINT chk_toxicidade CHECK (presenciou_toxicidade IN (0, 1))
 );
 
@@ -102,7 +100,6 @@ SELECT
 	AVG(a.nota_moderacao) AS media_moderacao,
 	AVG(a.nota_acolhimento) AS media_acolhimento,
 	AVG(a.nota_atividade) AS media_atividade,
-	AVG(a.nota_respeito) AS media_respeito,
 	SUM(a.presenciou_toxicidade) AS total_toxicidade
 FROM servidor s
 	LEFT JOIN avaliacao a
