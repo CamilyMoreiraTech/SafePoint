@@ -2,12 +2,19 @@ var database = require("../database/config");
 var escapar = require("../database/escapar-texto");
 
 // junta com a tabela servidor para mostrar o nome do servidor avaliado
+// traz todas as notas porque a tela de avaliar usa esta lista para preencher a edição
 function listarPorUsuaria(idUsuaria) {
     var instrucaoSql = `
         SELECT
             a.id,
+            a.fk_servidor,
             s.nome AS nome_servidor,
             a.nota_seguranca,
+            a.nota_moderacao,
+            a.nota_acolhimento,
+            a.nota_atividade,
+            a.nota_respeito,
+            a.presenciou_toxicidade,
             a.comentario,
             DATE_FORMAT(a.dt_avaliacao, '%d/%m/%Y') AS dt_avaliacao
         FROM avaliacao a
@@ -29,7 +36,35 @@ function avaliar(notaSeguranca, notaModeracao, notaAcolhimento, notaAtividade, n
     return database.executar(instrucaoSql);
 }
 
+// o AND fk_usuaria impede que uma usuária altere a avaliação de outra
+function editar(idAvaliacao, notaSeguranca, notaModeracao, notaAcolhimento, notaAtividade, notaRespeito, toxicidade, comentario, idUsuaria) {
+    var instrucaoSql = `
+        UPDATE avaliacao SET
+            nota_seguranca = ${notaSeguranca},
+            nota_moderacao = ${notaModeracao},
+            nota_acolhimento = ${notaAcolhimento},
+            nota_atividade = ${notaAtividade},
+            nota_respeito = ${notaRespeito},
+            presenciou_toxicidade = ${toxicidade},
+            comentario = '${escapar.escaparTexto(comentario)}'
+        WHERE id = ${idAvaliacao} AND fk_usuaria = ${idUsuaria};
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+// apaga a avaliação inteira (notas e comentário); o AND fk_usuaria impede apagar a de outra usuária
+function excluir(idAvaliacao, idUsuaria) {
+    var instrucaoSql = `
+        DELETE FROM avaliacao WHERE id = ${idAvaliacao} AND fk_usuaria = ${idUsuaria};
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     listarPorUsuaria,
-    avaliar
+    avaliar,
+    editar,
+    excluir
 };

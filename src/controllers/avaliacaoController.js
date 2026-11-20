@@ -23,6 +23,20 @@ function listarPorUsuaria(req, res) {
     });
 }
 
+// regras usadas ao avaliar e ao editar: devolve o que está errado ("" quando está tudo certo)
+function verificarAvaliacao(notaSeguranca, notaModeracao, notaAcolhimento, notaAtividade, notaRespeito, toxicidade, comentario) {
+    if (!validacoes.verificarNota(notaSeguranca) || !validacoes.verificarNota(notaModeracao) || !validacoes.verificarNota(notaAcolhimento) || !validacoes.verificarNota(notaAtividade) || !validacoes.verificarNota(notaRespeito)) {
+        return "Todas as notas precisam ser de 1 a 5!";
+    } else if (String(toxicidade) != "0" && String(toxicidade) != "1") {
+        // comparado como texto porque "" == 0 seria verdadeiro
+        return "A resposta sobre toxicidade precisa ser 0 ou 1!";
+    } else if (comentario.length > 500) {
+        return "O comentário pode ter até 500 caracteres!";
+    }
+
+    return "";
+}
+
 function avaliar(req, res) {
     var notaSeguranca = req.body.notaSegurancaServer;
     var notaModeracao = req.body.notaModeracaoServer;
@@ -39,13 +53,10 @@ function avaliar(req, res) {
         comentario = "";
     }
 
-    if (!validacoes.verificarNota(notaSeguranca) || !validacoes.verificarNota(notaModeracao) || !validacoes.verificarNota(notaAcolhimento) || !validacoes.verificarNota(notaAtividade) || !validacoes.verificarNota(notaRespeito)) {
-        res.status(400).send("Todas as notas precisam ser de 1 a 5!");
-    } else if (String(toxicidade) != "0" && String(toxicidade) != "1") {
-        // comparado como texto porque "" == 0 seria verdadeiro
-        res.status(400).send("A resposta sobre toxicidade precisa ser 0 ou 1!");
-    } else if (comentario.length > 500) {
-        res.status(400).send("O comentário pode ter até 500 caracteres!");
+    var erroAvaliacao = verificarAvaliacao(notaSeguranca, notaModeracao, notaAcolhimento, notaAtividade, notaRespeito, toxicidade, comentario);
+
+    if (erroAvaliacao != "") {
+        res.status(400).send(erroAvaliacao);
     } else if (!validacoes.verificarId(idUsuaria) || !validacoes.verificarId(idServidor)) {
         res.status(400).send("Usuária ou servidor inválido!");
     } else {
@@ -71,7 +82,71 @@ function avaliar(req, res) {
     }
 }
 
+function editar(req, res) {
+    var idAvaliacao = req.params.idAvaliacao;
+    var notaSeguranca = req.body.notaSegurancaServer;
+    var notaModeracao = req.body.notaModeracaoServer;
+    var notaAcolhimento = req.body.notaAcolhimentoServer;
+    var notaAtividade = req.body.notaAtividadeServer;
+    var notaRespeito = req.body.notaRespeitoServer;
+    var toxicidade = req.body.toxicidadeServer;
+    var comentario = req.body.comentarioServer;
+    var idUsuaria = req.body.idUsuariaServer;
+
+    // o comentário é opcional
+    if (comentario == undefined) {
+        comentario = "";
+    }
+
+    var erroAvaliacao = verificarAvaliacao(notaSeguranca, notaModeracao, notaAcolhimento, notaAtividade, notaRespeito, toxicidade, comentario);
+
+    if (erroAvaliacao != "") {
+        res.status(400).send(erroAvaliacao);
+    } else if (!validacoes.verificarId(idAvaliacao) || !validacoes.verificarId(idUsuaria)) {
+        res.status(400).send("Avaliação ou usuária inválida!");
+    } else {
+        avaliacaoModel.editar(Number(idAvaliacao), Number(notaSeguranca), Number(notaModeracao), Number(notaAcolhimento), Number(notaAtividade), Number(notaRespeito), Number(toxicidade), comentario, Number(idUsuaria))
+            .then(function (resultado) {
+                // affectedRows 0 = a avaliação não existe ou é de outra usuária
+                if (resultado.affectedRows == 0) {
+                    res.status(404).send("Avaliação não encontrada!");
+                } else {
+                    res.json(resultado);
+                }
+            }).catch(function (erro) {
+                console.log(erro);
+                console.log("\nHouve um erro ao editar a avaliação! Erro: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            });
+    }
+}
+
+function excluir(req, res) {
+    var idAvaliacao = req.params.idAvaliacao;
+    var idUsuaria = req.body.idUsuariaServer;
+
+    if (!validacoes.verificarId(idAvaliacao) || !validacoes.verificarId(idUsuaria)) {
+        res.status(400).send("Avaliação ou usuária inválida!");
+        return;
+    }
+
+    avaliacaoModel.excluir(Number(idAvaliacao), Number(idUsuaria)).then(function (resultado) {
+        // affectedRows 0 = a avaliação não existe ou é de outra usuária
+        if (resultado.affectedRows == 0) {
+            res.status(404).send("Avaliação não encontrada!");
+        } else {
+            res.json(resultado);
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("\nHouve um erro ao excluir a avaliação! Erro: ", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
 module.exports = {
     listarPorUsuaria,
-    avaliar
+    avaliar,
+    editar,
+    excluir
 }

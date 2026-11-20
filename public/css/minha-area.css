@@ -136,6 +136,30 @@
   line-height: 1.5;
 }
 
+/* botões Editar e Excluir de cada avaliação */
+.item-acoes {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.item-botao {
+  padding: 4px 10px;
+  border: 1px solid var(--cor-lilas);
+  background-color: transparent;
+  color: var(--cor-lilas);
+  font-family: inherit;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.item-botao:hover {
+  color: var(--cor-rosa);
+  border-color: var(--cor-rosa);
+}
+
 .status {
   padding: 3px 8px;
   font-size: 10px;

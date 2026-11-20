@@ -144,6 +144,10 @@ function mostrarAvaliacoes(avaliacoes) {
                 </div>
                 <div class="item-detalhe">Segurança · avaliado em ${avaliacao.dt_avaliacao}</div>
                 <p id="comentario_avaliacao_${i}" class="item-comentario"></p>
+                <div class="item-acoes">
+                    <button id="btn_editar_${i}" class="item-botao" onclick="editarAvaliacao(${avaliacao.id}, ${avaliacao.fk_servidor})">[ Editar ]</button>
+                    <button id="btn_excluir_${i}" class="item-botao" onclick="excluirAvaliacao(${avaliacao.id})">[ Excluir ]</button>
+                </div>
             </div>`;
     }
 
@@ -161,6 +165,40 @@ function mostrarAvaliacoes(avaliacoes) {
     }
 
     div_qtd_avaliacoes.innerHTML = avaliacoes.length;
+}
+
+// guarda qual avaliação será editada e abre a tela de avaliar já preenchida
+function editarAvaliacao(idAvaliacao, idServidor) {
+    sessionStorage.ID_AVALIACAO_EDITAR = idAvaliacao;
+    sessionStorage.ID_SERVIDOR_AVALIAR = idServidor;
+    window.location = "avaliar-servidor.html";
+}
+
+// apaga a avaliação inteira (notas e comentário) e recarrega a lista
+function excluirAvaliacao(idAvaliacao) {
+    if (!confirm("Tem certeza que quer excluir esta avaliação? As notas e o comentário serão apagados.")) {
+        return;
+    }
+
+    fetch(`/avaliacoes/excluir/${idAvaliacao}`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            idUsuariaServer: sessionStorage.ID_USUARIO
+        })
+    }).then(function (resposta) {
+        if (resposta.ok) {
+            div_msg.innerHTML = "Avaliação excluída.";
+            listarAvaliacoes();
+        } else {
+            div_msg.innerHTML = "Não foi possível excluir a avaliação. Tente novamente.";
+        }
+    }).catch(function (erro) {
+        console.log(`#ERRO: ${erro}`);
+        div_msg.innerHTML = "Não foi possível excluir a avaliação. Verifique se a API está iniciada.";
+    });
 }
 
 function montarStatus(status) {
