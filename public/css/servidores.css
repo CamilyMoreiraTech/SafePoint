@@ -202,6 +202,14 @@
   color: var(--cor-rosa);
 }
 
+/* aviso para a usuária que já avaliou o servidor */
+.card-servidor-avaliado {
+  margin-bottom: 10px;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--cor-rosa);
+}
+
 /* BOTÕES DO CARD */
 
 .card-servidor-botoes {

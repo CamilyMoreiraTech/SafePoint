@@ -1,5 +1,28 @@
 // servidores aprovados que vieram da API
 let listaServidores = [];
+// avaliações da usuária logada, para saber quais servidores ela já avaliou
+let listaAvaliacoes = [];
+
+// busca primeiro as avaliações da usuária e só depois monta os cards,
+// assim o card já nasce com "Avaliar" ou "Você já avaliou"
+function iniciarServidores() {
+    fetch(`/avaliacoes/usuaria/${sessionStorage.ID_USUARIO}`, {
+        method: "GET"
+    }).then(function (resposta) {
+        if (resposta.ok && resposta.status != 204) {
+            resposta.json().then(function (avaliacoes) {
+                listaAvaliacoes = avaliacoes;
+                listarServidores();
+            });
+        } else {
+            // 204 = ainda não avaliou nenhum; erro = os cards aparecem todos com "Avaliar"
+            listarServidores();
+        }
+    }).catch(function (erro) {
+        console.log(`#ERRO: ${erro}`);
+        listarServidores();
+    });
+}
 
 function listarServidores() {
     fetch("/servidores/listar", {
@@ -58,6 +81,8 @@ function mostrarServidores() {
 }
 
 function montarCard(servidor, numero) {
+    const idAvaliacao = buscarIdAvaliacao(servidor.id);
+
     let numeroTexto = numero;
     if (numero < 10) {
         numeroTexto = `0${numero}`;
@@ -75,13 +100,42 @@ function montarCard(servidor, numero) {
                 <p id="descricao_servidor_${servidor.id}"></p>
                 ${montarNotas(servidor)}
                 ${montarGraficoCriterios(servidor)}
+                ${montarAvisoAvaliado(idAvaliacao)}
                 <div class="card-servidor-botoes">
                     <a id="link_servidor_${servidor.id}" class="botao-contorno">Entrar no Discord</a>
-                    <a class="botao-destaque" onclick="avaliarServidor(${servidor.id})">Avaliar</a>
+                    ${montarBotaoAvaliar(servidor.id, idAvaliacao)}
                 </div>
             </div>
         </div>
     `;
+}
+
+// devolve o id da avaliação que a usuária fez neste servidor (0 = ainda não avaliou)
+function buscarIdAvaliacao(idServidor) {
+    for (let i = 0; i < listaAvaliacoes.length; i++) {
+        if (listaAvaliacoes[i].fk_servidor == idServidor) {
+            return listaAvaliacoes[i].id;
+        }
+    }
+
+    return 0;
+}
+
+function montarAvisoAvaliado(idAvaliacao) {
+    if (idAvaliacao == 0) {
+        return "";
+    }
+
+    return `<div class="card-servidor-avaliado">✓ Você já avaliou este servidor</div>`;
+}
+
+// quem já avaliou vê "Editar" no lugar de "Avaliar"
+function montarBotaoAvaliar(idServidor, idAvaliacao) {
+    if (idAvaliacao == 0) {
+        return `<a class="botao-destaque" onclick="avaliarServidor(${idServidor})">Avaliar</a>`;
+    }
+
+    return `<a class="botao-destaque" onclick="editarAvaliacao(${idAvaliacao}, ${idServidor})">Editar avaliação</a>`;
 }
 
 function montarTemas(temas) {
@@ -194,6 +248,15 @@ function preencherTextos(servidor) {
 
 function avaliarServidor(idServidor) {
     // guarda qual servidor foi escolhido para a página de avaliação saber
+    sessionStorage.ID_SERVIDOR_AVALIAR = idServidor;
+    // avaliação nova: apaga uma edição que tenha ficado pela metade
+    sessionStorage.removeItem("ID_AVALIACAO_EDITAR");
+    window.location = "avaliar-servidor.html";
+}
+
+// mesmo caminho do botão "Editar" da minha área: a tela de avaliar abre já preenchida
+function editarAvaliacao(idAvaliacao, idServidor) {
+    sessionStorage.ID_AVALIACAO_EDITAR = idAvaliacao;
     sessionStorage.ID_SERVIDOR_AVALIAR = idServidor;
     window.location = "avaliar-servidor.html";
 }
