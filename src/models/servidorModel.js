@@ -97,6 +97,32 @@ function moderar(idServidor, status, idModeradora) {
     return database.executar(instrucaoSql);
 }
 
+// para apagar um servidor, primeiro saem as avaliações e os temas dele
+// (as chaves estrangeiras não deixam apagar o servidor enquanto eles existirem)
+function removerAvaliacoes(idServidor) {
+    var instrucaoSql = `
+        DELETE FROM avaliacao WHERE fk_servidor = ${idServidor};
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function removerTemas(idServidor) {
+    var instrucaoSql = `
+        DELETE FROM tema_servidor WHERE fk_servidor = ${idServidor};
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function remover(idServidor) {
+    var instrucaoSql = `
+        DELETE FROM servidor WHERE id = ${idServidor};
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     listar,
     indicar,
@@ -104,5 +130,8 @@ module.exports = {
     listarIndicados,
     verificarModeradora,
     listarPendentes,
-    moderar
+    moderar,
+    removerAvaliacoes,
+    removerTemas,
+    remover
 };

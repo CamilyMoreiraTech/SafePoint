@@ -231,6 +231,20 @@
   color: var(--cor-rosa);
 }
 
+/* botão de remover, só aparece para moderadoras */
+.card-servidor-remover {
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--cor-texto-suave);
+  cursor: pointer;
+}
+
+.card-servidor-remover:hover {
+  color: var(--cor-rosa);
+}
+
 .card-servidor-botoes a {
   flex: 1;
   padding: 10px 8px;

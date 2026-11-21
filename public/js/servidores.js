@@ -106,6 +106,7 @@ function montarCard(servidor, numero) {
                     ${montarBotaoAvaliar(servidor.id, idAvaliacao)}
                 </div>
                 <a class="card-servidor-comentarios" onclick="verComentarios(${servidor.id})">» Comentários das usuárias</a>
+                ${montarBotaoRemover(servidor.id)}
             </div>
         </div>
     `;
@@ -257,6 +258,47 @@ function avaliarServidor(idServidor) {
 function verComentarios(idServidor) {
     sessionStorage.ID_SERVIDOR_COMENTARIOS = idServidor;
     window.location = "comentarios.html";
+}
+
+// só a moderadora vê o botão (a API confere de novo se ela é moderadora)
+function montarBotaoRemover(idServidor) {
+    if (sessionStorage.TIPO_USUARIO != "moderadora") {
+        return "";
+    }
+
+    return `<a class="card-servidor-remover" onclick="removerServidor(${idServidor})">× Remover servidor</a>`;
+}
+
+function removerServidor(idServidor) {
+    if (!confirm("Tem certeza que quer remover este servidor? Ele e todas as avaliações dele serão apagados.")) {
+        return;
+    }
+
+    fetch(`/servidores/remover/${idServidor}`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            idModeradoraServer: sessionStorage.ID_USUARIO
+        })
+    }).then(function (resposta) {
+        if (resposta.ok) {
+            // busca a lista de novo, assim o card removido some e o total é atualizado
+            listarServidores();
+            div_msg.innerHTML = "Servidor removido.";
+        } else if (resposta.status == 403) {
+            div_msg.innerHTML = "Apenas moderadoras podem remover servidores.";
+        } else if (resposta.status == 404) {
+            div_msg.innerHTML = "Este servidor já tinha sido removido.";
+            listarServidores();
+        } else {
+            div_msg.innerHTML = "Não foi possível remover o servidor. Tente novamente.";
+        }
+    }).catch(function (erro) {
+        console.log(`#ERRO: ${erro}`);
+        div_msg.innerHTML = "Não foi possível remover o servidor. Verifique se a API está iniciada.";
+    });
 }
 
 // mesmo caminho do botão "Editar" da minha área: a tela de avaliar abre já preenchida

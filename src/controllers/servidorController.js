@@ -160,10 +160,61 @@ function moderar(req, res) {
     }
 }
 
+// apaga o servidor de vez, junto com as avaliações e os temas dele (só moderadoras)
+function remover(req, res) {
+    var idServidor = req.params.idServidor;
+    var idModeradora = req.body.idModeradoraServer;
+
+    if (!validacoes.verificarId(idModeradora)) {
+        res.status(400).send("A moderadora é inválida!");
+    } else if (!validacoes.verificarId(idServidor)) {
+        res.status(400).send("O servidor é inválido!");
+    } else {
+
+        servidorModel.verificarModeradora(Number(idModeradora)).then(function (resultadoTipo) {
+            if (resultadoTipo.length == 0 || resultadoTipo[0].tipo != "moderadora") {
+                res.status(403).send("Apenas moderadoras podem remover servidores!");
+            } else {
+                // a ordem importa: avaliações e temas primeiro, o servidor por último
+                servidorModel.removerAvaliacoes(Number(idServidor)).then(function () {
+                    servidorModel.removerTemas(Number(idServidor)).then(function () {
+                        servidorModel.remover(Number(idServidor)).then(function (resultado) {
+                            // affectedRows = 0: o servidor não existe (pode já ter sido removido)
+                            if (resultado.affectedRows == 0) {
+                                res.status(404).send("Servidor não encontrado!");
+                            } else {
+                                res.json(resultado);
+                            }
+                        }).catch(function (erro) {
+                            avisarErroRemover(res, erro);
+                        });
+                    }).catch(function (erro) {
+                        avisarErroRemover(res, erro);
+                    });
+                }).catch(function (erro) {
+                    avisarErroRemover(res, erro);
+                });
+            }
+        }).catch(function (erro) {
+            console.log(erro);
+            console.log("Houve um erro ao verificar a moderadora: ", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        });
+    }
+}
+
+// a mesma resposta de erro serve para os três DELETE do remover
+function avisarErroRemover(res, erro) {
+    console.log(erro);
+    console.log("\nHouve um erro ao remover o servidor! Erro: ", erro.sqlMessage);
+    res.status(500).json(erro.sqlMessage);
+}
+
 module.exports = {
     listar,
     indicar,
     listarIndicados,
     listarPendentes,
-    moderar
+    moderar,
+    remover
 }

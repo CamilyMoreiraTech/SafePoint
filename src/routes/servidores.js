@@ -23,4 +23,8 @@ router.put("/moderar/:idServidor", function (req, res) {
     servidorController.moderar(req, res);
 });
 
+router.delete("/remover/:idServidor", function (req, res) {
+    servidorController.remover(req, res);
+});
+
 module.exports = router;
