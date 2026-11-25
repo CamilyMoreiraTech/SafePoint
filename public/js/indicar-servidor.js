@@ -14,6 +14,9 @@ function validar(nome, link, descricao, temas) {
         // o link vira o botão "Entrar no Discord" da lista, então só aceita convite do Discord
         valida = false;
         mensagem = "O link precisa começar com https://discord.gg/ ou https://discord.com/invite/";
+    } else if (link.length > 200) {
+        valida = false;
+        mensagem = "O link pode ter até 200 caracteres.";
     } else if (temas.length == 0) {
         valida = false;
         mensagem = "Marque pelo menos um tema.";

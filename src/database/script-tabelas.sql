@@ -36,7 +36,7 @@ CREATE TABLE servidor (
 	descricao VARCHAR(300),
 	status VARCHAR(10) NOT NULL DEFAULT 'pendente',
 	dt_indicacao DATETIME DEFAULT CURRENT_TIMESTAMP,
-	fk_usuaria INT,
+	fk_usuaria INT NOT NULL,
 	fk_moderadora INT,
 	FOREIGN KEY (fk_usuaria) REFERENCES usuaria(id),
 	FOREIGN KEY (fk_moderadora) REFERENCES usuaria(id),

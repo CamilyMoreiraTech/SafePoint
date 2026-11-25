@@ -62,6 +62,15 @@ function verificarModeradora(idUsuaria) {
     return database.executar(instrucaoSql);
 }
 
+// usado antes de avaliar: só servidores aprovados podem receber avaliação
+function buscarStatus(idServidor) {
+    var instrucaoSql = `
+        SELECT status FROM servidor WHERE id = ${idServidor};
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 // servidores que ainda esperam revisão, com o nome de quem indicou (os mais antigos primeiro)
 function listarPendentes() {
     var instrucaoSql = `
@@ -129,6 +138,7 @@ module.exports = {
     cadastrarTema,
     listarIndicados,
     verificarModeradora,
+    buscarStatus,
     listarPendentes,
     moderar,
     removerAvaliacoes,

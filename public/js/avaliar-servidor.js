@@ -178,6 +178,9 @@ function enviarAvaliacao(dadosAvaliacao) {
         } else if (resposta.status == 403) {
             // 403 = a usuária já tinha avaliado este servidor
             mostrarMensagem("Você já avaliou este servidor.");
+        } else if (resposta.status == 404) {
+            // 404 = o servidor não existe ou ainda não foi aprovado
+            mostrarMensagem("Este servidor não está disponível para avaliação. Escolha um servidor na lista de servidores.");
         } else {
             mostrarMensagem("Não foi possível enviar a avaliação. Tente novamente.");
         }

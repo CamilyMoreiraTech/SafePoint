@@ -1,4 +1,5 @@
 var avaliacaoModel = require("../models/avaliacaoModel");
+var servidorModel = require("../models/servidorModel");
 var validacoes = require("./validacoes");
 
 // avaliações que a usuária fez (para a minha área)
@@ -82,24 +83,36 @@ function avaliar(req, res) {
         res.status(400).send("Usuária ou servidor inválido!");
     } else {
 
-        // a partir daqui os números já foram conferidos: vão para o SQL como Number
-        avaliacaoModel.avaliar(Number(notaSeguranca), Number(notaModeracao), Number(notaAcolhimento), Number(notaAtividade), Number(toxicidade), comentario, Number(idUsuaria), Number(idServidor))
-            .then(
-                function (resultado) {
-                    res.json(resultado);
-                }
-            ).catch(
-                function (erro) {
-                    console.log(erro);
-                    // a tabela não deixa a mesma usuária avaliar o mesmo servidor duas vezes (UNIQUE)
-                    if (erro.code == "ER_DUP_ENTRY") {
-                        res.status(403).send("Você já avaliou este servidor!");
-                    } else {
-                        console.log("\nHouve um erro ao salvar a avaliação! Erro: ", erro.sqlMessage);
-                        res.status(500).json(erro.sqlMessage);
-                    }
-                }
-            );
+        // a tela só mostra aprovados, mas a rota pode ser chamada direto: a API confere o status no banco
+        servidorModel.buscarStatus(Number(idServidor)).then(function (resultadoStatus) {
+            if (resultadoStatus.length == 0 || resultadoStatus[0].status != "aprovado") {
+                res.status(404).send("Este servidor não está disponível para avaliação!");
+            } else {
+
+                // a partir daqui os números já foram conferidos: vão para o SQL como Number
+                avaliacaoModel.avaliar(Number(notaSeguranca), Number(notaModeracao), Number(notaAcolhimento), Number(notaAtividade), Number(toxicidade), comentario, Number(idUsuaria), Number(idServidor))
+                    .then(
+                        function (resultado) {
+                            res.json(resultado);
+                        }
+                    ).catch(
+                        function (erro) {
+                            console.log(erro);
+                            // a tabela não deixa a mesma usuária avaliar o mesmo servidor duas vezes (UNIQUE)
+                            if (erro.code == "ER_DUP_ENTRY") {
+                                res.status(403).send("Você já avaliou este servidor!");
+                            } else {
+                                console.log("\nHouve um erro ao salvar a avaliação! Erro: ", erro.sqlMessage);
+                                res.status(500).json(erro.sqlMessage);
+                            }
+                        }
+                    );
+            }
+        }).catch(function (erro) {
+            console.log(erro);
+            console.log("Houve um erro ao verificar o servidor: ", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        });
     }
 }
 

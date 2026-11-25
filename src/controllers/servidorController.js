@@ -29,6 +29,8 @@ function indicar(req, res) {
     } else if (!link.startsWith("https://discord.gg/") && !link.startsWith("https://discord.com/invite/")) {
         // o link vira o botão "Entrar no Discord": sem essa conferência daria para indicar um link perigoso
         res.status(400).send("O link precisa ser um convite do Discord!");
+    } else if (link.length > 200) {
+        res.status(400).send("O link pode ter até 200 caracteres!");
     } else if (nome.length > 100) {
         res.status(400).send("O nome pode ter até 100 caracteres!");
     } else if (descricao.length > 300) {

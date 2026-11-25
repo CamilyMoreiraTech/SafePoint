@@ -66,6 +66,8 @@ function verificarSenha(senha) {
 
     if (senha.length < 6) {
         return "A senha precisa ter pelo menos 6 caracteres!";
+    } else if (senha.length > 64) {
+        return "A senha pode ter até 64 caracteres!";
     } else if (!temMaiuscula) {
         return "A senha precisa ter pelo menos uma letra maiúscula!";
     } else if (!temMinuscula) {
