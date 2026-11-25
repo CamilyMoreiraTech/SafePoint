@@ -5,8 +5,7 @@
 
 USE safepoint;
 
--- senha de teste igual para todas: Teste@123
--- a usuária 101 é moderadora, para aprovar/recusar servidores
+-- senha de teste: Teste@123
 INSERT INTO usuaria (id, nome, email, senha, faixa_etaria, plataforma, tipo) VALUES
 	(101, 'Ana Souza', 'ana.souza@exemplo.com', 'Teste@123', '25-34', 'pc', 'moderadora'),
 	(102, 'Bianca Lima', 'bianca.lima@exemplo.com', 'Teste@123', '18-24', 'pc', 'usuaria'),
@@ -53,7 +52,7 @@ INSERT INTO tema_servidor (fk_servidor, fk_tema) VALUES
 	(107, 3),
 	(108, 1);
 
--- cada usuária avalia cada servidor uma vez só; o 106 (Arena Livre) tem notas baixas e toxicidade
+
 INSERT INTO avaliacao (nota_seguranca, nota_moderacao, nota_acolhimento, nota_atividade, presenciou_toxicidade, comentario, fk_usuaria, fk_servidor) VALUES
 	(5, 5, 5, 4, 0, 'Me senti em casa desde o primeiro dia.', 102, 101),
 	(4, 4, 5, 5, 0, 'Sempre tem alguém para jogar.', 102, 104),
@@ -81,10 +80,3 @@ INSERT INTO avaliacao (nota_seguranca, nota_moderacao, nota_acolhimento, nota_at
 	(5, 5, 5, 4, 0, 'Todo mundo ajuda quem está começando.', 110, 102),
 	(5, 4, 5, 4, 0, 'Indico para quem gosta de ler.', 110, 103),
 	(5, 4, 4, 4, 0, 'Ambiente leve e respeitoso.', 110, 105);
-
-/* para apagar os dados de teste (nessa ordem, por causa das FKs):
-   DELETE FROM avaliacao WHERE fk_usuaria BETWEEN 101 AND 110;
-   DELETE FROM tema_servidor WHERE fk_servidor BETWEEN 101 AND 108;
-   DELETE FROM servidor WHERE id BETWEEN 101 AND 108;
-   DELETE FROM interesse_usuaria WHERE fk_usuaria BETWEEN 101 AND 110;
-   DELETE FROM usuaria WHERE id BETWEEN 101 AND 110; */

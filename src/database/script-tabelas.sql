@@ -7,7 +7,6 @@ CREATE TABLE tema (
 	nome VARCHAR(20) UNIQUE
 );
 
-/* dados do formulário de cadastro */
 CREATE TABLE usuaria (
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	nome VARCHAR(50) NOT NULL,
@@ -15,7 +14,6 @@ CREATE TABLE usuaria (
 	senha VARCHAR(255) NOT NULL,
 	faixa_etaria VARCHAR(10) NOT NULL,
 	plataforma VARCHAR(10) NOT NULL,
-	-- quem se cadastra pelo site é sempre 'usuaria'; moderadoras são nomeadas direto no banco
 	tipo VARCHAR(15) NOT NULL DEFAULT 'usuaria',
 	dt_cadastro DATETIME DEFAULT CURRENT_TIMESTAMP,
 	CONSTRAINT chk_faixa_etaria CHECK (faixa_etaria IN ('18-24', '25-34', '35+')),
@@ -23,7 +21,6 @@ CREATE TABLE usuaria (
 	CONSTRAINT chk_tipo CHECK (tipo IN ('usuaria', 'moderadora'))
 );
 
-/* interesses marcados no cadastro (uma usuária pode ter de 1 a 3) */
 CREATE TABLE interesse_usuaria (
 	fk_usuaria INT,
 	fk_tema INT,
@@ -32,7 +29,6 @@ CREATE TABLE interesse_usuaria (
 	FOREIGN KEY (fk_tema) REFERENCES tema(id)
 );
 
-/* dados do formulário de indicação: todo servidor começa como pendente */
 CREATE TABLE servidor (
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	nome VARCHAR(100) NOT NULL,
@@ -41,14 +37,12 @@ CREATE TABLE servidor (
 	status VARCHAR(10) NOT NULL DEFAULT 'pendente',
 	dt_indicacao DATETIME DEFAULT CURRENT_TIMESTAMP,
 	fk_usuaria INT,
-	-- moderadora que aprovou ou recusou; fica vazio enquanto o servidor está pendente
 	fk_moderadora INT,
 	FOREIGN KEY (fk_usuaria) REFERENCES usuaria(id),
 	FOREIGN KEY (fk_moderadora) REFERENCES usuaria(id),
 	CONSTRAINT chk_status CHECK (status IN ('pendente', 'aprovado', 'recusado'))
 );
 
-/* temas do servidor (um servidor pode ter de 1 a 3) */
 CREATE TABLE tema_servidor (
 	fk_servidor INT,
 	fk_tema INT,
@@ -57,8 +51,6 @@ CREATE TABLE tema_servidor (
 	FOREIGN KEY (fk_tema) REFERENCES tema(id)
 );
 
-/* dados do formulário de avaliação: cada usuária avalia cada servidor uma vez */
-/* as FKs fazem parte da chave primária: não existe avaliação sem usuária e sem servidor */
 CREATE TABLE avaliacao (
 	id INT AUTO_INCREMENT,
 	nota_seguranca INT NOT NULL,
@@ -66,7 +58,7 @@ CREATE TABLE avaliacao (
 	nota_acolhimento INT NOT NULL,
 	nota_atividade INT NOT NULL,
 	comentario VARCHAR(500),
-	presenciou_toxicidade TINYINT NOT NULL, -- 1 = sim, 0 = não
+	presenciou_toxicidade TINYINT NOT NULL,
 	dt_avaliacao DATETIME DEFAULT CURRENT_TIMESTAMP,
 	fk_usuaria INT,
 	fk_servidor INT,
@@ -81,9 +73,6 @@ CREATE TABLE avaliacao (
 	CONSTRAINT chk_toxicidade CHECK (presenciou_toxicidade IN (0, 1))
 );
 
-/* servidores aprovados com os temas e as médias das avaliações
-   usada pela tela de servidores e pela dashboard (servidorModel.listar)
-   LEFT JOIN mantém os servidores que ainda não têm avaliação */
 CREATE VIEW vw_servidores_aprovados AS
 SELECT
 	s.id,
